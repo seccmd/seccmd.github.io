@@ -120,3 +120,4 @@ inject:
     ## Font https://github.com/lxgw/LxgwWenKai-Screen
     - <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
     ##- <link rel="stylesheet" href="/assets/test.css">
+    - <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?72a4db3c6bc2c4999bf152f9fb489a38";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>

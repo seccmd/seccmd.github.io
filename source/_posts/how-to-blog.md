@@ -64,7 +64,6 @@ $ npm i hexo-theme-stellar
 安装部署插件
 
 ```bash
-
 # 先找到 myblog/_config.yml 文件，在其中设置：
 deploy:
   - type: git
