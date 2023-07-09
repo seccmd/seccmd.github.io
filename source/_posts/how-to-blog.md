@@ -61,6 +61,24 @@ Install Stellar in terminal:
 $ npm i hexo-theme-stellar
 ```
 
+安装部署插件
+
+```bash
+
+# 先找到 myblog/_config.yml 文件，在其中设置：
+deploy:
+  - type: git
+    repo: https://github.com/username/username.github.io.git # 注意要把地址改为自己的仓库地址
+    branch: gh-pages
+    message: "Build at {{ now('YYYY-MM-DD HH:mm:ss Z') }}"
+
+# 这个指令用来安装插件
+npm i hexo-deployer-git
+
+# 此插件可以将博客部署到 git 仓库中
+hexo clean && hexo g && hexo d
+```
+
 ## MkDocs 系统
 
 Material for MkDocs 官网帮助文档：[快速上手](https://squidfunk.github.io/mkdocs-material/getting-started/)

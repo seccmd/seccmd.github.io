@@ -109,7 +109,10 @@ theme: stellar
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  - type: git
+    repo: https://github.com/seccmd/seccmd.github.io # 注意要把地址改为自己的仓库地址
+    branch: gh-pages
+    message: "Build at {{ now('YYYY-MM-DD HH:mm:ss Z') }}"
 
 inject:
   head:
