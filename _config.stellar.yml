@@ -1,0 +1,34 @@
+# https://github.com/cxvh/xaoxuu.github.io/blob/main/_config.yml
+style:
+  font-family:
+    body: '"LXGW WenKai Screen",system-ui,"Microsoft Yahei","Segoe UI",-apple-system,Roboto,Ubuntu,"Helvetica Neue",Arial,"WenQuanYi Micro Hei",sans-serif'
+sidebar:
+#  menu:
+#    post: '[btn.blog](/)'
+#    wiki: '[btn.wiki](/wiki/)'
+#    notes: '[笔记](/notes/)'
+#    more: '[更多](/more/)'
+  widgets:
+    #### 自动生成的页面 ####
+    # 主页
+    home: search, welcome, recent, timeline # for home
+
+# 文章搜索
+search:
+  service: local_search # local_search, todo...
+  local_search: # 在 front-matter 中设置 indexing:false 来避免被搜索索引
+    field: all # post, page, all
+    path: /search.json # 搜索文件存放位置
+    content: true # 是否搜索内容
+    codeblock: true # 是否搜索代码块（需要content: true)
+footer:
+  social:
+    - icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/25678f144c438.svg"/>'
+      url: /atom.xml
+    - icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/>'
+      url: https://github.com/seccmd
+    - icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/cf1ae151f9e83.svg"/>'
+      url: https://music.163.com/#/user/home?id=63035382
+    - icon: '<img src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/942ebbf1a4b91.svg"/>'
+      url: /about/#comments
+  source: '[GitHub](https://github.com/seccmd/seccmd.github.io/)'

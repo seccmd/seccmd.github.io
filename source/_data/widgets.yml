@@ -1,0 +1,7 @@
+welcome:
+  layout: markdown
+  title: 欢迎，安全旅行者：
+  content: |
+    我是数字安全极客，持续分享安全干货，欢迎交流，关注不迷路！
+    [GitHub](https://github.com/seccmd/) | [Twiter](https://twitter.com/sec_cmd) | [ZhiHu](https://www.zhihu.com/people/mlsec)
+    
