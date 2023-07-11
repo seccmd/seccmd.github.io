@@ -370,3 +370,24 @@ net user <USERNAME> <PASSWORD>
 | Process Lasso也是一款优秀的进程管理辅助工具，它同时可以监视进程动作 | http://www.processlassopro.com/ |
 | 火绒剑 是一款优秀的进程管理分析工具 | http://down4.huorong.cn/hrsword.exe |
 | Windows系统安全登录日志分析工具 | https://github.com/TheKingOfDuck/logonTracer |
+
+
+## Windows 命令探索
+
+``` PowerShell
+dsquery server   # 查看所有域控制器 
+dsquery subnet   # 查看域内内子网 
+dsquery group    # 查看域内工作组 
+dsquery site     # 查看域内站点 
+net time /domain # 查看域名、时间
+net view /domain # 查看域内所有共享
+
+# 快速查找未打的安全补丁 
+systeminfo>bzhack.txt&
+(for %i in ( KB977165 KB2160329 KB2503665 KB2592799 KB2707511 KB2829361 KB2850851 KB3000061 KB3045171 KB3077657 KB3079904 KB3134228 KB3143141 KB3141780 ) do @type bzhack.txt|@find /i "%i"|| @echo %i you can exp)&
+del /f /q /a bzhack.txt
+
+# PowerShell 快速上传SSH密钥
+type $env:USERPROFILE\.ssh\id_rsa.pub | ssh root@1.1.1.1 "cat >> .ssh/authorized_keys"
+```
+
