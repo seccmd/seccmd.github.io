@@ -12,9 +12,6 @@ tags:
 
 ## 浏览器插件
 
-* 好用的在线工具集
-	- https://tool.browser.qq.com/
-
 * WeTab 标签页插件
 	- Wetab 是一款可以亲手打造属于自己的高颜值主页的小组件新标签页插件。  
 
@@ -84,7 +81,6 @@ tags:
 	- https://plantuml.com/zh/
 * Mermaid 原生支持Web，无需通过生成图片即可集成到网站页面
 	- https://github.com/mermaid-js/mermaid
- 
 
 ## 白板工具
 
@@ -96,4 +92,13 @@ tags:
 	- https://whimsical.com/
 	Whimsical brings together four powerful formats in a unified hub for collaboration. 
 
+## 好用的在线工具集
 
+- https://tool.browser.qq.com/
+- [PDF24 Tools: 免费且易于使用的在线PDF工具](https://tools.pdf24.org/zh/)
+- [无需上传文件也可在线处理图片 (imagestool.com)](https://imagestool.com/zh_CN/index.html)
+
+## 其他工具
+
+- 寻找替代软件的网站：[AlternativeTo](https://alternativeto.net/)
+- 世界最大开源及开放数据图书馆：[安娜的档案 (annas-archive.org)](https://zh.annas-archive.org/)

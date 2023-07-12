@@ -69,3 +69,8 @@ Github是全球最大的程序员社区，里面不仅有代码，还有大量�
 * [微博搜索](https://weibo.com)
 * [中文维基](https://zh.wikipedia.org)
 * [法律搜索](https://wenshu.court.gov.cn/)
+* [wikiHow 万事指南](https://zh.wikihow.com/)
+
+## 便捷搜索
+
+- [虫部落快搜](https://search.chongbuluo.com/)

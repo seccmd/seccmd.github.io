@@ -30,11 +30,21 @@ cat /etc/rc.local
 # 查看开机启动项文件 :
 ls /etc/profile.d/
 
-# 查看开机启动项文件 :
-ls /etc/init.d/
+# SysV启动位置有：
+/etc/init
+/etc/init.d
+/etc/rc.d
+/etc/rc[0-6].d
+/etc/rc.local
+/etc/inittab
 
-# 查看开机启动项文件 :
-ls /etc/rc.d/init.d/
+# Systemd启动位置有：
+/etc/systemd
+~/.config/systemd/user
+
+# Xserver启动位置有：
+/etc/xdg/autostart
+~/.config/autostart
 ```
 
 ## Linux 防火墙
@@ -64,14 +74,15 @@ iptables -L
 # 清空防火墙规则 :
 iptables -F
 
-# 防火墙运行状态 :
+# Firewalld 防火墙 :
 service firewalld status
-
-# 开启防火墙 :
 service firewalld start
-
-# 关闭防火墙 :
 service firewalld stop
+
+# ufw 防火墙 :
+sudo ufw status
+sudo ufw enable
+sudo ufw disable
 ```
 
 ## Linux 系统日志
@@ -108,17 +119,31 @@ service firewalld stop
 注意事项：在大流量并发的服务器上，排查网络连接可能对性能会造成较严重影响。
 
 ```bash Shell 命令行
-# 查找监听模式的网卡 :
-ip link | grep PROMISC
-
 # 查找不常用的监听端口 :
 netstat -anp
+iftop
 
 # 运行的进程监听了端口 :
 lsof -i
+lsof -nPi tcp:443
+
+# 使用ss命令查看TCP协议：
+ss -anpt
+
+# 使用ss命令查看UDP协议：
+ss -anpu
+
+# 使用 tcpdump 分析：
+tcpdump -i {网卡名} host {本地IP} and udp port {本地端口号}
 
 # ARP表 :
 arp -a
+
+# 查找监听模式的网卡 :
+ip link | grep PROMISC
+
+# 提取所有活跃的连接 tcp ip
+$ netstat -ant |& grep -Po '(\d{1,3}\.){3}\d{1,3}' | sort | grep -v 10.187.0 | uniq -c
 ```
 
 ## Linux 进程管理
@@ -131,16 +156,39 @@ arp -a
 
 ```bash Shell 命令行
 # 查看全部进程 :
-ps -aux || ps -ef || pstree
+ps -aux || ps -ef
+
+# 定位高CPU占用的进程
+ps -eo cmd,pcpu,pid,user --sort -pcpu | head
+
+# 查看进程树
+pstree -sp <PID>
 
 # 关闭进程 :
 kill -9 <PID>
 
-# 查看进程文件描述符 :
+# 给它 STOP 信号不让 cpu 切换到它，不直接 kill 掉它
+$ kill -STOP <PID>
+
+# 查看进程信息 :
 ls -al /proc/<PID>/fd
+ls -al /proc/<PID>/exe
+cat /proc/<PID>/cmdline
 
 # 查看进程文件描述符 :
 lsof -p <PID>
+
+# 查看所有进程PID及运行命令
+perf top -s comm,pid
+
+# 跟踪进程执行时的系统调用和所接收的信号
+strace ls
+
+# 系统启动命令行也可能引入外部启动参数：
+cat /proc/cmdline
+
+# Nvidia显卡官方驱动自带命令看GPU占用情况：
+nvidia-smi -q -d utilization -l
 ```
 
 ## Linux 服务管理
@@ -163,6 +211,30 @@ systemctl stop <SERVICE_NAME>
 
 # 启动服务 :
 systemctl start <SERVICE_NAME>
+
+# 环境变量
+systemctl set-environment testu=testm
+systemctl show-environment
+
+# 查看全部服务的启动命令 :
+grep -R ExecStart /etc/systemd/system/*
+
+# 创建服务
+vi /etc/systemd/system/multi-user.target.wants/connection.service
+
+[Unit]
+Description = making network connection up
+After = network.target
+
+[Service]
+ExecStart = /root/scripts/conup.sh
+
+[Install]
+WantedBy = multi-user.target
+
+
+systemctl enable connection.service
+systemctl start connection.service
 ```
 
 ## Linux 计划任务
@@ -179,20 +251,73 @@ crontab -u root -l
 
 # 系统定时任务 :
 cat /etc/crontab
-
-# 系统定时任务 :
 cat /etc/anacrontab
-
-# 系统定时任务文件 :
-ls /etc/cron.*
 
 # 查看计划任务文件 :
 ls -la /var/spool/cron/
-
-# 查看计划任务文件 :
 ls -la /var/spool/anacron/
+ls -la /var/spool/at/spool/
+
+# 系统定时任务文件 :
+$ find /etc/cron* -type f
+/etc/cron.d/sysstat
+/etc/cron.d/0hourly
+/etc/cron.daily/logrotate
+/etc/cron.daily/man-db.cron
+/etc/cron.deny
+/etc/cron.hourly/0anacron
+
+# atd 调度命令列表：
+at -l
+
+# systemd-timers 的位置在/etc/systemd子目录下：
+systemctl list-timers
+systemctl list-unit-files | grep timer
+
+# 查看定时器
+systemctl list-timers
+systemctl --user list-timers
+
+find / -name apt-daily.timer
+/etc/systemd/system/timers.target.wants/apt-daily.timer
+/lib/systemd/system/apt-daily.timer
+
+# 创建定时器
+# Created a file at /etc/systemd/system/syncthing-monitoring.service
+[Unit]
+Description=Syncthing monitoring
+
+[Service]
+User=...
+Group=...
+Environment="TOKEN=..."
+Environment="CHAT_ID=..."
+Type=oneshot
+ExecStart=/usr/bin/touch /tmp/foo
+
+# Created timer file at /etc/systemd/system/syncthing-monitoring.timer
+[Unit]
+Description=Syncthing monitoring
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target
+
+# The commands to enable/start the timer:
+sudo systemctl enable syncthing-monitoring.timer
+sudo systemctl start syncthing-monitoring.timer
+
+# 创建临时定时器：
+systemd-run --on-active=1 /bin/touch /tmp/foo
+
+# 临时定时器保存目录，重启后清空 
+/run/systemd/transient
+Ref: https://wiki.archlinuxcn.org/wiki/Systemd/%E5%AE%9A%E6%97%B6%E5%99%A8
 ```
-	
+
 
 ## Linux 用户账号
 
@@ -235,6 +360,141 @@ userdel <USERNAME>
 
 # 新建账户 :
 useradd <USERNAME>
+
+默认用户密钥位文件是否被篡改：
+cat ~/.ssh/authorized_keys
+
+攻击者增加其他密钥信任文件：
+grep AuthorizedKeysFile /etc/ssh/sshd_config
+
+# 查询 UID 为 0 的账号:
+egrep ':0+:' /etc/passwd
+```
+
+## 搜索被篡改或增加的系统文件
+
+```sh
+# Centos 系统：
+rpm -Va
+
+# Debian/Ubuntu 系统：
+apt install debsums
+dpkg -l | awk '/^ii/ { print $2 }' | xargs debsums | grep -vE 'OK$'
+
+# Usage: rpm [OPTION...]
+
+Query options (with -q or --query):
+Verify options (with -V or --verify):
+Query/Verify package selection options:
+  -a, --all                        query/verify all packages
+  -f, --file                       query/verify package(s) owning file
+  -p, --package                    query/verify a package file
+  -l, --list                       list files in package
+
+# 显示全部安装包
+$ rpm -qa
+
+# 验证全部安装包，显示丢失或被修改的文件
+$ rpm -qaV
+S – File size differs
+M – Mode differs (permissions)
+5 – MD5 sum differs
+D – Device number mismatch
+L – readLink path mismatch
+U – user ownership differs
+G – group ownership differs
+T – modification time differs
+
+# 验证安装包，哪些文件丢失或被修改
+$ rpm -V  PACKAGE_NAME
+
+# 列出安装包包含的文件
+$ rpm -ql PACKAGE_NAME
+
+# 查询文件归属哪个安装包
+$ rpm -qf /path/to/file
+```
+
+## 环境变量
+```
+# 查看可疑动态加载的库文件
+cat /etc/ld.so.preload
+ls -alh /etc/ld.so.conf.d/ 
+
+# 查看可疑环境变量：PATH/LD_LIBRARY_PATH/LD_PRELOAD/LD_AUDIT 
+export |grep *.so
+env | grep PATH
+env | grep LD_
+
+# alias 命令查看当前所有命令别名：
+alias
+
+set    # 显示当前终端变量
+env    # 显示用户环境变量
+export # 显示和设置用户环境变量
+```
+
+## 用户会话配置文件
+```sh
+# 系统配置文件位置有：
+/etc/profile
+/etc/profile.d
+/etc/environment
+/etc/bashrc
+
+# 用户目录配置文件有：
+~/.profile
+~/.bashrc
+~/.bash_profile
+~/.bash_logout
+~/.zshrc
+
+# X Window服务，配置文件：
+~/.xprofile
+~/.xinitrc
+
+# source 命令
+- source 命令用于在当前 shell 环境中执行指定脚本文件，并将其中的变量和函数导入到当前环境中。它通常用于加载脚本文件中的环境变量、别名和函数定义，以便在当前会话中可以直接使用它们。
+- 使用方法如下：source <脚本文件路径>
+- 或者可以使用其简写形式：. <脚本文件路径>
+- 注意，source 命令是在当前进程中执行脚本，而不是启动一个新的子进程。这意味着脚本文件中的变量和函数都会影响到当前的 shell 环境。
+- source 命令通常用于加载 shell 配置文件（如 ~/.bashrc 或 ~/.profile），以便立即生效，而不需要重新登录或启动新的终端会话。此外，它还可以用于加载其他自定义脚本文件，以便在当前会话中使用特定的环境设置或功能。
+```
+
+## 其他命令
+```
+# 查询过去 3 天内 /etc 被读取的文件
+find /etc -atime -3
+
+lsattr test.txt
+----ia---------- test.txt
+chattr -ia test.txt
+
+find / -nouser -print
+
+Look for unusual SUID root files:
+# find / -uid 0 –perm -4000 –print
+
+This requires knowledge of normal SUID files.
+Look for unusual large files (greater than 10
+MegaBytes):
+# find / -size +10000k –print
+
+This requires knowledge of normal large files.
+Look for files named with dots and spaces ("...", ".. ",
+". ", and " ") used to camouflage files:
+# find / -name " " –print
+# find / -name ".. " –print
+# find / -name ". " –print
+# find / -name " " –print
+
+/etc/modprobe*
+/etc/modules*
+/etc/initcpio
+/etc/initramfs
+/etc/yum
+/etc/apt
+/etc/hosts
 ```
 
 ## Linux 应急工具
