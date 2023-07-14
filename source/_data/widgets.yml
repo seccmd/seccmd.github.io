@@ -2,12 +2,13 @@ welcome:
   layout: markdown
   title: 欢迎，赛博旅行者：
   content: |
-    我是数字安全极客，仅分享超级干货，欢迎交流，关注不迷路！
+    我是数字安全极客，专注开源安全生产力，欢迎交流！
     [GitHub](https://github.com/seccmd/) | [Twiter](https://twitter.com/sec_cmd) | [ZhiHu](https://www.zhihu.com/people/mlsec)
-    
+
 zuopin:
   layout: markdown
   title: 我的作品：
   content: |
     安全命令速查手册：[Sec123](https://123.seccmd.net)
+    ATT&CK 中文版：[Attack_CN](https://attack.seccmd.net/)
     

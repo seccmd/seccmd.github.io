@@ -57,12 +57,23 @@ PDF下载：[NIST CSF 实践指南](https://res-static.hc-cdn.cn/cloudbu-site/ch
 PDF下载：[HIPAA 遵从性指南](https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/TrustCenter/WithePaper/HIPAA_Compliance_chn_cn.pdf)
 
 
-
 ### PDPA
 
 新加坡于2012年10月15日颁布了《个人数据保护法 2012》（PDPA），该法于2014年7月2日生效。新加坡PDPA整体规范了组织对个人数据的收集、使用和披露， 保障个人对其个人数据保护的权利并承认组织出于合理的目的收集、使用和披露个人数据的需要。
 
 PDF下载：[新加坡 PDPA 遵从性指南](https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/TrustCenter/WithePaper/privacy/Singapore_PDPA_Compliance_chn_cn.pdf)
+
+### 网络安全实践指南
+
+基础设施安全是构筑多维全栈安全防护体系的核心组成部分。参考业界最佳实践在数据中心、网络等基础设施的设计和管理上充分考虑安全性与合规性。
+
+PDF下载：[网络安全白皮书](https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/TrustCenter/WithePaper/SecurityWhitepaper_cn.pdf)
+
+### 数据安全实践指南
+
+需要高度重数据资产，把数据保护作为安全策略的核心。遵循数据安全生命周期管理的业界先进标准，在身份认证、权限管理、访问控制、数据隔离、传输安全、存储安全、数据删除、物理销毁等方面，采用优秀技术、实践和流程，建立切实有效的数据保护能力。
+
+PDF下载：[数据安全白皮书](https://res-static.hc-cdn.cn/cloudbu-site/china/zh-cn/TrustCenter/WithePaper/best%20practices/DataSecurityWhitepaper_chn_cn.pdf)
 
 
 
