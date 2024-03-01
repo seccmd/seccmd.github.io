@@ -1,0 +1,18 @@
+welcome:
+  layout: markdown
+  title: 欢迎，赛博旅行者：
+  content: |
+<<<<<<< HEAD
+    我是数字安全极客，专注安全生产力，欢迎交流！
+=======
+    我是数字安全极客，专注开源安全生产力，欢迎交流！
+    [GitHub](https://github.com/seccmd/) | [Weibo](https://weibo.com/u/2974126731) | [ZhiHu](https://www.zhihu.com/people/mlsec)
+>>>>>>> 0549219bd6b280eb5383b95f11b57cb9cf44ab77
+
+zuopin:
+  layout: markdown
+  title: 我的作品：
+  content: |
+    微信公众号：赵钱的有趣体验
+    安全命令速查手册：[Sec123](https://123.seccmd.net)
+    ATT&CK 中文版：[Attack_CN](https://attack.seccmd.net/)
