@@ -8,6 +8,6 @@ zuopin:
   layout: markdown
   title: 我的作品：
   content: |
-    微信公众号：赵钱的有趣体验
-    安全命令速查手册：[Sec123](https://123.seccmd.net)
-    ATT&CK 中文版：[Attack_CN](https://attack.seccmd.net/)
+    微信公众号：[赵钱的有趣体验](https://mp.weixin.qq.com/s/fU8KLItr6qJyfB__3d7llQ)
+    安全命令速查手册：[Sec123](/sec123/)
+    ATT&CK 中文版：[Attack_CN](/Attack_CN/)
