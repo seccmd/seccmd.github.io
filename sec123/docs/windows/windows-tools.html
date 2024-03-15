@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en" data-color-mode="dark">
+<head>
+<meta charset="utf-8">
+<title>Windows 工具脚本
+ &#x26;  windows-tools cheatsheet &#x26;  SecCMD.net</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta description="Windows 工具脚本
+===
+
+这个快速参考备忘单提供了使用 Windows 工具脚本 常用命令的使用清单
+
+工具，为安全人员分享快速参考备忘单。">
+<meta keywords="windows-tools,reference,Quick,Reference,cheatsheet,cheat,sheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%221em%22%20width%3D%221em%22%3E%20%3Cpath%20d%3D%22m21.66%2010.44-.98%204.18c-.84%203.61-2.5%205.07-5.62%204.77-.5-.04-1.04-.13-1.62-.27l-1.68-.4c-4.17-.99-5.46-3.05-4.48-7.23l.98-4.19c.2-.85.44-1.59.74-2.2%201.17-2.42%203.16-3.07%206.5-2.28l1.67.39c4.19.98%205.47%203.05%204.49%207.23Z%22%20fill%3D%22%23c9d1d9%22%2F%3E%20%3Cpath%20d%3D%22M15.06%2019.39c-.62.42-1.4.77-2.35%201.08l-1.58.52c-3.97%201.28-6.06.21-7.35-3.76L2.5%2013.28c-1.28-3.97-.22-6.07%203.75-7.35l1.58-.52c.41-.13.8-.24%201.17-.31-.3.61-.54%201.35-.74%202.2l-.98%204.19c-.98%204.18.31%206.24%204.48%207.23l1.68.4c.58.14%201.12.23%201.62.27Zm2.43-8.88c-.06%200-.12-.01-.19-.02l-4.85-1.23a.75.75%200%200%201%20.37-1.45l4.85%201.23a.748.748%200%200%201-.18%201.47Z%22%20fill%3D%22%23228e6c%22%20%2F%3E%20%3Cpath%20d%3D%22M14.56%2013.89c-.06%200-.12-.01-.19-.02l-2.91-.74a.75.75%200%200%201%20.37-1.45l2.91.74c.4.1.64.51.54.91-.08.34-.38.56-.72.56Z%22%20fill%3D%22%23228e6c%22%20%2F%3E%20%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="stylesheet" href="..\..\style\style.css">
+<link rel="stylesheet" href="..\..\style\katex.css">
+</head>
+<body><nav class="header-nav"><div class="max-container"><a href="..\..\index.html" class="logo"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="1em" width="1em">
+  <path d="m21.66 10.44-.98 4.18c-.84 3.61-2.5 5.07-5.62 4.77-.5-.04-1.04-.13-1.62-.27l-1.68-.4c-4.17-.99-5.46-3.05-4.48-7.23l.98-4.19c.2-.85.44-1.59.74-2.2 1.17-2.42 3.16-3.07 6.5-2.28l1.67.39c4.19.98 5.47 3.05 4.49 7.23Z" fill="#c9d1d9"></path>
+  <path d="M15.06 19.39c-.62.42-1.4.77-2.35 1.08l-1.58.52c-3.97 1.28-6.06.21-7.35-3.76L2.5 13.28c-1.28-3.97-.22-6.07 3.75-7.35l1.58-.52c.41-.13.8-.24 1.17-.31-.3.61-.54 1.35-.74 2.2l-.98 4.19c-.98 4.18.31 6.24 4.48 7.23l1.68.4c.58.14 1.12.23 1.62.27Zm2.43-8.88c-.06 0-.12-.01-.19-.02l-4.85-1.23a.75.75 0 0 1 .37-1.45l4.85 1.23a.748.748 0 0 1-.18 1.47Z" fill="#228e6c"></path>
+  <path d="M14.56 13.89c-.06 0-.12-.01-.19-.02l-2.91-.74a.75.75 0 0 1 .37-1.45l2.91.74c.4.1.64.51.54.91-.08.34-.38.56-.72.56Z" fill="#228e6c"></path>
+</svg>
+<span class="title">SecCMD.net</span></a><div class="menu"><a href="javascript:void(0);" class="searchbtn" id="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" viewBox="0 0 18 18">
+  <path fill="currentColor" d="M17.71,16.29 L14.31,12.9 C15.4069846,11.5024547 16.0022094,9.77665502 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,12.418278 3.581722,16 8,16 C9.77665502,16.0022094 11.5024547,15.4069846 12.9,14.31 L16.29,17.71 C16.4777666,17.8993127 16.7333625,18.0057983 17,18.0057983 C17.2666375,18.0057983 17.5222334,17.8993127 17.71,17.71 C17.8993127,17.5222334 18.0057983,17.2666375 18.0057983,17 C18.0057983,16.7333625 17.8993127,16.4777666 17.71,16.29 Z M2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,11.3137085 11.3137085,14 8,14 C4.6862915,14 2,11.3137085 2,8 Z"></path>
+</svg><span>搜索</span><span>⌘K</span></a><a href="https://github.com/seccmd/secbase/blob/main/docs/windows\windows-tools.md" class="" target="__blank"><svg viewBox="0 0 36 36" fill="currentColor" height="1em" width="1em"><path d="m33 6.4-3.7-3.7a1.71 1.71 0 0 0-2.36 0L23.65 6H6a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V11.76l3-3a1.67 1.67 0 0 0 0-2.36ZM18.83 20.13l-4.19.93 1-4.15 9.55-9.57 3.23 3.23ZM29.5 9.43 26.27 6.2l1.85-1.85 3.23 3.23Z"></path><path fill="none" d="M0 0h36v36H0z"></path></svg><span>编辑</span></a><button id="darkMode" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="light" height="1em" width="1em">
+  <path d="M6.995 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007-2.246-5.007-5.007-5.007S6.995 9.239 6.995 12zM11 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2H2zm17 0h3v2h-3zM5.637 19.778l-1.414-1.414 2.121-2.121 1.414 1.414zM16.242 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.344 7.759 4.223 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"></path>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="dark" height="1em" width="1em">
+  <path d="M12 11.807A9.002 9.002 0 0 1 10.049 2a9.942 9.942 0 0 0-5.12 2.735c-3.905 3.905-3.905 10.237 0 14.142 3.906 3.906 10.237 3.905 14.143 0a9.946 9.946 0 0 0 2.735-5.119A9.003 9.003 0 0 1 12 11.807z"></path>
+</svg>
+</button><script src="..\../js/dark.js?v=1.5.3"></script><a href="https://github.com/seccmd/secbase" class="" target="__blank"><svg viewBox="0 0 16 16" fill="currentColor" height="1em" width="1em"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a></div></div></nav><div class="wrap h1body-exist max-container"><header class="wrap-header h1wrap"><h1 id="windows-工具脚本"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" width="1em">
+  <path d="M107.946667 838.4l57.173333 23.893333v-385.28l-103.68 250.026667c-17.493333 43.52 3.413333 93.44 46.506667 111.36z m832-157.866667L728.32 169.813333a85.888 85.888 0 0 0-77.226667-52.48c-11.093333 0-22.613333 1.706667-33.706666 6.4L302.933333 253.866667a85.290667 85.290667 0 0 0-46.08 110.933333l211.626667 510.72a85.248 85.248 0 0 0 110.933333 46.08l314.026667-130.133333a85.077333 85.077333 0 0 0 46.506667-110.933334zM336.213333 373.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667 42.666667 19.2 42.666667 42.666667-19.2 42.666667-42.666667 42.666666z m-85.333333 469.333334c0 46.933333 38.4 85.333333 85.333333 85.333333h61.866667l-147.2-355.84v270.506667z"></path>
+</svg><a aria-hidden="true" tabindex="-1" href="#windows-工具脚本"><span class="icon icon-link"></span></a>Windows 工具脚本</h1><div class="wrap-body">
+<p>这个快速参考备忘单提供了使用 Windows 工具脚本 常用命令的使用清单</p>
+</div></header><div class="menu-tocs"><div class="menu-btn"><svg aria-hidden="true" fill="currentColor" height="1em" width="1em" viewBox="0 0 16 16" version="1.1" data-view-component="true">
+  <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+</svg></div><div class="menu-modal"><a aria-hidden="true" class="leve2 tocs-link" data-num="2" href="#工具">工具</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#安全工具">安全工具</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#常用工具">常用工具</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#jdk-下载">JDK 下载</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#国内-jdk-下载服务">国内 JDK 下载服务</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#oracle-共享账号">Oracle 共享账号</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#win-安装-ssh-服务">Win 安装 ssh 服务</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#python-环境">Python 环境</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#安装">安装</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#示例">示例</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#golang-环境">Golang 环境</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#安装-1">安装</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#示例-1">示例</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#nodejs-环境">NodeJS 环境</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#安装-2">安装</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#示例-2">示例</a><a aria-hidden="true" class="leve2 tocs-link" data-num="2" href="#脚本">脚本</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#windows-initial-system-examination">Windows Initial System Examination</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#incident-response-windows-cheatsheet">Incident Response: Windows Cheatsheet</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#differential-analysis">Differential Analysis</a></div></div><div class="h1wrap-body"><div class="wrap h2body-exist"><div class="wrap-header h2wrap"><h2 id="工具"><a aria-hidden="true" tabindex="-1" href="#工具"><span class="icon icon-link"></span></a>工具</h2><div class="wrap-body">
+</div></div><div class="h2wrap-body"><div class="wrap h3body-not-exist"><div class="wrap-header h3wrap"><h3 id="安全工具"><a aria-hidden="true" tabindex="-1" href="#安全工具"><span class="icon icon-link"></span></a>安全工具</h3><div class="wrap-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><a href="https://docs.microsoft.com/en-us/sysinternals/downloads/">Microsoft Sysinternals</a></td><td align="left"></td></tr><tr><td align="left"><a href="http://processhacker.sourceforge.net">Process Hacker</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://filehippo.com/zh/download_autoruns">AutoRuns</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://www.huorong.cn">HuoRong 火绒 </a></td><td align="left"></td></tr></tbody></table>
+</div></div></div><div class="wrap h3body-not-exist col-span-2"><div class="wrap-header h3wrap"><h3 id="常用工具"><a aria-hidden="true" tabindex="-1" href="#常用工具"><span class="icon icon-link"></span></a>常用工具</h3><div class="wrap-body">
+<!--rehype:wrap-class=col-span-2-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th><th align="left">item</th><th align="left">item2</th><th align="left">item2</th></tr></thead><tbody><tr><td align="left"><a href="https://chocolatey.org">Chocolatey</a></td><td align="left"><a href="https://www.deepl.com/">DeepL翻译</a></td><td align="left"><a href="https://internetdownloadmanager.com/">IDM 下载</a></td><td align="left"><a href="">KeePass</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://zh.snipaste.com">Snipaste 截图</a></td><td align="left"><a href="https://fanyi.xfyun.cn/console/trans/doc">科大翻译</a></td><td align="left"><a href="https://freedownloadmanager.org/">FDM 下载</a></td><td align="left"><a href="">Mybase</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://iridiumbrowser.de">Iridium 浏览器</a></td><td align="left"><a href="https://fanyi.sogou.com/document">搜狗翻译</a></td><td align="left"><a href="https://youtube.iiilab.com/">视频下载</a></td><td align="left"><a href="">MobaXterm</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://start.me">Start.me 导航</a></td><td align="left"><a href="https://fanyi.pdf365.cn/doc">福昕翻译</a></td><td align="left"><a href="https://www.fkxz.cn/">Tampermonkey</a></td><td align="left"><a href="">Notepad++</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://www.yozosoft.com/">永中 Office</a></td><td align="left"><a href="http://www.zhiyunwenxian.cn">知云文献</a></td><td align="left"><a href="https://www.wireshark.org">Wireshark</a></td><td align="left"><a href="">Proxifier</a></td><td align="left"></td></tr><tr><td align="left"><a href="https://www.7-zip.org/">7zip 压缩</a></td><td align="left"><a href="https://immersive-translate.owenyoung.com/">沉浸翻译</a></td><td align="left"><a href="https://www.telerik.com">Fiddler</a></td><td align="left"><a href="">VS Code</a></td><td align="left"></td></tr></tbody></table>
+</div></div></div><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="jdk-下载"><a aria-hidden="true" tabindex="-1" href="#jdk-下载"><span class="icon icon-link"></span></a>JDK 下载</h3><div class="wrap-body">
+<h4 id="国内-jdk-下载服务"><a aria-hidden="true" tabindex="-1" href="#国内-jdk-下载服务"><span class="icon icon-link"></span></a>国内 JDK 下载服务</h4>
+<p>地址：<a href="http://www.codebaoku.com/jdk/jdk-index.html">http://www.codebaoku.com/jdk/jdk-index.html</a></p>
+<h4 id="oracle-共享账号"><a aria-hidden="true" tabindex="-1" href="#oracle-共享账号"><span class="icon icon-link"></span></a>Oracle 共享账号</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>Chad1962@rhyta.com</code></td><td align="left">KETQbd27NmhT9j8</td></tr><tr><td align="left"><code>hoi@muellmail.com</code></td><td align="left">Qwert1234</td></tr><tr><td align="left"><code>erfede@yopmail.com</code></td><td align="left">Bellapete!1</td></tr><tr><td align="left"><code>b7293568@urhen.com</code></td><td align="left">Y8l0W5KsDHB3YeNpn2y</td></tr></tbody></table>
+</div></div></div><div class="wrap h3body-not-exist col-span-2"><div class="wrap-header h3wrap"><h3 id="win-安装-ssh-服务"><a aria-hidden="true" tabindex="-1" href="#win-安装-ssh-服务"><span class="icon icon-link"></span></a>Win 安装 ssh 服务</h3><div class="wrap-body">
+<!--rehype:wrap-class=col-span-2-->
+<pre class="language-powershell"><code class="language-powershell code-highlight"><span class="code-line"><span class="token comment"># Search the OpenSSH</span>
+</span><span class="code-line"><span class="token function">Get-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token punctuation">|</span> <span class="token function">Where-Object</span> Name <span class="token operator">-like</span> <span class="token string">'OpenSSH*'</span>
+</span><span class="code-line"><span class="token comment"># Install the OpenSSH Client</span>
+</span><span class="code-line"><span class="token function">Add-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Client~~~~0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1<span class="token punctuation">.</span>0
+</span><span class="code-line"><span class="token comment"># Install the OpenSSH Server</span>
+</span><span class="code-line"><span class="token function">Add-WindowsCapability</span> <span class="token operator">-</span>Online <span class="token operator">-</span>Name OpenSSH<span class="token punctuation">.</span>Server~~~~0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1<span class="token punctuation">.</span>0
+</span><span class="code-line"><span class="token comment"># Start the sshd service</span>
+</span><span class="code-line"><span class="token function">Start-Service</span> sshd
+</span><span class="code-line"><span class="token comment"># OPTIONAL but recommended:</span>
+</span><span class="code-line"><span class="token function">Set-Service</span> <span class="token operator">-</span>Name sshd <span class="token operator">-</span>StartupType <span class="token string">'Automatic'</span>
+</span></code></pre>
+</div></div></div><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="python-环境"><a aria-hidden="true" tabindex="-1" href="#python-环境"><span class="icon icon-link"></span></a>Python 环境</h3><div class="wrap-body">
+<h4 id="安装"><a aria-hidden="true" tabindex="-1" href="#安装"><span class="icon icon-link"></span></a>安装</h4>
+<pre><code class="code-highlight"><span class="code-line"># Python 安装包
+</span><span class="code-line">http://npm.taobao.org/mirrors/python/
+</span><span class="code-line">
+</span><span class="code-line"># pip 国内镜像
+</span><span class="code-line">pip3 install -i https://mirrors.aliyun.com/pypi/simple/ requests
+</span></code></pre>
+<h4 id="示例"><a aria-hidden="true" tabindex="-1" href="#示例"><span class="icon icon-link"></span></a>示例</h4>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">$ python2 <span class="token parameter variable">-m</span> SimpleHTTPServer <span class="token number">8000</span>
+</span><span class="code-line">$ python3 <span class="token parameter variable">-m</span> http.server <span class="token number">8000</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># 导入 requests 包</span>
+</span><span class="code-line"><span class="token function">import</span> requests
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># 发送请求</span>
+</span><span class="code-line">x <span class="token operator">=</span> requests.get<span class="token punctuation">(</span><span class="token string">'https://www.runoob.com/'</span><span class="token punctuation">)</span>
+</span><span class="code-line">
+</span><span class="code-line">print<span class="token punctuation">(</span>response.status_code<span class="token punctuation">)</span>  <span class="token comment"># 获取响应状态码</span>
+</span><span class="code-line">print<span class="token punctuation">(</span>response.headers<span class="token punctuation">)</span>  <span class="token comment"># 获取响应头</span>
+</span><span class="code-line">print<span class="token punctuation">(</span>response.content<span class="token punctuation">)</span>  <span class="token comment"># 获取响应内容</span>
+</span><span class="code-line">print<span class="token punctuation">(</span>x.text<span class="token punctuation">)</span>            <span class="token comment"># 返回网页内容</span>
+</span></code></pre>
+</div></div></div><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="golang-环境"><a aria-hidden="true" tabindex="-1" href="#golang-环境"><span class="icon icon-link"></span></a>Golang 环境</h3><div class="wrap-body">
+<h4 id="安装-1"><a aria-hidden="true" tabindex="-1" href="#安装-1"><span class="icon icon-link"></span></a>安装</h4>
+<pre><code class="code-highlight"><span class="code-line"># 下载Win安装包
+</span><span class="code-line">https://studygolang.com/dl
+</span><span class="code-line">
+</span><span class="code-line"># 更换国内源
+</span><span class="code-line">set GO111MODULE=on 
+</span><span class="code-line">set GOPROXY=https://mirrors.aliyun.com/goproxy
+</span></code></pre>
+<h4 id="示例-1"><a aria-hidden="true" tabindex="-1" href="#示例-1"><span class="icon icon-link"></span></a>示例</h4>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># main.go</span>
+</span><span class="code-line">package main
+</span><span class="code-line"><span class="token function">import</span> <span class="token punctuation">(</span>
+</span><span class="code-line">    <span class="token string">"fmt"</span>
+</span><span class="code-line">    <span class="token string">"net/http"</span>
+</span><span class="code-line"><span class="token punctuation">)</span>
+</span><span class="code-line">func <span class="token function-name function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line">    http.HandleFunc<span class="token punctuation">(</span><span class="token string">"/"</span>, func<span class="token punctuation">(</span>w http.ResponseWriter, r *http.Request<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line">        fmt.Fprintf<span class="token punctuation">(</span>w, <span class="token string">"Welcome to new server!"</span><span class="token punctuation">)</span>
+</span><span class="code-line">    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span><span class="code-line">    http.ListenAndServe<span class="token punctuation">(</span><span class="token string">":5050"</span>, nil<span class="token punctuation">)</span>
+</span><span class="code-line"><span class="token punctuation">}</span>
+</span><span class="code-line">
+</span><span class="code-line">$ go build <span class="token parameter variable">-o</span> httpserver main.go
+</span></code></pre>
+</div></div></div><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="nodejs-环境"><a aria-hidden="true" tabindex="-1" href="#nodejs-环境"><span class="icon icon-link"></span></a>NodeJS 环境</h3><div class="wrap-body">
+<h4 id="安装-2"><a aria-hidden="true" tabindex="-1" href="#安装-2"><span class="icon icon-link"></span></a>安装</h4>
+<pre><code class="code-highlight"><span class="code-line"># 下载Win安装包
+</span><span class="code-line">https://nodejs.org/en/
+</span><span class="code-line">
+</span><span class="code-line"># 国内镜像源 https://npmmirror.com/
+</span><span class="code-line">npm config set registry https://registry.npm.taobao.org
+</span></code></pre>
+<h4 id="示例-2"><a aria-hidden="true" tabindex="-1" href="#示例-2"><span class="icon icon-link"></span></a>示例</h4>
+<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">$ <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">-g</span> http-server
+</span><span class="code-line">$ http-server C:<span class="token punctuation">\</span>temp <span class="token parameter variable">-p</span> <span class="token number">8000</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Linux安装nodejs</span>
+</span><span class="code-line"><span class="token function">wget</span> https://nodejs.org/dist/v16.15.0/node-v16.15.0-linux-x64.tar.xz
+</span><span class="code-line"><span class="token function">tar</span> <span class="token parameter variable">-xJvf</span> node-v16.15.0-linux-x64.tar.xz <span class="token parameter variable">-C</span> /usr/local/lib/nodejs 
+</span><span class="code-line"><span class="token function">vi</span> ~/.profile 
+</span><span class="code-line">  <span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span>//usr/local/lib/nodejs/node-v16.15.0-linux-x64/bin:<span class="token environment constant">$PATH</span>
+</span><span class="code-line"><span class="token builtin class-name">source</span> ~/.profile
+</span><span class="code-line">$ <span class="token function">node</span> <span class="token parameter variable">-v</span> 
+</span><span class="code-line">$ <span class="token function">npm</span> version 
+</span><span class="code-line">$ npx <span class="token parameter variable">-v</span>
+</span></code></pre>
+</div></div></div></div></div><div class="wrap h2body-exist"><div class="wrap-header h2wrap"><h2 id="脚本"><a aria-hidden="true" tabindex="-1" href="#脚本"><span class="icon icon-link"></span></a>脚本</h2><div class="wrap-body">
+</div></div><div class="h2wrap-body"><div class="wrap h3body-not-exist col-span-3"><div class="wrap-header h3wrap"><h3 id="windows-initial-system-examination"><a aria-hidden="true" tabindex="-1" href="#windows-initial-system-examination"><span class="icon icon-link"></span></a>Windows Initial System Examination</h3><div class="wrap-body">
+<!--rehype:wrap-class=col-span-3-->
+<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line"><span class="token comment"># Look at event logs	</span>
+</span><span class="code-line">eventvwr
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Examine network configuration	</span>
+</span><span class="code-line">arp <span class="token parameter variable">-a</span>
+</span><span class="code-line"><span class="token function">netstat</span> <span class="token parameter variable">-nr</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># List network connections and related details	</span>
+</span><span class="code-line"><span class="token function">netstat</span> <span class="token parameter variable">-nao</span>
+</span><span class="code-line"><span class="token function">netstat</span> <span class="token parameter variable">-vb</span>
+</span><span class="code-line">net session
+</span><span class="code-line">net use
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># List users and groups	</span>
+</span><span class="code-line">lusrmgr
+</span><span class="code-line">net <span class="token function">users</span>
+</span><span class="code-line">net localgroup administrators
+</span><span class="code-line">net group administrators
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Look at scheduled jobs	</span>
+</span><span class="code-line">schtasks
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Look at auto-start programs	</span>
+</span><span class="code-line">msconfig
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># List processes	</span>
+</span><span class="code-line">taskmgr
+</span><span class="code-line">wmic process list full
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># List services	</span>
+</span><span class="code-line">net start
+</span><span class="code-line">tasklist /svc
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Check DNS settings and the hosts file	</span>
+</span><span class="code-line">ipconfig /all
+</span><span class="code-line"><span class="token function">more</span> %SystemRoot%<span class="token punctuation">\</span>System32<span class="token punctuation">\</span>Drivers<span class="token punctuation">\</span>etc<span class="token punctuation">\</span>hosts
+</span><span class="code-line">ipconfig /displaydns
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Verify integrity of OS files (affects lots of files!)	</span>
+</span><span class="code-line">sigverif
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Research recently-modified files (affects lots of files!)	</span>
+</span><span class="code-line"><span class="token function">dir</span> /a/o-d/p %SystemRoot%System32
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Avoid using Windows Explorer, as it modifies useful file system details; use command-line.</span>
+</span></code></pre>
+<p>参考：<a href="https://zeltser.com/security-incident-survey-cheat-sheet/">security-incident</a></p>
+</div></div></div><div class="wrap h3body-not-exist col-span-3"><div class="wrap-header h3wrap"><h3 id="incident-response-windows-cheatsheet"><a aria-hidden="true" tabindex="-1" href="#incident-response-windows-cheatsheet"><span class="icon icon-link"></span></a>Incident Response: Windows Cheatsheet</h3><div class="wrap-body">
+<!--rehype:wrap-class=col-span-3-->
+<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line"><span class="token comment"># Check user accounts</span>
+</span><span class="code-line">lusrmgr.msc
+</span><span class="code-line">net user
+</span><span class="code-line">Get-LocalUser
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">#Check Administrators</span>
+</span><span class="code-line">net localgroup administrators
+</span><span class="code-line">Get-LocalGroupMember Administrators
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Check processes</span>
+</span><span class="code-line">taskmgr.exe
+</span><span class="code-line">tasklist
+</span><span class="code-line">Get-Process
+</span><span class="code-line">wmic process get name,parentprocessid,processid
+</span><span class="code-line">wmic process where <span class="token string">'ProcessID=PID'</span> get CommandLine
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Check Services</span>
+</span><span class="code-line">services.msc
+</span><span class="code-line">net start
+</span><span class="code-line">sc query <span class="token operator">|</span> <span class="token function">more</span>
+</span><span class="code-line">tasklist /svc
+</span><span class="code-line">Get-Service <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Task Scheduler</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Administrative Tools (GUI)</span>
+</span><span class="code-line">C:<span class="token punctuation">\</span>ProgramData<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>Start Menu<span class="token punctuation">\</span>Programs<span class="token punctuation">\</span>Administrative Tools
+</span><span class="code-line">schtasks
+</span><span class="code-line">taskmgr <span class="token punctuation">(</span>Check Startup<span class="token punctuation">)</span>
+</span><span class="code-line">wmic startup get caption,command
+</span><span class="code-line">Get-CimInstance Win32_StartupCommand <span class="token operator">|</span> Select-Object Name, command, Location, User <span class="token operator">|</span> Format-List
+</span><span class="code-line">Get-ScheduledTask <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">Get-ScheduledTask <span class="token parameter variable">-TaskName</span> Office* <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Enabling / Disabling Scheduled Tasks</span>
+</span><span class="code-line">Disable-ScheduledTask <span class="token parameter variable">-taskname</span> <span class="token string">"Adobe Flash Player Updater"</span>
+</span><span class="code-line">Enable-ScheduledTask <span class="token parameter variable">-taskname</span> <span class="token string">"Adobe Flash Player Updater"</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Registry Entries</span>
+</span><span class="code-line">regedit
+</span><span class="code-line">reg query HKLM<span class="token punctuation">\</span>SOFTWARE<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>CurrentVersion<span class="token punctuation">\</span>Run
+</span><span class="code-line">reg query HKEY_CURRENT_USER<span class="token punctuation">\</span>SOFTWARE<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>CurrentVersion<span class="token punctuation">\</span>Run
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Powershell Registry</span>
+</span><span class="code-line">get-psdrive
+</span><span class="code-line"><span class="token builtin class-name">cd</span> HKLM:<span class="token punctuation">\</span>
+</span><span class="code-line">set-location <span class="token parameter variable">-path</span> HKLM:<span class="token punctuation">\</span>SOFTWARE<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>CurrentVersion
+</span><span class="code-line">Get-childitem <span class="token parameter variable">-ErrorAction</span> SilentlyContinue <span class="token operator">|</span> Where-Object <span class="token punctuation">{</span><span class="token variable">$_</span>.Name <span class="token parameter variable">-like</span> <span class="token string">"*Run*"</span><span class="token punctuation">}</span>
+</span><span class="code-line">set-location <span class="token parameter variable">-path</span> HKCU:<span class="token punctuation">\</span>SOFTWARE<span class="token punctuation">\</span>Microsoft<span class="token punctuation">\</span>Windows<span class="token punctuation">\</span>CurrentVersion<span class="token punctuation">\</span>
+</span><span class="code-line">Get-childitem <span class="token parameter variable">-ErrorAction</span> SilentlyContinue <span class="token operator">|</span> Where-Object <span class="token punctuation">{</span><span class="token variable">$_</span>.Name <span class="token parameter variable">-like</span> <span class="token string">"*Run*"</span><span class="token punctuation">}</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Active Internet Connections</span>
+</span><span class="code-line"><span class="token function">netstat</span> <span class="token parameter variable">-ano</span>
+</span><span class="code-line">Get-NetTCPConnection <span class="token parameter variable">-LocalAddress</span> <span class="token number">192.168</span>.0.100 <span class="token operator">|</span> Sort-Object LocalPort
+</span><span class="code-line">Get-NetTCPConnection <span class="token parameter variable">-LocalAddress</span> <span class="token number">192.168</span>.0.100 <span class="token operator">|</span> Select local*,remote*,state,@<span class="token punctuation">{</span>Name<span class="token operator">=</span><span class="token string">"Process"</span><span class="token punctuation">;</span><span class="token assign-left variable">Expression</span><span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span>Get-Process <span class="token parameter variable">-Id</span> <span class="token variable">$_</span>.OwningProcess<span class="token punctuation">)</span>.ProcessName<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># File Sharing</span>
+</span><span class="code-line">net view <span class="token punctuation">\</span><span class="token punctuation">\</span><span class="token number">192.168</span>.0.100
+</span><span class="code-line">Get-SMBShare
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Files (in your user Profile)(C:\users\MyName)</span>
+</span><span class="code-line"><span class="token builtin class-name">cd</span> %HOMEPATH%
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## To view the .exe files with their path to locate them</span>
+</span><span class="code-line">forfiles /D <span class="token parameter variable">-10</span> /S /M *.exe /C <span class="token string">"cmd /c echo @path"</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## To View files without its path and more details of the particular file extension and its modification date</span>
+</span><span class="code-line">forfiles /D <span class="token parameter variable">-10</span> /S /M *.exe /C <span class="token string">"cmd /c echo @ext @fname @fdate"</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## To check for files modified in the last 10 days type</span>
+</span><span class="code-line">forfiles /p c: /S /D <span class="token parameter variable">-10</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## To check for file size below 6MB, you can use the file explorer’s search box and enter size:&#x3C;6M</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Powershell</span>
+</span><span class="code-line"><span class="token builtin class-name">cd</span> <span class="token variable">$env</span>:userprofile
+</span><span class="code-line">Get-ChildItem <span class="token parameter variable">-Recurse</span> –force <span class="token parameter variable">-ErrorAction</span> SilentlyContinue <span class="token parameter variable">-Include</span> *.exe <span class="token operator">|</span> Sort-Object Name <span class="token operator">|</span> Format-Table Name, Fullname <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Search for exe Created Last Day</span>
+</span><span class="code-line">Get-ChildItem <span class="token parameter variable">-Recurse</span> –force <span class="token parameter variable">-ErrorAction</span> SilentlyContinue <span class="token parameter variable">-Include</span> *.exe <span class="token operator">|</span> Where-Object <span class="token punctuation">{</span> <span class="token variable">$_</span>.CreationTime <span class="token parameter variable">-gt</span> <span class="token punctuation">(</span>Get-Date<span class="token punctuation">)</span>.AddDays<span class="token punctuation">(</span>-1<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token operator">|</span> Sort-Object Name <span class="token operator">|</span> Format-Table Name, Fullname <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Search for exe Modified Last Day</span>
+</span><span class="code-line">Get-ChildItem <span class="token parameter variable">-Recurse</span> –force <span class="token parameter variable">-ErrorAction</span> SilentlyContinue <span class="token parameter variable">-Include</span> *.exe <span class="token operator">|</span> Where-Object <span class="token punctuation">{</span> <span class="token variable">$_</span>.LastWriteTime <span class="token parameter variable">-gt</span> <span class="token punctuation">(</span>Get-Date<span class="token punctuation">)</span>.AddDays<span class="token punctuation">(</span>-1<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token operator">|</span> Sort-Object Name <span class="token operator">|</span> Format-Table Name, Fullname <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Firewall Settings</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">##  view the firewall configurations and the inbound and outbound traffic </span>
+</span><span class="code-line">netsh firewall show config
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## view the firewall settings of the current profile</span>
+</span><span class="code-line">netsh advfirewall show currentprofile
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Powershell</span>
+</span><span class="code-line">Get-NetFirewallRule <span class="token operator">|</span> <span class="token keyword">select</span> DisplayName,Direction,Action,Enabled <span class="token operator">|</span> Where-Object Enabled <span class="token parameter variable">-eq</span> <span class="token variable">$true</span> <span class="token operator">|</span> Sort-Object Direction, DisplayName <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">Get-NetFirewallProfile
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Sessions with other systems</span>
+</span><span class="code-line">net use
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Open Sessions</span>
+</span><span class="code-line">net session
+</span><span class="code-line">Get-SmbMapping
+</span><span class="code-line">Get-SmbConnection
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Log Entries</span>
+</span><span class="code-line">eventvwr.msc
+</span><span class="code-line">Get-EventLog <span class="token parameter variable">-List</span> 
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Get Log From latest 2 hours</span>
+</span><span class="code-line">Get-EventLog Application <span class="token parameter variable">-After</span> <span class="token punctuation">(</span>Get-Date<span class="token punctuation">)</span>.AddHours<span class="token punctuation">(</span>-2<span class="token punctuation">)</span> <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">Get-EventLog System <span class="token parameter variable">-After</span> <span class="token punctuation">(</span>Get-Date<span class="token punctuation">)</span>.AddHours<span class="token punctuation">(</span>-2<span class="token punctuation">)</span> <span class="token operator">|</span> Format-Table <span class="token parameter variable">-AutoSize</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment">## Search for specific message</span>
+</span><span class="code-line">Get-EventLog System <span class="token parameter variable">-After</span> <span class="token punctuation">(</span>Get-Date<span class="token punctuation">)</span>.AddHours<span class="token punctuation">(</span>-2<span class="token punctuation">)</span> <span class="token operator">|</span> Where-Object <span class="token punctuation">{</span><span class="token variable">$_</span>.Message <span class="token parameter variable">-like</span> <span class="token string">"*Server*"</span><span class="token punctuation">}</span>
+</span><span class="code-line">
+</span><span class="code-line">Check Windows Stability
+</span><span class="code-line">perfmon /rel 
+</span></code></pre>
+<p>参考：<a href="https://sansorg.egnyte.com/dl/4oAuAf70Zt">https://sansorg.egnyte.com/dl/4oAuAf70Zt</a></p>
+</div></div></div><div class="wrap h3body-not-exist col-span-3"><div class="wrap-header h3wrap"><h3 id="differential-analysis"><a aria-hidden="true" tabindex="-1" href="#differential-analysis"><span class="icon icon-link"></span></a>Differential Analysis</h3><div class="wrap-body">
+<!--rehype:wrap-class=col-span-3-->
+<pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line"><span class="token comment"># This assumes that there is a baseline present for services, users, scheduled tasks, and listening TCP ports. If there is no baseline available, spin up a golden image of the system and grab the baseline from that</span>
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Capture running services, users, scheduledtasks, and listening TCP ports and then save to files</span>
+</span><span class="code-line">Get-Service <span class="token operator">|</span> Select-Object <span class="token parameter variable">-ExpandProperty</span> Name <span class="token operator">|</span> Out-File services.txt
+</span><span class="code-line">Get-LocalUser <span class="token operator">|</span> Select-Object <span class="token parameter variable">-ExpandProperty</span> Name <span class="token operator">|</span> Out-File localusers.txt
+</span><span class="code-line">Get-ScheduledTask <span class="token operator">|</span> Select-Object <span class="token parameter variable">-ExpandProperty</span> TaskName <span class="token operator">|</span> Out-File scheduledtasks.txt
+</span><span class="code-line">Get-NetTCPConnection <span class="token parameter variable">-State</span> Listen <span class="token operator">|</span> Out-File tcpports.txt
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Assign the files to variables respectively to compare with baselines</span>
+</span><span class="code-line"><span class="token variable">$services_current</span> <span class="token operator">=</span> Get-Content services.txt
+</span><span class="code-line"><span class="token variable">$services_baseline</span> <span class="token operator">=</span> Get-Content services_baseline.txt
+</span><span class="code-line">
+</span><span class="code-line"><span class="token comment"># Compare the current running services with the services from the baseline file, repeat this step for localusers, scheduledtasks, and listening TCP ports</span>
+</span><span class="code-line"><span class="token comment"># The output will show the difference between the two files, i.e. service running currently that were not in the baseline</span>
+</span><span class="code-line">Compare-Object <span class="token variable">$services_baseline</span> <span class="token variable">$services_current</span>
+</span></code></pre>
+<p>参考：<a href="https://github.com/JonesPwns/powershell-incident-response/blob/main/Powershell-Incident-CheatSheet.ps1">Differential Analysis</a></p>
+</div></div></div></div></div></div></div><footer class="footer-wrap"><footer class="max-container">© 2023 Cyber Walker.</footer></footer><script src="..\..\/data.js?v=1.5.3" defer></script><script src="..\..\/js/fuse.min.js?v=1.5.3" defer></script><script src="..\..\/js/main.js?v=1.5.3" defer></script><div id="mysearch"><div class="mysearch-box"><div class="mysearch-input"><div><svg xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" viewBox="0 0 18 18">
+  <path fill="currentColor" d="M17.71,16.29 L14.31,12.9 C15.4069846,11.5024547 16.0022094,9.77665502 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,12.418278 3.581722,16 8,16 C9.77665502,16.0022094 11.5024547,15.4069846 12.9,14.31 L16.29,17.71 C16.4777666,17.8993127 16.7333625,18.0057983 17,18.0057983 C17.2666375,18.0057983 17.5222334,17.8993127 17.71,17.71 C17.8993127,17.5222334 18.0057983,17.2666375 18.0057983,17 C18.0057983,16.7333625 17.8993127,16.4777666 17.71,16.29 Z M2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,11.3137085 11.3137085,14 8,14 C4.6862915,14 2,11.3137085 2,8 Z"></path>
+</svg><input id="mysearch-input" type="search" placeholder="搜索" autocomplete="off"><div class="mysearch-clear"></div></div><button id="mysearch-close" type="button">搜索</button></div><div class="mysearch-result"><div id="mysearch-menu"></div><div id="mysearch-content"></div></div></div></div></body>
+</html>

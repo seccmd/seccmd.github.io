@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en" data-color-mode="dark">
+<head>
+<meta charset="utf-8">
+<title>Windows 功能与日志
+ &#x26;  windows-logs cheatsheet &#x26;  SecCMD.net</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta description="Windows 功能与日志
+===
+
+这个快速参考备忘单提供了使用 Windows 功能与日志 常用命令的使用清单
+
+系统功能与日志，为安全人员分享快速参考备忘单。">
+<meta keywords="windows-logs,reference,Quick,Reference,cheatsheet,cheat,sheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20height%3D%221em%22%20width%3D%221em%22%3E%20%3Cpath%20d%3D%22m21.66%2010.44-.98%204.18c-.84%203.61-2.5%205.07-5.62%204.77-.5-.04-1.04-.13-1.62-.27l-1.68-.4c-4.17-.99-5.46-3.05-4.48-7.23l.98-4.19c.2-.85.44-1.59.74-2.2%201.17-2.42%203.16-3.07%206.5-2.28l1.67.39c4.19.98%205.47%203.05%204.49%207.23Z%22%20fill%3D%22%23c9d1d9%22%2F%3E%20%3Cpath%20d%3D%22M15.06%2019.39c-.62.42-1.4.77-2.35%201.08l-1.58.52c-3.97%201.28-6.06.21-7.35-3.76L2.5%2013.28c-1.28-3.97-.22-6.07%203.75-7.35l1.58-.52c.41-.13.8-.24%201.17-.31-.3.61-.54%201.35-.74%202.2l-.98%204.19c-.98%204.18.31%206.24%204.48%207.23l1.68.4c.58.14%201.12.23%201.62.27Zm2.43-8.88c-.06%200-.12-.01-.19-.02l-4.85-1.23a.75.75%200%200%201%20.37-1.45l4.85%201.23a.748.748%200%200%201-.18%201.47Z%22%20fill%3D%22%23228e6c%22%20%2F%3E%20%3Cpath%20d%3D%22M14.56%2013.89c-.06%200-.12-.01-.19-.02l-2.91-.74a.75.75%200%200%201%20.37-1.45l2.91.74c.4.1.64.51.54.91-.08.34-.38.56-.72.56Z%22%20fill%3D%22%23228e6c%22%20%2F%3E%20%3C%2Fsvg%3E" type="image/svg+xml">
+<link rel="stylesheet" href="..\..\style\style.css">
+<link rel="stylesheet" href="..\..\style\katex.css">
+</head>
+<body><nav class="header-nav"><div class="max-container"><a href="..\..\index.html" class="logo"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="1em" width="1em">
+  <path d="m21.66 10.44-.98 4.18c-.84 3.61-2.5 5.07-5.62 4.77-.5-.04-1.04-.13-1.62-.27l-1.68-.4c-4.17-.99-5.46-3.05-4.48-7.23l.98-4.19c.2-.85.44-1.59.74-2.2 1.17-2.42 3.16-3.07 6.5-2.28l1.67.39c4.19.98 5.47 3.05 4.49 7.23Z" fill="#c9d1d9"></path>
+  <path d="M15.06 19.39c-.62.42-1.4.77-2.35 1.08l-1.58.52c-3.97 1.28-6.06.21-7.35-3.76L2.5 13.28c-1.28-3.97-.22-6.07 3.75-7.35l1.58-.52c.41-.13.8-.24 1.17-.31-.3.61-.54 1.35-.74 2.2l-.98 4.19c-.98 4.18.31 6.24 4.48 7.23l1.68.4c.58.14 1.12.23 1.62.27Zm2.43-8.88c-.06 0-.12-.01-.19-.02l-4.85-1.23a.75.75 0 0 1 .37-1.45l4.85 1.23a.748.748 0 0 1-.18 1.47Z" fill="#228e6c"></path>
+  <path d="M14.56 13.89c-.06 0-.12-.01-.19-.02l-2.91-.74a.75.75 0 0 1 .37-1.45l2.91.74c.4.1.64.51.54.91-.08.34-.38.56-.72.56Z" fill="#228e6c"></path>
+</svg>
+<span class="title">SecCMD.net</span></a><div class="menu"><a href="javascript:void(0);" class="searchbtn" id="searchbtn"><svg xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" viewBox="0 0 18 18">
+  <path fill="currentColor" d="M17.71,16.29 L14.31,12.9 C15.4069846,11.5024547 16.0022094,9.77665502 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,12.418278 3.581722,16 8,16 C9.77665502,16.0022094 11.5024547,15.4069846 12.9,14.31 L16.29,17.71 C16.4777666,17.8993127 16.7333625,18.0057983 17,18.0057983 C17.2666375,18.0057983 17.5222334,17.8993127 17.71,17.71 C17.8993127,17.5222334 18.0057983,17.2666375 18.0057983,17 C18.0057983,16.7333625 17.8993127,16.4777666 17.71,16.29 Z M2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,11.3137085 11.3137085,14 8,14 C4.6862915,14 2,11.3137085 2,8 Z"></path>
+</svg><span>搜索</span><span>⌘K</span></a><a href="https://github.com/seccmd/secbase/blob/main/docs/windows\windows-logs.md" class="" target="__blank"><svg viewBox="0 0 36 36" fill="currentColor" height="1em" width="1em"><path d="m33 6.4-3.7-3.7a1.71 1.71 0 0 0-2.36 0L23.65 6H6a2 2 0 0 0-2 2v22a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V11.76l3-3a1.67 1.67 0 0 0 0-2.36ZM18.83 20.13l-4.19.93 1-4.15 9.55-9.57 3.23 3.23ZM29.5 9.43 26.27 6.2l1.85-1.85 3.23 3.23Z"></path><path fill="none" d="M0 0h36v36H0z"></path></svg><span>编辑</span></a><button id="darkMode" type="button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="light" height="1em" width="1em">
+  <path d="M6.995 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007-2.246-5.007-5.007-5.007S6.995 9.239 6.995 12zM11 19h2v3h-2zm0-17h2v3h-2zm-9 9h3v2H2zm17 0h3v2h-3zM5.637 19.778l-1.414-1.414 2.121-2.121 1.414 1.414zM16.242 6.344l2.122-2.122 1.414 1.414-2.122 2.122zM6.344 7.759 4.223 5.637l1.415-1.414 2.12 2.122zm13.434 10.605-1.414 1.414-2.122-2.122 1.414-1.414z"></path>
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="dark" height="1em" width="1em">
+  <path d="M12 11.807A9.002 9.002 0 0 1 10.049 2a9.942 9.942 0 0 0-5.12 2.735c-3.905 3.905-3.905 10.237 0 14.142 3.906 3.906 10.237 3.905 14.143 0a9.946 9.946 0 0 0 2.735-5.119A9.003 9.003 0 0 1 12 11.807z"></path>
+</svg>
+</button><script src="..\../js/dark.js?v=1.5.3"></script><a href="https://github.com/seccmd/secbase" class="" target="__blank"><svg viewBox="0 0 16 16" fill="currentColor" height="1em" width="1em"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a></div></div></nav><div class="wrap h1body-exist max-container"><header class="wrap-header h1wrap"><h1 id="windows-功能与日志"><svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" width="1em">
+  <path d="M107.946667 838.4l57.173333 23.893333v-385.28l-103.68 250.026667c-17.493333 43.52 3.413333 93.44 46.506667 111.36z m832-157.866667L728.32 169.813333a85.888 85.888 0 0 0-77.226667-52.48c-11.093333 0-22.613333 1.706667-33.706666 6.4L302.933333 253.866667a85.290667 85.290667 0 0 0-46.08 110.933333l211.626667 510.72a85.248 85.248 0 0 0 110.933333 46.08l314.026667-130.133333a85.077333 85.077333 0 0 0 46.506667-110.933334zM336.213333 373.333333c-23.466667 0-42.666667-19.2-42.666666-42.666666s19.2-42.666667 42.666666-42.666667 42.666667 19.2 42.666667 42.666667-19.2 42.666667-42.666667 42.666666z m-85.333333 469.333334c0 46.933333 38.4 85.333333 85.333333 85.333333h61.866667l-147.2-355.84v270.506667z"></path>
+</svg><a aria-hidden="true" tabindex="-1" href="#windows-功能与日志"><span class="icon icon-link"></span></a>Windows 功能与日志</h1><div class="wrap-body">
+<p>这个快速参考备忘单提供了使用 Windows 功能与日志 常用命令的使用清单</p>
+</div></header><div class="menu-tocs"><div class="menu-btn"><svg aria-hidden="true" fill="currentColor" height="1em" width="1em" viewBox="0 0 16 16" version="1.1" data-view-component="true">
+  <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+</svg></div><div class="menu-modal"><a aria-hidden="true" class="leve2 tocs-link" data-num="2" href="#系统功能与日志">系统功能与日志</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#检测系统信息">检测系统信息</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#powershell-查询系统日志">Powershell 查询系统日志</a><a aria-hidden="true" class="leve2 tocs-link" data-num="2" href="#wmic">WMIC</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#wmic-命令">wmic 命令</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#wmic-命令-1">wmic 命令</a><a aria-hidden="true" class="leve2 tocs-link" data-num="2" href="#winrm">WinRM</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#winrm-远程管理服务">WinRM 远程管理服务</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#参数">参数</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#示例">示例</a><a aria-hidden="true" class="leve3 tocs-link" data-num="3" href="#winrs-远程管理客户端">WinRS 远程管理客户端</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#参数-1">参数</a><a aria-hidden="true" class="leve4 tocs-link" data-num="4" href="#示例-1">示例</a></div></div><div class="h1wrap-body"><div class="wrap h2body-exist"><div class="wrap-header h2wrap"><h2 id="系统功能与日志"><a aria-hidden="true" tabindex="-1" href="#系统功能与日志"><span class="icon icon-link"></span></a>系统功能与日志</h2><div class="wrap-body">
+</div></div><div class="h2wrap-body"><div class="wrap h3body-not-exist"><div class="wrap-header h3wrap"><h3 id="检测系统信息"><a aria-hidden="true" tabindex="-1" href="#检测系统信息"><span class="icon icon-link"></span></a>检测系统信息</h3><div class="wrap-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>hostname</code></td><td align="left">查看机器名</td></tr><tr><td align="left"><code>ver</code></td><td align="left">查看计算机操作系统版本</td></tr><tr><td align="left"><code>set</code></td><td align="left">查看当前机器的环境变量</td></tr><tr><td align="left"><code>systeminfo</code></td><td align="left">查看计算机信息（版本，位数，补丁情况）</td></tr><tr><td align="left"><code>whoami</code></td><td align="left">查看当前用户及权限</td></tr><tr><td align="left"><code>query user</code></td><td align="left">查看当前在线的用户</td></tr><tr><td align="left"><code>fsutil fsinfo drives</code></td><td align="left">列出当前机器上的所有盘符</td></tr><tr><td align="left"><code>dir /a /s /b d:\"*.conf"</code></td><td align="left">搜索d盘里conf结尾的文件</td></tr><tr><td align="left"><code>findstr /s /i "pass" *.py* </code></td><td align="left">查找文件后缀结果</td></tr><tr><td align="left"><code>eventvwr.msc</code></td><td align="left">打开事件查看器</td></tr></tbody></table>
+</div></div></div><div class="wrap h3body-not-exist row-span-1 col-span-2"><div class="wrap-header h3wrap"><h3 id="powershell-查询系统日志"><a aria-hidden="true" tabindex="-1" href="#powershell-查询系统日志"><span class="icon icon-link"></span></a>Powershell 查询系统日志</h3><div class="wrap-body">
+<!--rehype:wrap-class=row-span-1 col-span-2-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table class="style-list"><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>Get-EventLog -List</code></td><td align="left">查看日志清单</td></tr><tr><td align="left"><code>Get-EventLog Security -After (Get-Date).AddHours(-2) | Format-Table -AutoSize</code></td><td align="left">最近两个小时的安全日志</td></tr><tr><td align="left"><code>Get-EventLog Security -After (Get-Date).AddHours(-2) | Where-Object {$_.InstanceID -like "4624"}</code></td><td align="left">最近两个小时登录成功的日志</td></tr><tr><td align="left"><code>Get-EventLog Security -After (Get-Date).AddHours(-2) | Where-Object {$_.InstanceID -like "4624"} | Format-List</code></td><td align="left">最近两个小时登录成功的详情</td></tr><tr><td align="left"><code>Get-EventLog System -After (Get-Date).AddHours(-2) | Where-Object {$_.Message -like "*Server*"}</code></td><td align="left">搜索指定系统日志</td></tr><tr><td align="left"><code>Get-EventLog Application -After (Get-Date).AddHours(-2) | Format-Table -AutoSize</code></td><td align="left">最近两个小时的应用日志</td></tr></tbody></table>
+<!--rehype:className=style-list-->
+</div></div></div></div></div><div class="wrap h2body-exist"><div class="wrap-header h2wrap"><h2 id="wmic"><a aria-hidden="true" tabindex="-1" href="#wmic"><span class="icon icon-link"></span></a>WMIC</h2><div class="wrap-body">
+</div></div><div class="h2wrap-body"><div class="wrap h3body-not-exist"><div class="wrap-header h3wrap"><h3 id="wmic-命令"><a aria-hidden="true" tabindex="-1" href="#wmic-命令"><span class="icon icon-link"></span></a>wmic 命令</h3><div class="wrap-body">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>wmic os</code></td><td align="left">查看OS信息</td></tr><tr><td align="left"><code>wmic product list</code></td><td align="left">查看安装软件</td></tr><tr><td align="left"><code>wmic service list brief</code></td><td align="left">查看服务</td></tr><tr><td align="left"><code>wmic startup list full</code></td><td align="left">查看启动项</td></tr><tr><td align="left"><code>wmic bios get Name,Version</code></td><td align="left">查看bios信息</td></tr><tr><td align="left"><code>wmic environment list</code></td><td align="left">查看环境变量</td></tr><tr><td align="left"><code>wmic qfe list</code></td><td align="left">查看补丁信息</td></tr><tr><td align="left"><code>wmic qfe get hotfixid</code></td><td align="left">查看补丁Patch号</td></tr><tr><td align="left"><code>135/tcp msrpc</code></td><td align="left">wmic 服务端口</td></tr></tbody></table>
+</div></div></div><div class="wrap h3body-not-exist row-span-1 col-span-2"><div class="wrap-header h3wrap"><h3 id="wmic-命令-1"><a aria-hidden="true" tabindex="-1" href="#wmic-命令-1"><span class="icon icon-link"></span></a>wmic 命令</h3><div class="wrap-body">
+<!--rehype:wrap-class=row-span-1 col-span-2-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>wmic /node:"IP" /password:"123456" /user:"admin"</code></td><td align="left">连接目标机器</td></tr><tr><td align="left"><code>wmic /node:“IP” bios get /ALL</code></td><td align="left">远程获取BIOS信息</td></tr><tr><td align="left"><code>wmic process get caption,executablepath,commandline</code></td><td align="left">显示进程信息</td></tr><tr><td align="left"><code>wmic process call create "calc.exe"</code></td><td align="left">运行程序</td></tr><tr><td align="left"><code>wmic process where name="calc.exe" call terminate </code></td><td align="left">停止程序</td></tr><tr><td align="left"><code>wmic diskdrive get model,name,freespace,size</code></td><td align="left">显示物理磁盘</td></tr><tr><td align="left"><code>wmic logicaldisk where drivetype=3 get /ALL</code></td><td align="left">显示逻辑磁盘</td></tr><tr><td align="left"><code>wmic useraccount get /ALL </code></td><td align="left">显示用户信息</td></tr><tr><td align="left"><code>wmic sysaccount list</code></td><td align="left">显示系统账号</td></tr><tr><td align="left"><code>wmic group list brief</code></td><td align="left">显示用户组信息</td></tr><tr><td align="left"><code>wmic share get name, path (or /ALL)</code></td><td align="left">显示共享信息</td></tr></tbody></table>
+</div></div></div></div></div><div class="wrap h2body-exist"><div class="wrap-header h2wrap"><h2 id="winrm"><a aria-hidden="true" tabindex="-1" href="#winrm"><span class="icon icon-link"></span></a>WinRM</h2><div class="wrap-body">
+</div></div><div class="h2wrap-body"><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="winrm-远程管理服务"><a aria-hidden="true" tabindex="-1" href="#winrm-远程管理服务"><span class="icon icon-link"></span></a>WinRM 远程管理服务</h3><div class="wrap-body">
+<h4 id="参数"><a aria-hidden="true" tabindex="-1" href="#参数"><span class="icon icon-link"></span></a>参数</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>winrm quickconfig</code></td><td align="left">开启远程管理服务</td></tr><tr><td align="left"><code>winrm get</code></td><td align="left">检索管理信息</td></tr><tr><td align="left"><code>winrm set</code></td><td align="left">修改管理信息</td></tr><tr><td align="left"><code>winrm create</code></td><td align="left">创建管理资源的新实例</td></tr><tr><td align="left"><code>winrm delete</code></td><td align="left">删除管理资源的实例</td></tr><tr><td align="left"><code>winrm enumerate</code></td><td align="left">列出管理资源的所有实例</td></tr><tr><td align="left"><code>winrm identify</code></td><td align="left">远程管理服务是否运行</td></tr></tbody></table>
+<h4 id="示例"><a aria-hidden="true" tabindex="-1" href="#示例"><span class="icon icon-link"></span></a>示例</h4>
+<pre><code class="code-highlight"><span class="code-line"># 显示运行状态，如返回报错，说明未运行
+</span><span class="code-line">winrm e winrm/config/listener
+</span><span class="code-line">
+</span><span class="code-line"># 启用 WinRM
+</span><span class="code-line">winrm quickconfig
+</span><span class="code-line">
+</span><span class="code-line"># 禁用 WinRM
+</span><span class="code-line">winrm delete ^
+</span><span class="code-line">winrm/config/listener?Address=*+Transport=HTTP
+</span></code></pre>
+</div></div></div><div class="wrap h3body-exist"><div class="wrap-header h3wrap"><h3 id="winrs-远程管理客户端"><a aria-hidden="true" tabindex="-1" href="#winrs-远程管理客户端"><span class="icon icon-link"></span></a>WinRS 远程管理客户端</h3><div class="wrap-body">
+<h4 id="参数-1"><a aria-hidden="true" tabindex="-1" href="#参数-1"><span class="icon icon-link"></span></a>参数</h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">参数</th><th align="left">action</th></tr></thead><tbody><tr><td align="left"><code>winrs -r</code></td><td align="left">连接目标机器</td></tr><tr><td align="left"><code>winrs -u</code></td><td align="left">指定用户名</td></tr><tr><td align="left"><code>winrs -p</code></td><td align="left">指定密码</td></tr><tr><td align="left"><code>winrs -d</code></td><td align="left">指定启动目录</td></tr><tr><td align="left"><code>winrs -env</code></td><td align="left">指定环境变量</td></tr><tr><td align="left"><code>winrs -ssl</code></td><td align="left">启用 SSL 连接</td></tr><tr><td align="left"><code>winrs -comp</code></td><td align="left">启用压缩</td></tr></tbody></table>
+<h4 id="示例-1"><a aria-hidden="true" tabindex="-1" href="#示例-1"><span class="icon icon-link"></span></a>示例</h4>
+<pre><code class="code-highlight"><span class="code-line"># 远程管理目标机器
+</span><span class="code-line">winrs -r:http://127.0.0.1 command 
+</span><span class="code-line">winrs -r:https://myserver.com command 
+</span><span class="code-line">
+</span><span class="code-line"># 配置连接信息
+</span><span class="code-line">winrs -u:administrator -p:$%fgh7 ipconfig 
+</span><span class="code-line">winrs -env:PATH=^%PATH^%;c:\tools
+</span><span class="code-line">
+</span></code></pre>
+</div></div></div></div></div></div></div><footer class="footer-wrap"><footer class="max-container">© 2023 Cyber Walker.</footer></footer><script src="..\..\/data.js?v=1.5.3" defer></script><script src="..\..\/js/fuse.min.js?v=1.5.3" defer></script><script src="..\..\/js/main.js?v=1.5.3" defer></script><div id="mysearch"><div class="mysearch-box"><div class="mysearch-input"><div><svg xmlns="http://www.w3.org/2000/svg" height="1em" width="1em" viewBox="0 0 18 18">
+  <path fill="currentColor" d="M17.71,16.29 L14.31,12.9 C15.4069846,11.5024547 16.0022094,9.77665502 16,8 C16,3.581722 12.418278,0 8,0 C3.581722,0 0,3.581722 0,8 C0,12.418278 3.581722,16 8,16 C9.77665502,16.0022094 11.5024547,15.4069846 12.9,14.31 L16.29,17.71 C16.4777666,17.8993127 16.7333625,18.0057983 17,18.0057983 C17.2666375,18.0057983 17.5222334,17.8993127 17.71,17.71 C17.8993127,17.5222334 18.0057983,17.2666375 18.0057983,17 C18.0057983,16.7333625 17.8993127,16.4777666 17.71,16.29 Z M2,8 C2,4.6862915 4.6862915,2 8,2 C11.3137085,2 14,4.6862915 14,8 C14,11.3137085 11.3137085,14 8,14 C4.6862915,14 2,11.3137085 2,8 Z"></path>
+</svg><input id="mysearch-input" type="search" placeholder="搜索" autocomplete="off"><div class="mysearch-clear"></div></div><button id="mysearch-close" type="button">搜索</button></div><div class="mysearch-result"><div id="mysearch-menu"></div><div id="mysearch-content"></div></div></div></div></body>
+</html>
