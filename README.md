@@ -4,8 +4,9 @@ SecCMD Blog
 ### blog 操作 
 
 ```
-# 安装 hexo
+# 安装 hexo & 依赖
 npm install -g hexo-cli
+npm install --force
 
 cd seccmd.github.io
 
