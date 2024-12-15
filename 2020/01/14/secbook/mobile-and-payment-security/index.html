@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>移动支付与支付安全 SDL - 数字安全极客</title>
+
+  
+    <meta name="description" content="移动支付与支付安全 SDL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动支付与支付安全 SDL">
+<meta property="og:url" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/index.html">
+<meta property="og:site_name" content="数字安全极客">
+<meta property="og:description" content="移动支付与支付安全 SDL">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955495070-e5301817-95bc-417f-a8bb-4d046cf2cf94.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955496751-60fb8d13-1422-46f6-b79a-b673a3e412dc.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955495922-1e797a80-fc19-41d2-aaac-a30141b13c58.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955496216-d38259ba-0dbd-4874-9059-1c13684e26da.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955496792-b1a63aa7-234e-4c2a-ad2f-5d77ee90ebc6.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955497981-fbd73a1a-7e10-4007-9e27-742081c326f1.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955497578-25bfb045-e638-4e80-8068-d849f60dd9b2.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955498120-1f41387f-6e63-49cf-bec2-39dbcc61b63b.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955500779-9f78e996-307e-4755-847d-7a3668d7d6ac.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955499145-66382438-6827-46e5-879f-bae8f6be7022.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955499233-31d0dba6-e999-475e-ba5f-6655c6accdb6.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955499707-66ab3010-3685-4ad0-80f6-4eeff9b31619.webp">
+<meta property="og:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955500044-e0f9d9b6-8c45-44fa-a03e-025a9f7cae6d.webp">
+<meta property="article:published_time" content="2020-01-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-15T06:05:43.729Z">
+<meta property="article:author" content="SecAdmin">
+<meta property="article:tag" content="SDL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/01/14/secbook/mobile-and-payment-security/1657955495070-e5301817-95bc-417f-a8bb-4d046cf2cf94.webp">
+  
+  
+  
+  <meta name="keywords" content="SDL">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/logo.ico">
+  
+
+  
+
+  
+
+
+  
+    
+      <link rel="preconnect" href="https://gcore.jsdelivr.net">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
+    
+      <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?471fac1b9a27585ef00b1647ef02618e";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+    
+      <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CKX8MZFEY"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-3CKX8MZFEY');</script>
+    
+      <!-- Google ADS google.com/adsense/ --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9718108884365672" crossorigin="anonymous"></script>
+    
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/logo.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">数字安全极客</div><div class="sub normal cap">专注实战安全防御体系</div><div class="sub hover cap" style="opacity:0"> Digital Security Geek</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">移动支付与支付安全 SDL</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98%E4%B8%8E%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">一、移动支付与支付安全基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98%E5%AE%9A%E4%B9%89"><span class="toc-text">1）移动支付定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-text">2）支付安全基本原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E7%9B%91%E7%AE%A1%E5%90%88%E8%A7%84%E8%A7%92%E5%BA%A6%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E8%83%8C%E6%99%AF"><span class="toc-text">3）监管合规角度支付安全背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%EF%BC%89%E6%B6%88%E8%B4%B9%E8%80%85%E8%A7%92%E5%BA%A6%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E9%9C%80%E6%B1%82"><span class="toc-text">4）消费者角度支付安全需求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84%E5%92%8C%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9"><span class="toc-text">二、移动支付网络架构和安全风险</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-text">1）移动支付网络模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E9%97%AE%E9%A2%98"><span class="toc-text">2）移动支付安全风险问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%87%91%E8%9E%8D%E6%94%AF%E4%BB%98%E5%AE%89%E5%85%A8%E6%8D%9F%E5%A4%B1%E4%BA%8B%E4%BB%B6%E6%A1%88%E4%BE%8B"><span class="toc-text">三、金融支付安全损失事件案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%BC%89%E9%87%91%E8%9E%8D%E5%BC%BA%E7%9B%91%E7%AE%A1%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A%E6%A1%88%E4%BE%8B"><span class="toc-text">1）金融强监管行政处罚案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89%E9%81%AD%E9%BB%91%E5%AE%A2%E6%94%BB%E5%87%BB%E5%85%A5%E4%BE%B5%E6%A1%88%E4%BE%8B"><span class="toc-text">2）遭黑客攻击入侵案例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%BC%89%E4%BA%A4%E6%98%93%E6%94%AF%E4%BB%98%E6%BC%8F%E6%B4%9E%E8%A2%AB%E5%88%A9%E7%94%A8%E6%A1%88%E4%BE%8B"><span class="toc-text">3）交易支付漏洞被利用案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%87%91%E8%9E%8D%E7%A7%BB%E5%8A%A8%E6%94%AF%E4%BB%98-SDL-%E5%AE%89%E5%85%A8%E8%AE%BE%E8%AE%A1"><span class="toc-text">四、金融移动支付 SDL 安全设计</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a><a class="social" href="https://github.com/seccmd" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/></a><a class="social" href="https://twitter.com/sec_cmd" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a><a class="social" href="https://123.seccmd.net" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/></svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%94%BB%E9%98%B2%E5%85%BC%E5%A4%87%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/">攻防兼备企业安全实践</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-01-14T00:00:00.000Z">2020-01-14</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>移动支付与支付安全 SDL</span></h1>
+<h2 id="一、移动支付与支付安全基础概念"><a href="#一、移动支付与支付安全基础概念" class="headerlink" title="一、移动支付与支付安全基础概念"></a>一、移动支付与支付安全基础概念</h2><h3 id="1）移动支付定义"><a href="#1）移动支付定义" class="headerlink" title="1）移动支付定义"></a>1）移动支付定义</h3><p>移动支付是指消费者通过移动终端(通常是手机、PAD 等)对所消费的商品或服务进行账务支付的一种支付方式。客户通过移动设备、互联网或者近距离传感直接或间接向银行金融企业发送支付指令产生货币支付和资金转移，实现资金的移动支付，实现了终端设备、互联网、应用提供商以及金融机构的融合，完成货币支付、缴费等金融业务。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955495070-e5301817-95bc-417f-a8bb-4d046cf2cf94.webp"/></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955496751-60fb8d13-1422-46f6-b79a-b673a3e412dc.webp"/></div></div>
+
+
+<h3 id="2）支付安全基本原则"><a href="#2）支付安全基本原则" class="headerlink" title="2）支付安全基本原则"></a>2）支付安全基本原则</h3><p>ISO 在《ISO&#x2F;IEC 27000: 2014》中定义了信息安全，包括三个主要方面:保密性 (Confidentiality)、可用性(Availability)和完整性 (Integrity)。</p>
+<p>金融科技信息安全的关键要素定义，信息安全必须与金融科技行业的网络安全特点及业务趋势相结合（交易安全、数据安全、传统安全）。</p>
+<p>支付安全的基本原则，移动支付应实现交易双方身份认证及交易数据的机密性、完整性、抗抵赖性等，这也是金融支付安全的核心要求。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955495922-1e797a80-fc19-41d2-aaac-a30141b13c58.webp"/></div></div>
+
+
+
+<p>支付安全目标</p>
+<p>●交易双方身份认证：交易开始前应确认交易双方身份。</p>
+<p>●交易数据机密性：交易过程中应保证业务数据不可侵犯，采用加密或其他有效措施实现业务数据传输和存储的保密性。</p>
+<p>●交易数据完整性：交易过程中保证业务数据在传输和存储过程中不受篡改。</p>
+<p>●交易抗抵赖性：交易双方均不能否认或抵赖已发生的交易事件，应能为双方提供数据源发证据或数据接收证据。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955496216-d38259ba-0dbd-4874-9059-1c13684e26da.webp"/></div></div>
+
+
+
+<h3 id="3）监管合规角度支付安全背景"><a href="#3）监管合规角度支付安全背景" class="headerlink" title="3）监管合规角度支付安全背景"></a>3）监管合规角度支付安全背景</h3><p>（1）非银行支付机构纳入国家监管体系，拥有了合法的身份。</p>
+<p>（2）第三方电子支付系统应符合网络安全等级保护第三级安全保护等级的基本要求。</p>
+<p>（3）为贯彻执行国务院关于金融领域密码应用的指导意见，中国人民银行发布了非银行支付机构关于数字证书应用的要求，其中规定支付机构采用数字证书、电子签名作为验证要素的，数字证书及生成电子签名的过程应符合《中华人民共和国电子签名法》《金融电子认证规范》以及国家密码管理局等有关规定，确保数字证书唯一性、完整性及交易的不可抵赖性。</p>
+<p>（4）第三方电子支付系统针对电子支付安全的基本要素包括身份识别、交易验证、交易信息保护、支付指令保护。其中身份识别，指客户在发起支付指令进行支付交易之前，需先对客户身份进行识别，针对支付账户的客户实行实名制管理；交易验证指按规定采取客户支付指令的验证措施；交易信息保护，是指电子支付系统应当确保交易信息的真实性、完整性、可追溯性以及在支付全流程中的一致性，不得篡改或者隐匿交易信息；支付指令保护是指电子支付系统应当确保电子支付指令的完整性、一致性、可跟踪稽核和不可篡改。这些安全要素的实现需应用密码技术。</p>
+<h3 id="4）消费者角度支付安全需求"><a href="#4）消费者角度支付安全需求" class="headerlink" title="4）消费者角度支付安全需求"></a>4）消费者角度支付安全需求</h3><p> 移动支付验证方式 </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955496792-b1a63aa7-234e-4c2a-ad2f-5d77ee90ebc6.webp"/></div></div>
+
+<p> 移动支付安全期待 </p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955497981-fbd73a1a-7e10-4007-9e27-742081c326f1.webp"/></div></div>
+
+<p>数据来源：中国银联 2019 移动支付安全大调查报告</p>
+<h2 id="二、移动支付网络架构和安全风险"><a href="#二、移动支付网络架构和安全风险" class="headerlink" title="二、移动支付网络架构和安全风险"></a>二、移动支付网络架构和安全风险</h2><h3 id="1）移动支付网络模型"><a href="#1）移动支付网络模型" class="headerlink" title="1）移动支付网络模型"></a>1）移动支付网络模型</h3><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955497578-25bfb045-e638-4e80-8068-d849f60dd9b2.webp"/></div></div>
+
+
+<h3 id="2）移动支付安全风险问题"><a href="#2）移动支付安全风险问题" class="headerlink" title="2）移动支付安全风险问题"></a>2）移动支付安全风险问题</h3><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955498120-1f41387f-6e63-49cf-bec2-39dbcc61b63b.webp"/></div></div>
+
+
+<h2 id="三、金融支付安全损失事件案例"><a href="#三、金融支付安全损失事件案例" class="headerlink" title="三、金融支付安全损失事件案例"></a>三、金融支付安全损失事件案例</h2><h3 id="1）金融强监管行政处罚案例"><a href="#1）金融强监管行政处罚案例" class="headerlink" title="1）金融强监管行政处罚案例"></a>1）金融强监管行政处罚案例</h3><p>重罚 716 万！国内多家金融机构因数据泄露被行政处罚</p>
+<p>中国人民银行发布了一则高达 716 万元的行政处罚信息，处罚对象包括四大国有银行和民生、光大、广发、中信、浦发等多家银行，还包括保险公司、资产管理公司等多家金融机构。</p>
+<p>这些金融机构在过去两个月时间里，都曾发生泄露信息、瞒报数据等违规行为，有银行机构不仅过失泄露信息，而且未经授权便查询个人信用信息，甚至违法出售个人信息。</p>
+<p>据调查发现：有 73%的金融员工表示，他们可以很轻松访问到内部敏感数据。</p>
+<p>江苏江南农村商业银行股份有限公司因网络安全工作严重不足，江苏银保监局根据《中华人民共和国银行业监督管理法》第四十六条第（五）项，罚款人民币 30 万元。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955500779-9f78e996-307e-4755-847d-7a3668d7d6ac.webp"/></div></div>
+
+
+<h3 id="2）遭黑客攻击入侵案例"><a href="#2）遭黑客攻击入侵案例" class="headerlink" title="2）遭黑客攻击入侵案例"></a>2）遭黑客攻击入侵案例</h3><p>●某互联网金融平台刚上线就无法访问。平台才新上线没几天就遭到黑客攻击，导致站点无法访问，网站维护工程师也束手无策。无奈之下，只好按照攻击者的要求，向其支付了 5000 块的“保护费”，平台这才暂时恢复了正常。</p>
+<p>●某平台最近收到投诉，多名用户的信息泄漏，被坏人利用来对用户进行诈骗。 黑客通过拖库、撞库、入侵的方式盗取数据，目前已损失数百万。经过调查，发现原来是平台遭到了黑客的撞库攻击，用户的帐号泄露潜伏期很长，企业发现的时候数据大量账号都是这样被泄漏出去的，甚至出现资金已被分散转移，并且被消费成虚拟商品、积分流失，无法拦截追回了。</p>
+<p>●深圳某金融平台遭黑客入侵 1600 万投资款被盗取。一家互联网科技公司向深圳市公安局反信息诈骗咨询专线报案，称客户多笔资金未按时到帐。但公司财务核对，需向客户支付的款项早已汇出。之后，事主发现有 8 个商户的帐户资料被黑客通过网络入侵篡改成自己的银行账号，该公司财务向 8 个陌生账号汇去款项共计 1600 万元。</p>
+<p>●黑客入侵多家 P2P 平台篡改客户资料，骗取 157 万。谭登元同另一名黑客郎小龙侵入了多家 P2P 平台。他们两个分工明确，由谭登元非法侵入被害单位的网站，取得被害单位网站的后台管理系统权限，并将权限发送给郎小龙，郎小龙则用获取到的权限篡改网站投资客户的姓名、身份证号、资金记录、银行卡号等原始数据后登陆网站系统申请提现，骗取被害单位向郎小龙控制的多个账户转账。通过这样的手段，两人一共骗取人民币共计 1572356.15 元。</p>
+<h3 id="3）交易支付漏洞被利用案例"><a href="#3）交易支付漏洞被利用案例" class="headerlink" title="3）交易支付漏洞被利用案例"></a>3）交易支付漏洞被利用案例</h3><p><strong>●</strong>空手套走三百余万 平顶山银行 App 存在重大漏洞</p>
+<p>周某使用手机 App 通过中信银行Ⅰ类银行卡向平顶山银行Ⅱ类账户充值时，发现自己没有接到扣款短信，一查银行卡余额，显示余额为 0。周某并不知道自己的银行卡账户已经为 0 了，但是平顶山银行自己的Ⅱ类账户余额增加了，数额正好是自己刚刚试图充值的数额。在随后的几个月内，他重复充值操作 166 次，转入了资金 311 万元。</p>
+<p><strong>●</strong>厦门浦发建设银行 App 可通过虚假身份注册银行账户</p>
+<p>田某在注册账户过程中，先输入本人身份信息，待进行人脸识别步骤时，利用软件抓包技术将银行系统下发的人脸识别身份认证数据包进行拦截并保存。尔后，在输入开卡密码步骤，被告人田世纪将 APP 返回到第一步（上传身份证照片之步骤），输入伪造的身份信息，并再次进入到人脸识别之身份验证步骤，此时，其上传此前拦截下来的包含其本人身份信息的数据包，使系统误以为要比对其本人的身份信息，其遂用本人人脸通过银行系统人脸识别比对，使得成功利用虚假身份信息注册到银行账户。</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955499145-66382438-6827-46e5-879f-bae8f6be7022.webp"/></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955499233-31d0dba6-e999-475e-ba5f-6655c6accdb6.webp"/></div></div>
+
+
+
+<h2 id="四、金融移动支付-SDL-安全设计"><a href="#四、金融移动支付-SDL-安全设计" class="headerlink" title="四、金融移动支付 SDL 安全设计"></a>四、金融移动支付 SDL 安全设计</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955499707-66ab3010-3685-4ad0-80f6-4eeff9b31619.webp"/></div></div>
+
+
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955500044-e0f9d9b6-8c45-44fa-a03e-025a9f7cae6d.webp"/></div></div>
+
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/01/15/secbook/personal-information-protection/">个人信息保护安全防范</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/01/13/secbook/major-security-risk-assessment-of-cloud-computing-services/">云计算服务重大安全风险评估</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

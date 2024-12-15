@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>云计算服务重大安全风险评估 - 数字安全极客</title>
+
+  
+    <meta name="description" content="云计算服务重大安全风险评估">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云计算服务重大安全风险评估">
+<meta property="og:url" content="http://example.com/2020/01/13/secbook/major-security-risk-assessment-of-cloud-computing-services/index.html">
+<meta property="og:site_name" content="数字安全极客">
+<meta property="og:description" content="云计算服务重大安全风险评估">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/01/13/secbook/major-security-risk-assessment-of-cloud-computing-services/1675402087107-c30fd780-d16d-4910-b261-680379ed3e76.webp">
+<meta property="og:image" content="http://example.com/2020/01/13/secbook/major-security-risk-assessment-of-cloud-computing-services/1657955101729-e9aaa8c6-9d60-479a-b7fd-6d53d43b6945.webp">
+<meta property="article:published_time" content="2020-01-13T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-15T06:05:39.353Z">
+<meta property="article:author" content="SecAdmin">
+<meta property="article:tag" content="Cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/01/13/secbook/major-security-risk-assessment-of-cloud-computing-services/1675402087107-c30fd780-d16d-4910-b261-680379ed3e76.webp">
+  
+  
+  
+  <meta name="keywords" content="Cloud">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/logo.ico">
+  
+
+  
+
+  
+
+
+  
+    
+      <link rel="preconnect" href="https://gcore.jsdelivr.net">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
+    
+      <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?471fac1b9a27585ef00b1647ef02618e";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+    
+      <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CKX8MZFEY"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-3CKX8MZFEY');</script>
+    
+      <!-- Google ADS google.com/adsense/ --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9718108884365672" crossorigin="anonymous"></script>
+    
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/logo.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">数字安全极客</div><div class="sub normal cap">专注实战安全防御体系</div><div class="sub hover cap" style="opacity:0"> Digital Security Geek</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">云计算服务重大安全风险评估</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E5%B9%B3%E5%8F%B0%E9%87%8D%E5%A4%A7%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E6%8A%A5%E5%91%8A"><span class="toc-text">云平台重大安全风险评估报告</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A6%82%E8%BF%B0"><span class="toc-text">一、概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A0%87%E5%87%86%E4%BE%9D%E6%8D%AE"><span class="toc-text">二、标准依据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%A3%8E%E9%99%A9%E5%88%86%E5%B8%83"><span class="toc-text">三、风险分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E5%AE%89%E5%85%A8"><span class="toc-text">四、数据中心安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E4%B8%8E%E8%99%9A%E6%8B%9F%E5%8C%96%E5%AE%89%E5%85%A8"><span class="toc-text">五、基础设施与虚拟化安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%92%8C%E6%8E%A5%E5%8F%A3%E5%AE%89%E5%85%A8"><span class="toc-text">六、应用程序和接口安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E9%89%B4%E6%9D%83%E5%AE%A1%E8%AE%A1%E4%B8%8E%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-text">七、      身份认证鉴权审计与访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81-%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%B8%8E%E4%BF%A1%E6%81%AF%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%AE%A1%E7%90%86"><span class="toc-text">八、      数据安全与信息生命周期管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81-%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E4%B8%8E%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="toc-text">九、      应急响应与安全事件管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E8%AE%A1%E7%AE%97%E6%9C%8D%E5%8A%A1%E6%BB%A5%E7%94%A8%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83"><span class="toc-text">云计算服务滥用安全防范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%83%8C%E6%99%AF"><span class="toc-text">一、背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%BB%A5%E7%94%A8%E5%8E%9F%E5%9B%A0"><span class="toc-text">二、云服务滥用原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%BB%A5%E7%94%A8%E8%A1%8C%E4%B8%BA"><span class="toc-text">三、云服务滥用行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%81%9A%E5%A5%BD%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83%EF%BC%8C%E6%8A%B5%E5%BE%A1%E6%81%B6%E6%84%8F%E6%94%BB%E5%87%BB"><span class="toc-text">四、做好安全防范，抵御恶意攻击</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a><a class="social" href="https://github.com/seccmd" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/></a><a class="social" href="https://twitter.com/sec_cmd" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a><a class="social" href="https://123.seccmd.net" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/></svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%94%BB%E9%98%B2%E5%85%BC%E5%A4%87%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%AE%9E%E8%B7%B5/">攻防兼备企业安全实践</a></div><div id="post-meta">发布于&nbsp;<time datetime="2020-01-13T00:00:00.000Z">2020-01-13</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>云计算服务重大安全风险评估</span></h1>
+<h2 id="云平台重大安全风险评估报告"><a href="#云平台重大安全风险评估报告" class="headerlink" title="云平台重大安全风险评估报告"></a>云平台重大安全风险评估报告</h2><h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><p>为提升云平台安全竞争力，识别防范重大安全风险发生。从数据中心安全、基础设施与虚拟化安全、应用程序与接口安全、身份认证鉴权审计与访问控制、数据安全与信息生命周期管理、应用响应与安全事件管理，六大方面进行综合分析，为安全决策提供有效依据。</p>
+<h3 id="二、标准依据"><a href="#二、标准依据" class="headerlink" title="二、标准依据"></a>二、标准依据</h3><p>·        GB&#x2F;T 20984-2007 《信息安全技术信息安全风险评估规范》</p>
+<p>·        GB&#x2F;T 22239-2019 《信息安全技术信息系统安全等级保护基本要求》</p>
+<p>·        ISO&#x2F;IEC 27001:2005 《信息安全技术信息安全管理体系要求》</p>
+<p>·        ISO&#x2F;IEC 27002:2005 《信息安全技术信息安全管理实用规则》</p>
+<p>·        《CSA云计算关键领域安全指南》</p>
+<p>·        《CSA云安全控制矩阵CCM》</p>
+<p>·        《CSA云计算安全技术要求》</p>
+<p>·        结合云安全治理运营的实际安全评估经验</p>
+<h3 id="三、风险分布"><a href="#三、风险分布" class="headerlink" title="三、风险分布"></a>三、风险分布</h3><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1675402087107-c30fd780-d16d-4910-b261-680379ed3e76.webp"/></div></div>
+
+
+
+<h3 id="四、数据中心安全"><a href="#四、数据中心安全" class="headerlink" title="四、数据中心安全"></a>四、数据中心安全</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>完整的关键业务资产清单</td>
+<td>必须按照对业务的关键程度、服务级别期望和运营连续性的要求对资产进行分类。应针对所有场所和区域的资产以及它们的用途，维护一份完整的关键业务资产清单，保持定期的更新，并按照定义的角色和职责来分配责任人</td>
+</tr>
+<tr>
+<td>缺乏严格的资产统一管理流程</td>
+<td>服务器对应资产负责人信息缺失，不能直接定位到归属，负责人变更同步 有外网权限的机器，绑定的VIP未及时更新，该收回的未及时回收</td>
+</tr>
+<tr>
+<td>缺乏资产统一管理平台：网络资产、主机资产、应用资产、数据资产</td>
+<td>特权设备管理：如直接NAT到外网的机器、有外网访问权限的机器、跳板机集中控制机，或者有其他特殊权限的机器 设备用途管理：网络设备、负载均衡、容器集群、数据库、大数据、云存储、云计算、云网络 应急和处理安全问题带来较大沟通成本（如：每次排查和应急都需要发一批业务方和一群运维同事自己去【认领】机器）</td>
+</tr>
+<tr>
+<td>业务部署公有云上，资产分类不清晰</td>
+<td>业务部署在公有云上，在资产平台显示的IP就为公用云租户，不能准确定位机器是租户还是内部业务与业务归属</td>
+</tr>
+<tr>
+<td>设备识别与保护，应使用自动设备识别，认证授权后接入网络连接</td>
+<td>发生过外部设备供应商和服务提供商的PC设备接入内网后，由于外部PC中毒在内网传播病毒</td>
+</tr>
+</tbody></table>
+<h3 id="五、基础设施与虚拟化安全"><a href="#五、基础设施与虚拟化安全" class="headerlink" title="五、基础设施与虚拟化安全"></a>五、基础设施与虚拟化安全</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应实施技术措施和深度防御技术，检测并及时阻断出入站异常流量和网络攻击</td>
+<td>网络出口被流量攻击打满阻塞，调研运营商阻断流量攻击 部署分布式拒绝服务（DDoS）攻击防御系统，清洗流量 部署入侵检测防御系统，识别和阻断网络攻击</td>
+</tr>
+<tr>
+<td>缺乏详细的边界网络隔离策略，严格的网络变更流程，持续监控机制。</td>
+<td>访问控制列表梳理困难，大量历史遗留规则 无法新加规则，规则数量已满 边界端口变更，安全隔离失效 IDC 及 CDN 服务器外网开放高危端口及高危服务 集团私有云、公有云（除租户）存在高危端口对外网开放，可能造成黑客利用漏洞绕过公司边界防护直接入侵内网</td>
+</tr>
+<tr>
+<td>各业务网络开放策略没有书面说明所允许的服务</td>
+<td>多种的业务类型，不同安全等级，复杂的安全策略，共用网络入口（租户策略、平台策略、CDN策略、抗D策略、LB策略、Nat策略、独立IP策略）</td>
+</tr>
+<tr>
+<td>缺乏详细的内部网络隔离策略，严格的网络变更流程，持续监控机制。</td>
+<td>办公网与 IDC 缺少网络安全域隔离，任一方风险可能横向扩散 IDC 内管理网未与生产网隔离，访问认证弱，且存在诸多绕过 IDC 内第三方业务服务器、测试服务器、windows服务器未与在线业务隔离 数据系统未严格与其他系统隔离 托管网络隔离措施Vlan评估</td>
+</tr>
+<tr>
+<td>缺乏详细的虚拟网络隔离策略，严格的网络变更流程，持续监控机制。</td>
+<td>应设计并配置网络环境和虚拟机实例，以限制和监控可信与不可信通信中的流量。应至少每年对这些配置进行一次评审，书面说明所有允许的服务、协议和端口的使用理由，并建立补偿性控制措施。</td>
+</tr>
+<tr>
+<td>网络设备&#x2F;物理主机&#x2F;虚机&#x2F;容器&#x2F;数据库&#x2F;中间件，操作系统加固和基础控制措施</td>
+<td>应对每个操作系统进行加固，以提供业务必需的端口、协议和服务，并落实技术控制措施，如：杀毒软件、文件完整性监控、日志记录等，这些可以作为其运行构建的基线标准或模板的一部分</td>
+</tr>
+<tr>
+<td>所有主机未统一接入主机安全软件保护</td>
+<td>IDC 主机存在 SSH 弱认证风险 IDC 主机缺少恶意代码检测和防护能力，不能发现病毒木马 IDC 主机反弹 shell 无法监控发现 IDC 主机服务器漏洞缺乏发现 IDC 主机日志未集中收集 IDC 主机对进程、重要配置文件缺少防护，可能被篡改或删除</td>
+</tr>
+<tr>
+<td>CPU&#x2F;Kernel&#x2F;Hypervisor漏洞缺少热补丁机制</td>
+<td>底层系统漏洞需要重新修复，会导致业务中断。 需要具备热补丁&#x2F;热迁移技术</td>
+</tr>
+<tr>
+<td>虚拟机安全加固</td>
+<td>时刻确保所有虚拟机镜像的完整性 确保安全漏洞评估工具或服务适应当前使用的虚拟化技术</td>
+</tr>
+<tr>
+<td>虚拟机监控器安全加固</td>
+<td>访问虚拟机监控器的管理功能或宿主系统的管理控制台时，应基于最小权限原则限制人员访问，并采用技术控制措施（如：双因素认证、审计追踪、IP 地址过滤、防火墙、TLS 协议和管理控制台通信）</td>
+</tr>
+</tbody></table>
+<h3 id="六、应用程序和接口安全"><a href="#六、应用程序和接口安全" class="headerlink" title="六、应用程序和接口安全"></a>六、应用程序和接口安全</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>对公网应用（包括测试系统、演示系统），未全部接入WAF安全防护</td>
+<td>对公网应用，未部署防护措施，造成存在漏洞的应用系统被成功上线，进而造成线上存在有漏洞的系统</td>
+</tr>
+<tr>
+<td>所有应用上线未全部进行SDL检测</td>
+<td>因缺乏安全流程或卡点、不遵守安全流程或卡点，造成存在漏洞的应用系统被成功上线，进而造成线上存在有漏洞的系统</td>
+</tr>
+<tr>
+<td>APP安全统一管理</td>
+<td>因缺乏安全流程或卡点，APP发布没有通过阿凡达平台统一发布</td>
+</tr>
+<tr>
+<td>大量应用存在无认证、越权访问、无审批、无审计等安全问题</td>
+<td>因应用系统未实现身份认证，或使用自研身份认证体系而认证存在缺陷被攻破，造成线上应用存在认证凭证被盗用或未授权访问等漏洞 因应用系统缺乏对用户、资源（含数据）、操作的权限鉴别和控制，或设计及实现不当，造成线上应用存在越权访问漏洞 因应用系统缺乏账号及权限管理功能、权限申请审批、权限定期审计等，造成线上应用存在不恰当用户的问题</td>
+</tr>
+<tr>
+<td>第三方开源应用、框架、组件安全风险</td>
+<td>因应用系统 使用了第三方开源应用、框架、组件实现，而此类应用、框架、组件被爆出安全漏洞，进而造成上层业务应用也存在安全漏洞</td>
+</tr>
+<tr>
+<td>应用系统自建账号体系风险</td>
+<td>缺少密码复杂度策略，密码定期更换，强制修改初始密码策略 缺少多次登录失败后的处理机制，可尝试暴力破解 外网自建账号体系系统缺少对系统账号的风险行为监控 外网自建账号采用单一密码认证，容易被破解</td>
+</tr>
+</tbody></table>
+<h3 id="七、-身份认证鉴权审计与访问控制"><a href="#七、-身份认证鉴权审计与访问控制" class="headerlink" title="七、      身份认证鉴权审计与访问控制"></a>七、      身份认证鉴权审计与访问控制</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基础设施认证脆弱点</td>
+<td>主机存在远程管理弱口令，批量主机使用相同账号密码 通过堡垒机远程管理主机，但可通过测试网绕过堡垒机直接登录主机 主机普遍存在内网信任关系，可通过1台主机作为跳板2次登录其他主机 网络设备未通过堡垒机管理，认证授权、操作审计方式未进行调研 主机、基础服务（如mysql）的账号密码明文存储在cf上，且未设置权限，造成账号持续泄漏</td>
+</tr>
+<tr>
+<td>缺乏统一账号权限系统</td>
+<td>目前Erp系统做为统一账号身份系统，但是权限系统都是自建的，人员异动权限无法及时更新，权限审计困难</td>
+</tr>
+<tr>
+<td>堡垒机使用和管理风险</td>
+<td>堡垒机权限管理较差，堡垒机未设置专用审计权限账户，系统日志审计差 堡垒机缺少精确到自然人的操作日志审计 堡垒机密码策略不完善，均未设置登录失败处理和账户锁定时间等策略</td>
+</tr>
+<tr>
+<td>特权账号管理风险</td>
+<td>超级管理员&#x2F;Root&#x2F;大Key权限管理 系统化、流程化、规范化落地特权帐号的管理工作</td>
+</tr>
+<tr>
+<td>日志保护制度不明确</td>
+<td>需建立对审计日志保护、保留和生命周期管理的高级别保证机制，以符合适用的法律法规和强制性义务，确保提供用户访问的唯一可追溯能力，以检测潜在的可疑网络行为和&#x2F;或文件完整性异常，并提供在安全违规的情况下的取证调查能力。</td>
+</tr>
+<tr>
+<td>日志审计缺失风险</td>
+<td>堡垒机日志未进行统一管理，缺少定期的操作审计 数据库未进行日志记录功能 网络设备未进行操作行为日志记录</td>
+</tr>
+<tr>
+<td>日志远程集中存储缺失风险</td>
+<td>主机、WEB服务日志保存本地，且保留时间过短 日志信息中包含敏感信息， 未对日志信息进行脱敏处理。 应用系统没有用户行为操作日志 大量业务的业务日志、应用日志、主机日志等缺乏记录、缺少字段、存储时长较短，造成违背网络安全法的有关事件溯源追查等相关要求。 日志风险，没有全部收集集中存储</td>
+</tr>
+</tbody></table>
+<h3 id="八、-数据安全与信息生命周期管理"><a href="#八、-数据安全与信息生命周期管理" class="headerlink" title="八、      数据安全与信息生命周期管理"></a>八、      数据安全与信息生命周期管理</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>缺少数据目录</td>
+<td>搜寻并详细列记整个组织的数据资产。</td>
+</tr>
+<tr>
+<td>缺少数据分类</td>
+<td>应由数据责任人基于数据类型、数据值和对于组织的敏感程度、关键程度，对数据和包含数据的对象进行分类。</td>
+</tr>
+<tr>
+<td>数据责任人&#x2F;管理者责任</td>
+<td>所有数据的管理工作应被定义，并以文件化形式定义和传达被分配的职责。</td>
+</tr>
+<tr>
+<td>重要数据库集中存储与加密未有效管控</td>
+<td>应建立策略和规程，并实施支持性业务流程和技术手段，按照适用的法律、法规和合规性义务，以保护敏感数据的存储（如文件服务器、数据库、终端用户工作站）、使用（内存中数据）、传输（如系统交互、跨越公共网络和电子消息）</td>
+</tr>
+<tr>
+<td>数据访问鉴权和监控审计未有效管控</td>
+<td>运营后台，数据没有脱敏处理，没有进行操作审计 人员变动，访问权限变更不及时</td>
+</tr>
+<tr>
+<td>数据库系统&#x2F;大数据系统保护策略缺失</td>
+<td>重要数据库系统，没有进程数据库审计 DMS数据库查询系统，权限限制不明确</td>
+</tr>
+</tbody></table>
+<h3 id="九、-应急响应与安全事件管理"><a href="#九、-应急响应与安全事件管理" class="headerlink" title="九、      应急响应与安全事件管理"></a>九、      应急响应与安全事件管理</h3><table>
+<thead>
+<tr>
+<th>风险项目</th>
+<th>风险描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>针对各类安全威胁结合本部门业务情况，制定切实有效的应急预案，并定期对其进行更新</td>
+<td>预案中应至少包含以下部分： 1）严重、高危web漏洞、业务逻辑漏洞、通用漏洞响应与修复 2）信息泄露事件分析、定位与止损 3）拒绝服务攻击响应 业务应用所依赖的通用框架、组件和服务、数据库等，出现重大0day需要紧急修复 预案中应明确RTO、RPO、响应流程、处理方法、主要负责人等信息；</td>
+</tr>
+<tr>
+<td>应急响应预案并定期演练</td>
+<td>针对应用面临的主要威胁制定应急响应预案并开展贴近真实场景的演练。 定期组织贴近真实情况的演练，提高本部门员工在安全方面的应急响应能力。</td>
+</tr>
+<tr>
+<td>事件响应度量指标</td>
+<td>风险资产批量综合定位时间长 安全能力检测与防御时间，IoC、IDS、WAF规则，上线时间较长</td>
+</tr>
+<tr>
+<td>事件止损措施缺乏</td>
+<td>出方向，网络止损隔离时间较长，网络东西向隔离措施缺乏 批量恶意程序检测和杀毒能力缺乏，单机隔离措施缺乏</td>
+</tr>
+</tbody></table>
+<h2 id="云计算服务滥用安全防范"><a href="#云计算服务滥用安全防范" class="headerlink" title="云计算服务滥用安全防范"></a>云计算服务滥用安全防范</h2><h3 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h3><p>云计算服务因易获取、低成本、可靠性等优势，使得越来越多的个人、企业选择使用云服务，由于注册验证过程不严格、促销或免费试用、错误的配置和漏洞等原因，导致云资源被恶意攻击者滥用，网络安全法的出台以及各行业标准的要求，云运营商需要对服务滥用的行为进行识别和阻断。</p>
+<h3 id="二、云服务滥用原因"><a href="#二、云服务滥用原因" class="headerlink" title="二、云服务滥用原因"></a>二、云服务滥用原因</h3><p>●云服务不安全部署：身份密码的泄漏、系统或应用漏洞、身份劫持。</p>
+<p>●利用云服务身份验证漏洞，从事非法活动：伪造、冒用他人身份注册并获取服务。</p>
+<p>●支付漏洞，促销、免费试用活动具有漏洞，黑产从业者抢购大量廉价云计算资源。</p>
+<h3 id="三、云服务滥用行为"><a href="#三、云服务滥用行为" class="headerlink" title="三、云服务滥用行为"></a>三、云服务滥用行为</h3><p>常见的滥用行为包括：</p>
+<p>●分布式拒绝服务攻击（DDoS）</p>
+<p>●违法内容传播（黄反赌毒暴恐政）</p>
+<p>●远程暴力破解（RDP、SSH、Mysql、FTP、Web）</p>
+<p>●恶意软件，木马传播</p>
+<p>●数字货币挖矿采矿</p>
+<p>●电子邮件垃圾邮件</p>
+<p>●网络钓鱼攻击活动</p>
+<p>CNCERT 的抽样监测结果显示：</p>
+<p>●针对境内目标 IP 的 DDoS 攻击中 80.1%的攻击来源为国内云服务提供商；</p>
+<p>●C2 远程控制端 IP 中约 59%为国内云服务提供商 IP；</p>
+<p>●对外植入网站后门的 IP 中约 39.4%的境内 IP 来源于国内云服务提供商；</p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1657955101729-e9aaa8c6-9d60-479a-b7fd-6d53d43b6945.webp"/></div></div>
+
+
+
+
+
+<h3 id="四、做好安全防范，抵御恶意攻击"><a href="#四、做好安全防范，抵御恶意攻击" class="headerlink" title="四、做好安全防范，抵御恶意攻击"></a>四、做好安全防范，抵御恶意攻击</h3><ol>
+<li><p>杜绝弱口令，弱口令是最容易出现的也是最容易被利用的漏洞。</p>
+</li>
+<li><p>为所有服务配置强密码，要求至少 8 个字符以上，包含大小写字母、数字、特殊符号，并且要不定时更新口令。</p>
+</li>
+<li><p>Web 应用系统，必须使用强密码安全策略和验证码，防止暴力破解和撞库。</p>
+</li>
+<li><p>数据库系统（Redis、MongoDB、MySQL、MSsql Server）禁止使用弱密码或无密码。</p>
+</li>
+<li><p>增强安全策略，使用多因素验证机制（MFA）、强制密码安全策略（如：锁定策略），和审计功能（异常告警）。</p>
+</li>
+<li><p>使用虚拟专有网络（VPC），隔离企业内部不同安全级别的云主机，避免同网络环境下一台服务器被入侵后影响到其它云主机。</p>
+</li>
+<li><p>在 VPC 中使用 NAT 提供上网服务，禁止云主机直接绑定公网 IP，直接绑定公网 IP 会导致云主机完全暴露在互联网遭受攻击入侵。</p>
+</li>
+<li><p>对互联网提供服务，通过负载均衡（LB）将需要开放对外的端口（如：80，443）代理到后端的应用服务，并将对外服务放置在独立的子网中。</p>
+</li>
+<li><p>防火墙隔离（安全组）是云上的主要网络安全隔离手段，通过安全组设置在网络层过滤服务器的访问行为，限定服务器对外&#x2F;对内的的端口访问，授权访问地址，从而减少攻击面，保护服务器的安全。</p>
+</li>
+<li><p>高危网络端口，开启的服务端口越多越不安全。只对外开放提供服务的必要端口，禁止将 RDP、SSH、Redis、MongoDB、MySQL、MSsql 等高危服务直接暴露在互联网上。</p>
+</li>
+</ol>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2020/01/14/secbook/mobile-and-payment-security/">移动支付与支付安全 SDL</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2020/01/12/secbook/iot-security-architecture-design-solution/">IoT 物联网安全架构设计方案</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

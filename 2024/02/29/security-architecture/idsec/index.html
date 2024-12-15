@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>身份优先安全风险知识库 - 数字安全极客</title>
+
+  
+    <meta name="description" content="关于身份风险：网络入侵难以完全杜绝的根本原因在于攻击是通过合法用户凭据发起的，这使得非法攻击看起来就像是普通用户访问一样。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="身份优先安全风险知识库">
+<meta property="og:url" content="http://example.com/2024/02/29/security-architecture/idsec/index.html">
+<meta property="og:site_name" content="数字安全极客">
+<meta property="og:description" content="关于身份风险：网络入侵难以完全杜绝的根本原因在于攻击是通过合法用户凭据发起的，这使得非法攻击看起来就像是普通用户访问一样。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2024/02/29/security-architecture/idsec/1675333180518-ac5248f3-ac64-455c-b87c-37f6fa940b7e.png">
+<meta property="og:image" content="http://example.com/2024/02/29/security-architecture/idsec/1675332891813-ef75de34-c6a4-4fb4-912b-1ee076c38fe9.png">
+<meta property="og:image" content="http://example.com/2024/02/29/security-architecture/idsec/1675332891928-5264029c-6699-4e70-bf72-b069eaec48ec.png">
+<meta property="og:image" content="http://example.com/2024/02/29/security-architecture/idsec/1675333013112-a9c45bc6-b30b-4637-8174-8794a2d76443.png">
+<meta property="article:published_time" content="2024-02-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-15T04:28:41.618Z">
+<meta property="article:author" content="SecAdmin">
+<meta property="article:tag" content="数据安全">
+<meta property="article:tag" content="身份安全">
+<meta property="article:tag" content="ATO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/02/29/security-architecture/idsec/1675333180518-ac5248f3-ac64-455c-b87c-37f6fa940b7e.png">
+  
+  
+  
+  <meta name="keywords" content="数据安全,身份安全,ATO">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/logo.ico">
+  
+
+  
+
+  
+
+
+  
+    
+      <link rel="preconnect" href="https://gcore.jsdelivr.net">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
+    
+      <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?471fac1b9a27585ef00b1647ef02618e";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+    
+      <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CKX8MZFEY"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-3CKX8MZFEY');</script>
+    
+      <!-- Google ADS google.com/adsense/ --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9718108884365672" crossorigin="anonymous"></script>
+    
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/logo.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">数字安全极客</div><div class="sub normal cap">专注实战安全防御体系</div><div class="sub hover cap" style="opacity:0"> Digital Security Geek</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">身份优先安全风险知识库</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E5%A8%81%E6%8A%A5%E5%91%8A%E7%A0%94%E7%A9%B6"><span class="toc-text">权威报告研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A3%8E%E9%99%A9%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6"><span class="toc-text">风险案例研究</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E4%BC%98%E5%85%88%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E6%B8%85%E5%8D%95"><span class="toc-text">身份优先安全风险清单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%B4%A6%E5%8F%B7%E4%BF%9D%E6%8A%A4"><span class="toc-text">1.账号保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E8%B4%A6%E5%8F%B7"><span class="toc-text">默认账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%A6%E5%8F%B7%E5%8F%AF%E6%9E%9A%E4%B8%BE"><span class="toc-text">账号可枚举</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E5%81%87%E6%B3%A8%E5%86%8C"><span class="toc-text">虚假注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%BB%95%E8%BF%87"><span class="toc-text">验证绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%81%B6%E6%84%8F%E9%94%81%E5%AE%9A"><span class="toc-text">恶意锁定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%83%B5%E5%B0%B8%E8%B4%A6%E5%8F%B7"><span class="toc-text">僵尸账号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%AD%E8%AF%81%E7%A0%B4%E8%A7%A3"><span class="toc-text">凭证破解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%AD%E8%AF%81%E5%A4%8D%E7%94%A8"><span class="toc-text">凭证复用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%86%E7%A0%81%E4%BF%9D%E6%8A%A4"><span class="toc-text">2.密码保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%B1%E5%AF%86%E7%A0%81"><span class="toc-text">弱密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%8F%A3%E4%BB%A4"><span class="toc-text">默认口令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81"><span class="toc-text">万能密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%9E%E5%BA%93%E6%94%BB%E5%87%BB"><span class="toc-text">撞库攻击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E5%96%B7%E5%B0%84"><span class="toc-text">密码喷射</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%E6%B3%84%E9%9C%B2"><span class="toc-text">密码明文泄露</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="toc-text">越权修改密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%98%E8%AE%B0%E5%AF%86%E7%A0%81%E6%89%BE%E5%9B%9E"><span class="toc-text">忘记密码找回</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BA%BA%E6%9C%BA%E8%AF%86%E5%88%AB"><span class="toc-text">3.人机识别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E5%A4%B1%E6%95%88"><span class="toc-text">验证码失效</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E5%A4%8D%E7%94%A8"><span class="toc-text">验证码复用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E4%BC%AA%E9%80%A0"><span class="toc-text">验证码伪造</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E9%AA%8C%E8%AF%81%E7%A0%81%E5%AF%B9%E6%8A%97"><span class="toc-text">文字验证码对抗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E9%AA%8C%E8%AF%81%E7%A0%81%E5%AF%B9%E6%8A%97"><span class="toc-text">图形验证码对抗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E9%AA%8C%E8%AF%81%E7%A0%81%E5%AF%B9%E6%8A%97"><span class="toc-text">行为验证码对抗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-text">智能验证码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%A4%9A%E5%9B%A0%E7%B4%A0%E4%BF%9D%E6%8A%A4"><span class="toc-text">4.多因素保护</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%88%86%E7%A0%B4"><span class="toc-text">短信验证爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%AE%E7%AE%B1%E9%AA%8C%E8%AF%81%E7%88%86%E7%A0%B4"><span class="toc-text">邮箱验证爆破</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%8F%A3%E4%BB%A4%E7%BB%95%E8%BF%87"><span class="toc-text">动态口令绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E5%AF%B9%E6%8A%97"><span class="toc-text">人脸识别对抗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E5%AF%B9%E6%8A%97"><span class="toc-text">指纹识别对抗</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8"><span class="toc-text">5.协议安全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CAS-%E6%BC%8F%E6%B4%9E"><span class="toc-text">CAS 漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OAuth-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">OAuth 安全配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OIDC-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">OIDC 安全配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SAML-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">SAML 安全配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDAP-x2F-AD-%E6%BC%8F%E6%B4%9E"><span class="toc-text">LDAP &#x2F; AD 漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT-%E5%AE%89%E5%85%A8%E7%AE%97%E6%B3%95"><span class="toc-text">JWT 安全算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cookie-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="toc-text">Cookie 安全配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%8E%AF%E5%A2%83%E5%AE%89%E5%85%A8"><span class="toc-text">6.环境安全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE"><span class="toc-text">异常地理位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%97%B6%E9%97%B4%E8%AE%BF%E9%97%AE"><span class="toc-text">异常时间访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF%E8%AE%BE%E5%A4%87%E5%BC%82%E5%B8%B8"><span class="toc-text">终端设备异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%E7%BB%9C%E5%BC%82%E5%B8%B8"><span class="toc-text">接入网络异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E5%BA%94%E7%94%A8%E5%BC%82%E5%B8%B8"><span class="toc-text">进程应用异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%8F%E6%84%9F%E9%AB%98%E9%A2%91%E8%AE%BF%E9%97%AE"><span class="toc-text">敏感高频访问</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E5%B9%B3%E5%8F%B0%E5%AE%89%E5%85%A8"><span class="toc-text">7.平台安全</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-text">网络访问控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%8B%A6%E6%88%AA"><span class="toc-text">入侵检测拦截</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E8%A1%A5%E4%B8%81"><span class="toc-text">安全漏洞补丁</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%91%E6%8E%A7%E5%93%8D%E5%BA%94"><span class="toc-text">事件监控响应</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AE%89%E5%85%A8%E4%BC%A0%E8%BE%93"><span class="toc-text">数据安全传输</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E5%AD%98%E5%82%A8"><span class="toc-text">数据加密存储</span></a></li></ol></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a><a class="social" href="https://github.com/seccmd" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/></a><a class="social" href="https://twitter.com/sec_cmd" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a><a class="social" href="https://123.seccmd.net" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/></svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB/">安全体系</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-02-29T00:00:00.000Z">2024-02-29</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>身份优先安全风险知识库</span></h1>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1675333180518-ac5248f3-ac64-455c-b87c-37f6fa940b7e.png" alt="img"/></div><div class="image-meta"><span class="image-caption center">img</span></div></div>
+
+<h2 id="权威报告研究"><a href="#权威报告研究" class="headerlink" title="权威报告研究"></a>权威报告研究</h2><p>关于身份风险：网络入侵难以完全杜绝的根本原因在于攻击是通过合法用户凭据发起的，这使得非法攻击看起来就像是普通用户访问一样。</p>
+<p>美国 NSA 前监察长曾指出，犯罪分子可以利用在黑市上买来的凭证访问几乎所有机构的信息。</p>
+<p><a target="_blank" rel="noopener" href="https://www.gartner.com/smarterwithgartner/gartner-top-security-and-risk-trends-for-2021">Gartner Top Security and Risk Trends for 2021</a> <strong>- November 15, 2021</strong></p>
+<ul>
+<li><strong>Trend No. 4: Identity-first security</strong></li>
+</ul>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1675332891813-ef75de34-c6a4-4fb4-912b-1ee076c38fe9.png" alt="img"/></div><div class="image-meta"><span class="image-caption center">img</span></div></div>
+
+<ul>
+<li>混合工作和向云应用程序的迁移巩固了身份作为安全边界的趋势。身份优先安全并不是个新概念，但随着攻击者开始瞄准身份和访问管理功能以实现长期潜伏，身份优先安全变得更加紧迫。</li>
+<li>凭据滥用现在是攻击行为中最常用的技术。国际黑客组织以Active Directory和身份基础设施为目标，取得了惊人的成功。身份是突破物理隔离网络的关键横向移动技术。多因素身份验证(MFA)的使用正在增长，但它不是万能的。企业必须更加重视MFA的正确配置、维护并监控身份基础设施。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.gartner.com/en/newsroom/press-releases/2022-03-07-gartner-identifies-top-security-and-risk-management-trends-for-2022">Gartner Identifies Top Security and Risk Management Trends for 2022</a> <strong>March 7, 2022</strong></p>
+<ul>
+<li><strong>Trend 3: Identity Threat Detection and Response</strong></li>
+<li>复杂的威胁参与者正在积极瞄准身份和访问管理 (IAM) 基础设施，而凭据滥用现在是主要的攻击媒介。Gartner 引入了术语“身份威胁检测和响应”(ITDR) 来描述用于保护身份系统的工具和最佳实践的集合。</li>
+<li>“组织花费了大量精力来改进 IAM 功能，但其中大部分都集中在改进用户身份验证的技术上，这实际上增加了网络安全基础设施基础部分的攻击面，”Firstbrook 表示：“ITDR 工具可以帮助保护身份系统，检测它们何时受到损害并实现有效的补救。”</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.gartner.com/en/articles/7-top-trends-in-cybersecurity-for-2022">Gartner Top Security and Risk Trends in 2022</a> <strong>- April 13, 2022</strong></p>
+<ul>
+<li><strong>Trend No. 2: Identity system defense</strong></li>
+<li>身份系统正受到持续的攻击。滥用凭据现在是攻击者用来访问系统并实现其目标的主要方法。例如，在SolarWinds漏洞中，攻击者使用供应商的特权访问权限来渗透目标网络。</li>
+</ul>
+<p><strong>IDSA 2022 数字身份保护趋势报告 (</strong><a target="_blank" rel="noopener" href="https://steamory.feishu.cn/docx/JzSTdCPnUoNVcKxshAXcqHbMnbd">Trends in Securing Digital Identities</a><strong>)</strong></p>
+<ul>
+<li>令⼈震惊 84% 的组织在过去一年中经历过与身份相关的泄露事件。最常见的泄露归因是网络钓鱼攻击 (59%)，权限管理不当 (36%) 和凭据被盗 (33%)。 </li>
+<li>失陷事件通常涉及网络钓鱼和被盗凭据。威胁行为者可以利用这些凭据的访问权限，绕过 IT 限制、窃取数据、部署勒索软件或采取其他恶意行动。 </li>
+<li>⼏乎所有安全和身份专家 (97%) 都表示，他们组织将在明年投资于以身份为中心的安全架构。</li>
+</ul>
+<p><strong>CSA 2022 云计算面临的主要威胁报告 《</strong><a target="_blank" rel="noopener" href="https://information.rapid7.com/rs/411-NAK-970/images/Whitepaper_2022-Attacks-Threat-Report_Rapid7.pdf">SANS 2022 Top New Attacks and Threat Report</a><strong>》</strong></p>
+<ul>
+<li>报告调查了 700 名安全专业人士，发现了 19 种与云相关的安全事件最常见的攻击路径，排名第一位的是⾝份、凭据、访问和密钥管理水平不足。</li>
+<li>较差的身份安全保护再一次被列为最关键的领域，本质上是阻止网络钓鱼攻击和其他窃取可重复使用密码的尝试的能力。</li>
+</ul>
+<p><strong>Microsoft 2022 微软数字防御报告</strong>(<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/security/business/microsoft-digital-defense-report-2022">Microsoft Digital Defense Report</a>)</p>
+<ul>
+<li>微软监测数据称，99％ 被入侵的帐户未启用多因素身份验证。目前以多因素认证（MFA）、无密码方案为代表的强身份认证的使用率还很低，而那些仅仅依靠密码保护的账号，常常成为黑客们最容易得手的目标。<a target="_blank" rel="noopener" href="https://published-prd.lanyonevents.com/published/rsaus20/sessionsFiles/18466/2020_USA20_IDY2-F03_01_Breaking-Password-Dependencies-Challenges-in-the-Final-Mile-at-Microsoft.pdf">详情链接</a></li>
+<li>微软安全洞察，身份管理漏洞成为数字安全首要威胁。确保身份认证及管理的安全性是确保数字安全的重中之重。强化身份管理，是应对数字威胁最行之有效又简便易行的手段。<a target="_blank" rel="noopener" href="https://news.microsoft.com/zh-cn/%E5%BE%AE%E8%BD%AF%E6%B4%9E%E5%AF%9F%EF%BC%9A%E8%BA%AB%E4%BB%BD%E7%AE%A1%E7%90%86%E6%BC%8F%E6%B4%9E%E6%88%90%E4%B8%BA%E6%95%B0%E5%AD%97%E5%AE%89%E5%85%A8%E9%A6%96%E8%A6%81%E5%A8%81%E8%83%81/">详情链接</a></li>
+</ul>
+<p><strong>Verizon 2022 数据泄露调查报告</strong> (<a target="_blank" rel="noopener" href="https://www.verizon.com/business/resources/reports/2022/dbir/2022-data-breach-investigations-report-dbir.pdf">Data Breach Investigations Report</a>)</p>
+<ul>
+<li>报告称被盗凭据仍然是恶意行为者用来实施数据泄露的第一大黑客策略。黑客入侵导致的数据泄露事件中，超过 60% 涉及丢失、被盗或可破解的凭据或网络钓鱼。</li>
+<li>报告指出，目前有四个主要途径会威胁到数据资产：凭证窃取、网络钓鱼、漏洞利用和僵尸网络。</li>
+</ul>
+<p><strong>身份和访问管理标准体系</strong></p>
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1675332891928-5264029c-6699-4e70-bf72-b069eaec48ec.png" alt="img"/></div><div class="image-meta"><span class="image-caption center">img</span></div></div>
+
+<h2 id="风险案例研究"><a href="#风险案例研究" class="headerlink" title="风险案例研究"></a>风险案例研究</h2><p><a target="_blank" rel="noopener" href="https://www.secrss.com/articles/48764">2022年度全球数据泄露事件TOP 20</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/afXYJHoNcy5tg7TqSgcVzQ">2022年网络攻击事件盘点</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/va1el2MjQe1LdwwolKG6-g">2022年数据泄露事件盘点</a></p>
+<ol>
+<li>随着 MFA 多因素认证普及，对抗 MFA 的网络钓鱼即服务 Phishing-as-a-Service (PhaaS) 已经实现产品化，支持针对主流在线服务身份验证令牌的窃取，包括：Apple、Google、Facebook、Microsoft、Twitter、GitHub、GoDaddy。</li>
+<li>黑客针对大多数企业的攻击者中，出于经济利益或者政治活动，利用恶意软件和电脑病毒等手段窃取信息，以达到攻击目的。搜狐员工遭遇工资补助诈骗。经调查，实为某员工使用邮件时被意外钓鱼导致密码泄露，进而被冒充财务部盗发邮件。据统计，共有24名员工被骗取4万余元。<a target="_blank" rel="noopener" href="https://www.chinaz.com/2022/0525/1400166.shtml">链接</a></li>
+<li>“内鬼”泄密，公司内部人员因安全意识不足导致泄密，或者前员工有意曝光公司重要数据。知名漏洞众测平台 HackerOne 的一名员工，利用工作职务之便，窃取通过漏洞赏金平台提交的漏洞报告，出售给那些受影响的用户，以此索取现金奖励。据 HackerOne 表示，这名员工联系了7名HackerOne 客户，并在少数披露中获取了赏金。<a target="_blank" rel="noopener" href="https://www.freebuf.com/news/338142.html">链接</a></li>
+<li>系统漏洞，黑客利用系统上存在的漏洞进入系统并窃取登录凭证后发动网络攻击。有安全研究人员发现，攻击者利用微软 MSHTML 远程代码执行漏洞（CVE-2021-40444），通过PowerShell 恶意软件窃取器，来窃取受害者谷歌和在线服务凭证信息。<a target="_blank" rel="noopener" href="https://www.163.com/dy/article/GQ69HUEN0511CJ6O.html">链接</a></li>
+<li>云通讯巨头Twilio 表示，有攻击者利用短信网络钓鱼攻击窃取了员工凭证，并潜入内部系统泄露了部分客户数据。</li>
+<li>美国网约车巨头Uber发生了重大黑客攻击事件，一名黑客获得了Uber一位员工的Slack账号，并获取了该公司在亚马逊和谷歌云计算平台的访问权限。位于旧金山的Uber公司目前已经证实了这次黑客攻击，公司上下正在匆忙评估这次黑客攻击造成的损失。</li>
+<li>继三星微软之后Lapsus$黑客组织宣布入侵LG、Okta、Cloudflare。对三星电子、微软、英伟达、沃达丰等巨头发起网络攻击的外国黑客组织Lapsus$宣布，该组织也入侵了LG电子。该组织在Telegram上上传了一份文件，声称这是LG电子员工和服务账户的哈希值。在透露这一消息时，该组织还在其Telegram账号上发布了自称是Okta内部系统的截图，其中一张似乎显示了Okta的Slack频道，另一张是Cloudflare界面。LG电子表示，到目前为止，尚未确认客户相关信息的泄露。</li>
+<li>黑客伪造“政府传票”窃取科技巨头敏感数据，苹果、脸书等均受影响。安全博客KrebsOnSecurity披露了一种伪装政府执法部门向互联网公司套取用户数据的攻击手法，攻击者窃取执法部门邮箱等官方账号，向互联网平台发送“紧急数据申请”，从而套取用户敏感数据。最近兴起的LAPSUS$数据勒索团伙正是利用这一手法为基础，成功入侵了微软、Okta、英伟达等知名企业内网窃取数据，苹果、Meta等巨头曾应黑客要求提供用户数据。</li>
+<li>黑客用GitHub用户令牌从数十家企业内部系统窃取信息。GitHub安全研究人员报告称，4月12日，一名未知的攻击者使用被盗的Heroku和Travis CI维护的第三方OAuth用户令牌从数十家企业的私有存储库中下载数据。虽然目前尚不清楚究竟有多少企业受到了此次活动的影响，但根据软件供应链保护提供商BluBracket的说法，可以确认的是攻击者“利用了npm私有库中的AWS密钥。”因此，此次曝光的数据泄露不仅限于GitHub，还可能波及集成了Heroku&#x2F;Travis的所有应用程序。</li>
+</ol>
+<h2 id="身份优先安全风险清单"><a href="#身份优先安全风险清单" class="headerlink" title="身份优先安全风险清单"></a>身份优先安全风险清单</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="1675333013112-a9c45bc6-b30b-4637-8174-8794a2d76443.png" alt="img"/></div><div class="image-meta"><span class="image-caption center">img</span></div></div>
+
+<h3 id="1-账号保护"><a href="#1-账号保护" class="headerlink" title="1.账号保护"></a>1.账号保护</h3><h4 id="默认账号"><a href="#默认账号" class="headerlink" title="默认账号"></a>默认账号</h4><p>很多系统都会有默认的账号，比如管理后台都会有个admin、root、system账号，攻击者免去破解账号名称，使用默认账号尝试发起攻击。</p>
+<h4 id="账号可枚举"><a href="#账号可枚举" class="headerlink" title="账号可枚举"></a>账号可枚举</h4><p>攻击者根据应用程序返回的不同的出错信息可枚举出系统中存在的账号信息，然后针对枚举出来的登录用户名，对其密码进行暴力破解。</p>
+<h4 id="虚假注册"><a href="#虚假注册" class="headerlink" title="虚假注册"></a>虚假注册</h4><p>通过使用应用程序的帐户注册流程，提供虚假的身份数据注册账号，利用虚假的身份注册虚假账号便于后续攻击。</p>
+<h4 id="验证绕过"><a href="#验证绕过" class="headerlink" title="验证绕过"></a>验证绕过</h4><p>应用程序在认证上没有做好，可以导致恶意用户或者攻击者绕过认证，访问内部资源。</p>
+<h4 id="恶意锁定"><a href="#恶意锁定" class="headerlink" title="恶意锁定"></a>恶意锁定</h4><p>通过不断的输入错误的密码可恶意锁定任意账号。若系统认证功能无人机识别功能模块，攻击者可编写脚本批量锁定系统账号。</p>
+<h4 id="僵尸账号"><a href="#僵尸账号" class="headerlink" title="僵尸账号"></a>僵尸账号</h4><p>由于各种历史原因，很多账号处于无人使用状态。这种长时间没有登录行为，如果突然在某个时刻再次被使用，很可能是被攻击者掌握。</p>
+<h4 id="凭证破解"><a href="#凭证破解" class="headerlink" title="凭证破解"></a>凭证破解</h4><p>攻击者使用自动化脚本组合出常见的用户名和密码，即字典，再结合高并发破解软件进行暴力破解。</p>
+<h4 id="凭证复用"><a href="#凭证复用" class="headerlink" title="凭证复用"></a>凭证复用</h4><p>很多账户系统在账户改密码之后并不能清除已有的登录状态，导致在盗用或使用 Cookies 的情况之下，可以一直维持对目标用户的登录权限。</p>
+<h3 id="2-密码保护"><a href="#2-密码保护" class="headerlink" title="2.密码保护"></a>2.密码保护</h3><h4 id="弱密码"><a href="#弱密码" class="headerlink" title="弱密码"></a>弱密码</h4><p> 仅包含简单数字和字母的密码，例如”123”、”abc”等，这样的密码很容易被别人破解。通过爆破工具就可以很容易破解。</p>
+<h4 id="默认口令"><a href="#默认口令" class="headerlink" title="默认口令"></a>默认口令</h4><p> 很多系统都会有出厂的默认密码，攻击者会收集各种类型系统的默认密码，如果管理员没有及时修改默认密码，很可能会被攻击者利用。</p>
+<h4 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h4><p> 攻击者可通过万能密码直接登录后台，获取后台权限，构造特殊的 SQL 语句进行截断，造成永真，就可以越过查询完成登录。</p>
+<h4 id="撞库攻击"><a href="#撞库攻击" class="headerlink" title="撞库攻击"></a>撞库攻击</h4><p> 攻击者使用从其他地方窃取的身份验证凭据，通过批量登陆，验证被盗账号密码在当前系统中的有效性。</p>
+<h4 id="密码喷射"><a href="#密码喷射" class="headerlink" title="密码喷射"></a>密码喷射</h4><p> 通过暴力枚举众多账号列表的特定脆弱密码尝试登陆，攻击者将有可能获得当前系统上使用脆弱密码的用户权限。</p>
+<h4 id="密码明文泄露"><a href="#密码明文泄露" class="headerlink" title="密码明文泄露"></a>密码明文泄露</h4><p> 认证过程中用户名密码等敏感数据明文传输，攻击者通过在局域网中嗅探网络流量，获取明文传输的认证凭证，如用户名密码、SESSIONID等敏感信息。</p>
+<h4 id="越权修改密码"><a href="#越权修改密码" class="headerlink" title="越权修改密码"></a>越权修改密码</h4><p> 修改密码处如果没有校验旧密码、短信验证码、存在越权漏洞等问题，导致攻击者可利用该漏洞直接修改其他用户的密码。</p>
+<h4 id="忘记密码找回"><a href="#忘记密码找回" class="headerlink" title="忘记密码找回"></a>忘记密码找回</h4><p> 在未知他人的重置密码链接或手机验证码的情况下，攻击者通过构造重置密码链接或穷举手机验证码的方式直接重置他人的密码。</p>
+<h3 id="3-人机识别"><a href="#3-人机识别" class="headerlink" title="3.人机识别"></a>3.人机识别</h3><h4 id="验证码失效"><a href="#验证码失效" class="headerlink" title="验证码失效"></a>验证码失效</h4><p> 常见的让验证码失效的方式有把验证码参数值填空，或者验证码参数删掉，系统不再返回验证码错误。</p>
+<h4 id="验证码复用"><a href="#验证码复用" class="headerlink" title="验证码复用"></a>验证码复用</h4><p> 验证码使用多次不失效，攻击者利用这个缺陷来绕过验证码。攻击者多次请求都是使用的同一个验证码，系统返回都请求成功。</p>
+<h4 id="验证码伪造"><a href="#验证码伪造" class="headerlink" title="验证码伪造"></a>验证码伪造</h4><p> 由客户端来生成验证码，或者由客户端来判断验证码，攻击者通过逆向客户端程序，来伪造合法的验证码，绕过验证机制。</p>
+<h4 id="文字验证码对抗"><a href="#文字验证码对抗" class="headerlink" title="文字验证码对抗"></a>文字验证码对抗</h4><p> 主要是通过用户输入图片中的字母、数字、汉字等进行验证。简单易操作，人机交互性较好，但安全系数低，容易被破解。采用OCR技术可轻松破解。</p>
+<h4 id="图形验证码对抗"><a href="#图形验证码对抗" class="headerlink" title="图形验证码对抗"></a>图形验证码对抗</h4><p> 按照指定顺序点击正确的图标，即可完成验证。需按照常用语的顺序点击正确的文字，即可完成验证。</p>
+<h4 id="行为验证码对抗"><a href="#行为验证码对抗" class="headerlink" title="行为验证码对抗"></a>行为验证码对抗</h4><p> 按照要求将备选碎片直线滑动到正确的位置，或拖动滑块移动来达到验证目的。维度单一，容易被逆向模拟。</p>
+<h4 id="智能验证码"><a href="#智能验证码" class="headerlink" title="智能验证码"></a>智能验证码</h4><p> 通过行为特征、设备指纹、数据风控等技术，正常用户免验证，异常用户强制验证。简单便捷，区分人与机器、人与人、设备与设备。</p>
+<h3 id="4-多因素保护"><a href="#4-多因素保护" class="headerlink" title="4.多因素保护"></a>4.多因素保护</h3><h4 id="短信验证爆破"><a href="#短信验证爆破" class="headerlink" title="短信验证爆破"></a>短信验证爆破</h4><p> 短信验证码位数太短或有效期太长导致可暴力破解，验证码错误次数超过上限应触发短信验证码失效重新发送等保护机制。</p>
+<h4 id="邮箱验证爆破"><a href="#邮箱验证爆破" class="headerlink" title="邮箱验证爆破"></a>邮箱验证爆破</h4><p> 邮箱验证码位数太短或有效期太长导致可暴力破解，验证码错误次数超过上限应触发验证码失效重新发送等保护机制。</p>
+<h4 id="动态口令绕过"><a href="#动态口令绕过" class="headerlink" title="动态口令绕过"></a>动态口令绕过</h4><p> 系统实现存在缺陷，在验证完账号密码后，COOKIE 已经拥有登录态，导致不填入动态口令也可以直接访问后台系统，绕过动态口令认证。</p>
+<h4 id="人脸识别对抗"><a href="#人脸识别对抗" class="headerlink" title="人脸识别对抗"></a>人脸识别对抗</h4><p> 人脸识别技术已得到广泛应用，攻击者使用一段带有用户人脸的视频，或者3D打印的人脸面具，就可以骗过认证系统。</p>
+<h4 id="指纹识别对抗"><a href="#指纹识别对抗" class="headerlink" title="指纹识别对抗"></a>指纹识别对抗</h4><p> 通过采集用户遗留在各种物体表面上的指纹印记，重构出带有纹理沟壑的指纹膜，套在任何人手上，就可以成功骗过一般的指纹识别。</p>
+<h3 id="5-协议安全"><a href="#5-协议安全" class="headerlink" title="5.协议安全"></a>5.协议安全</h3><h4 id="CAS-漏洞"><a href="#CAS-漏洞" class="headerlink" title="CAS 漏洞"></a>CAS 漏洞</h4><p> CAS 反序列化命令执行漏洞</p>
+<h4 id="OAuth-安全配置"><a href="#OAuth-安全配置" class="headerlink" title="OAuth 安全配置"></a>OAuth 安全配置</h4><p> state 参数处理不当，redirect_uri 地址绕过，code 参数泄露</p>
+<h4 id="OIDC-安全配置"><a href="#OIDC-安全配置" class="headerlink" title="OIDC 安全配置"></a>OIDC 安全配置</h4><p> nonce 参数处理不当、request_uri 参数 SSRF 漏洞</p>
+<h4 id="SAML-安全配置"><a href="#SAML-安全配置" class="headerlink" title="SAML 安全配置"></a>SAML 安全配置</h4><p> 数字签名和加密的加密材料，用于配置远程实体提供的可信加密材料的安全配置文件以及HTTPS连接的验证</p>
+<h4 id="LDAP-x2F-AD-漏洞"><a href="#LDAP-x2F-AD-漏洞" class="headerlink" title="LDAP &#x2F; AD 漏洞"></a>LDAP &#x2F; AD 漏洞</h4><p> LDAP 注入漏洞、Kerberos 协议攻击</p>
+<h4 id="JWT-安全算法"><a href="#JWT-安全算法" class="headerlink" title="JWT 安全算法"></a>JWT 安全算法</h4><p> 弱密钥、密钥泄露、未校验签名、空加密算法</p>
+<h4 id="Cookie-安全配置"><a href="#Cookie-安全配置" class="headerlink" title="Cookie 安全配置"></a>Cookie 安全配置</h4><p> 会话固定、会话泄露、未设置HTTPONLY、未设置SECURE</p>
+<h3 id="6-环境安全"><a href="#6-环境安全" class="headerlink" title="6.环境安全"></a>6.环境安全</h3><h4 id="异常地理位置"><a href="#异常地理位置" class="headerlink" title="异常地理位置"></a>异常地理位置</h4><p> 用户登录的地理位置产生异常变化</p>
+<h4 id="异常时间访问"><a href="#异常时间访问" class="headerlink" title="异常时间访问"></a>异常时间访问</h4><p> 用户在非常用时段登录成功</p>
+<h4 id="终端设备异常"><a href="#终端设备异常" class="headerlink" title="终端设备异常"></a>终端设备异常</h4><p> 非常用设备、终端补丁加固、终端防病毒、设备安全状态</p>
+<h4 id="接入网络异常"><a href="#接入网络异常" class="headerlink" title="接入网络异常"></a>接入网络异常</h4><p> 办公网、公共网络、家庭网络、移动网络、恶意源地址</p>
+<h4 id="进程应用异常"><a href="#进程应用异常" class="headerlink" title="进程应用异常"></a>进程应用异常</h4><p> 访问敏感数据、窃取凭据、执行恶意命令</p>
+<h4 id="敏感高频访问"><a href="#敏感高频访问" class="headerlink" title="敏感高频访问"></a>敏感高频访问</h4><p> 用户在登录后，在短时间内，连续访问多个不同的系统</p>
+<h3 id="7-平台安全"><a href="#7-平台安全" class="headerlink" title="7.平台安全"></a>7.平台安全</h3><h4 id="网络访问控制"><a href="#网络访问控制" class="headerlink" title="网络访问控制"></a>网络访问控制</h4><p> 保护网络边界面临的外部攻击。控制网络流量和边界，对网络进行强制隔离，在公司网络中，只允许被授权的服务和协议传输，未经授权的数据包将被自动丢弃。</p>
+<h4 id="入侵检测拦截"><a href="#入侵检测拦截" class="headerlink" title="入侵检测拦截"></a>入侵检测拦截</h4><p> 对成千上万的网络日志等信息进行自动分析处理与深度挖掘，对网络的安全状态进行分析评价，快速感知到网络中的异常事件与整体安全态势。</p>
+<h4 id="安全漏洞补丁"><a href="#安全漏洞补丁" class="headerlink" title="安全漏洞补丁"></a>安全漏洞补丁</h4><p> 采用自动化的漏洞扫描工具定期进行服务器漏洞检测，第一时间进行处理修复，定期进行系统补丁更新，有效保障服务器稳定运行。</p>
+<h4 id="事件监控响应"><a href="#事件监控响应" class="headerlink" title="事件监控响应"></a>事件监控响应</h4><p> 安全事件的收集、归并和过滤。通过安全事件监控整个组织内的 IT 资源，过滤并关联事件，迅速定位安全威胁，并启动安全事件响应。</p>
+<h4 id="数据安全传输"><a href="#数据安全传输" class="headerlink" title="数据安全传输"></a>数据安全传输</h4><p> 数据传输皆受 AES 密钥加密强度的保护，完全满足敏感数据加密传输需求。通过 HTTPS 协议，信息在终端端到云端实现加密传输。</p>
+<h4 id="数据加密存储"><a href="#数据加密存储" class="headerlink" title="数据加密存储"></a>数据加密存储</h4><p> 加密数据存储，使用 KMS 管理密钥，为敏感数据提供可持续的信息保护，实现数据安全保护和控制。</p>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/06/01/ransomware/">勒索病毒-快速应对手册</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/01/falco/">Falco 防御绕过尝试</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
