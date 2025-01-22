@@ -4,7 +4,7 @@ title: Java/JSP环境搭建与安全相关操作全解析
 authors: [SecCMD]
 description: >
  全面介绍Java/JSP开发相关内容，涵盖自动化与手动安装JDK的详细步骤，包括Windows和Linux系统下的安装方法，还提供Java下载地址及特殊账号。同时深入讲解Java/JSP安全相关操作，如无回显与有回显的命令执行、文件写入及编码原理等，为Java开发者及安全从业者提供一站式知识服务。
-categories: 编程开发, 网络安全
+categories: 编程开发, 基础工具
 tags:
   - Java
   - JSP
