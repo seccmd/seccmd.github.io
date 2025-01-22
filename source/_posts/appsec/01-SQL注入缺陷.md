@@ -29,7 +29,7 @@ SQL注入是网站存在最多也是最简单的漏洞，原因是应用程序�
 
 Java代码示例：
 
-```
+```Java
 // bad：直接将用户输入拼接到SQL查询中，存在SQL注入的风险
 public void unsafeQuery(HttpServletRequest request, Connection connection) {
     String custname = request.getParameter("name"); 
@@ -70,7 +70,7 @@ public void safeQueryWithValidation(HttpServletRequest request, Connection conne
 
 Go代码示例：
 
-```
+```Go
 // bad: 直接将用户输入拼接到SQL查询中，存在SQL注入的风险
 func vulnerableHandler(db *sql.DB, req *http.Request) {
     query := fmt.Sprintf("SELECT ITEM, PRICE FROM PRODUCT WHERE ITEM_CATEGORY='%s' ORDER BY PRICE",
@@ -87,7 +87,7 @@ func safeHandler(db *sql.DB, req *http.Request) {
 
 PHP代码示例：
 
-```
+```PHP
 // bad：未使用参数绑定方式执行SQL查询
 $id = $_GET['id'];
 $sql = "SELECT * FROM pages WHERE id = $id";
@@ -111,7 +111,7 @@ $red = $sth->fetchAll();
 
 Python代码示例：
 
-```
+```Python
 # bad：直接通过字符串格式化将用户输入拼接到SQL查询中，存在SQL注入风险
 import mysql.connector
 
@@ -159,7 +159,7 @@ myresult = cur.fetchall()
 
 JavaScript代码示例：
 
-```
+```JavaScript
 // bad：拼接SQL语句查询，存在安全风险
 const mysql  = require("mysql");
 const connection = mysql.createConnection(options);
