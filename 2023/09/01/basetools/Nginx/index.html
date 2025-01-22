@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Nginx安装配置全攻略 - 数字安全极客</title>
+
+  
+    <meta name="description" content="本页面专注于Nginx服务器的安装与配置技巧，涵盖从基础安装到多种高级应用场景。介绍Nginx安装指令，以及如何测试配置文件确保其正确性。深入讲解Basic Auth认证设置、Http Proxy代理配置、云主机TCP端口转发等操作，还详细阐述NGINX location在配置中的优先级，为您提供全面且实用的Nginx使用指引。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx安装配置全攻略">
+<meta property="og:url" content="http://example.com/2023/09/01/basetools/Nginx/index.html">
+<meta property="og:site_name" content="数字安全极客">
+<meta property="og:description" content="本页面专注于Nginx服务器的安装与配置技巧，涵盖从基础安装到多种高级应用场景。介绍Nginx安装指令，以及如何测试配置文件确保其正确性。深入讲解Basic Auth认证设置、Http Proxy代理配置、云主机TCP端口转发等操作，还详细阐述NGINX location在配置中的优先级，为您提供全面且实用的Nginx使用指引。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-01-22T13:42:10.725Z">
+<meta property="article:author" content="SecAdmin">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="网络代理">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+  <meta name="keywords" content="Nginx,网络代理">
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/assets/logo.ico">
+  
+
+  
+
+  
+
+
+  
+    
+      <link rel="preconnect" href="https://gcore.jsdelivr.net">
+    
+      <link rel="stylesheet" href="https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/lxgwwenkaiscreen.css" media="all">
+    
+      <script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?471fac1b9a27585ef00b1647ef02618e";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>
+    
+      <!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-3CKX8MZFEY"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-3CKX8MZFEY');</script>
+    
+      <!-- Google ADS google.com/adsense/ --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9718108884365672" crossorigin="anonymous"></script>
+    
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/about/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/assets/logo.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">数字安全极客</div><div class="sub normal cap">专注实战安全防御体系</div><div class="sub hover cap" style="opacity:0"> Digital Security Geek</div></a></div>
+
+<nav class="menu dis-select"></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Nginx安装配置全攻略</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Nginx"><span class="toc-text">Install Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Auth"><span class="toc-text">Basic Auth</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http-Proxy"><span class="toc-text">Http Proxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%91%E4%B8%BB%E6%9C%BA-nginx-tcp-%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">云主机 nginx tcp 端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NGINX-location-%E5%9C%A8%E9%85%8D%E7%BD%AE%E4%B8%AD%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">NGINX location 在配置中的优先级</span></a></li></ol></div></div></widget>
+
+
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="/" rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/> <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/></svg></a><a class="social" href="https://github.com/seccmd" target="_blank" rel="external nofollow noopener noreferrer"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://cdn.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/social/08a41b181ce68.svg"/></a><a class="social" href="https://twitter.com/sec_cmd" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">  <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/></svg></a><a class="social" href="https://123.seccmd.net" target="_blank" rel="external nofollow noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16"><path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z"/></svg></a></div></footer>
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7/">基础工具</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-09-01T00:00:00.000Z">2023-09-01</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>Nginx安装配置全攻略</span></h1>
+<h1 id="Nginx安装配置全攻略"><a href="#Nginx安装配置全攻略" class="headerlink" title="Nginx安装配置全攻略"></a>Nginx安装配置全攻略</h1><h3 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install nginx</span><br><span class="line"></span><br><span class="line">### 测试配置文件01</span><br><span class="line">Test the config &amp; Restart nginx: </span><br><span class="line">$ sudo service nginx configtest &amp;&amp; sudo service nginx restart</span><br><span class="line"></span><br><span class="line">### 测试配置文件02</span><br><span class="line">TIP: You can pinpoint problems in your nginx config using the following command</span><br><span class="line">$ sudo nginx -t</span><br></pre></td></tr></table></figure>
+
+<h3 id="Basic-Auth"><a href="#Basic-Auth" class="headerlink" title="Basic Auth"></a>Basic Auth</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1、生成认证文件</span><br><span class="line"># printf &quot;test:$(openssl passwd -crypt 123456)\n&quot; &gt;&gt; /etc/nginx/htpasswd </span><br><span class="line"># cat /etc/nginx/htpasswd </span><br><span class="line">test:xyJkVhXGAZ8tM</span><br><span class="line"></span><br><span class="line">2、配置网站conf文件</span><br><span class="line">server&#123;</span><br><span class="line">       listen 80;</span><br><span class="line">       server_name  www.moerats.com moerats.com;</span><br><span class="line">       index index.html index.php;</span><br><span class="line">       root /home/wwwroot/www.moerats.com;       </span><br><span class="line">       location /</span><br><span class="line">       &#123;</span><br><span class="line">                auth_basic &quot;Please enter your username and password&quot;;</span><br><span class="line">                auth_basic_user_file /etc/nginx/htpasswd; </span><br><span class="line">                autoindex on; # 打开目录浏览功能</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">3、重启Nginx</span><br><span class="line">/etc/init.d/nginx restart</span><br><span class="line">/usr/local/nginx/sbin/nginx -t测试配置是否有错误。 </span><br><span class="line">/usr/local/nginx/sbin/nginx -s reload载入配置文件。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="Http-Proxy"><a href="#Http-Proxy" class="headerlink" title="Http Proxy"></a>Http Proxy</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/nginx/sites-enabled/local8080</span><br><span class="line">$ /etc/init.d/nginx reload</span><br><span class="line"></span><br><span class="line">upstream local8080 &#123;</span><br><span class="line">    server 127.0.0.1:8080 weight=1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    #侦听的80端口</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  sso.lab.com;</span><br><span class="line"></span><br><span class="line">    #匹配以jsp结尾的，tomcat的网页文件是以jsp结尾</span><br><span class="line">    location / &#123;</span><br><span class="line">        index index.html;</span><br><span class="line">        proxy_pass   http://local8080;    #在这里设置一个代理，和upstream的名字一样</span><br><span class="line">        #以下是一些反向代理的配置可删除</span><br><span class="line">        proxy_redirect             off;</span><br><span class="line">        #后端的Web服务器可以通过X-Forwarded-For获取用户真实IP</span><br><span class="line">        proxy_set_header           Host $host;</span><br><span class="line">        proxy_set_header           X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        client_max_body_size       10m; #允许客户端请求的最大单文件字节数</span><br><span class="line">        client_body_buffer_size    128k; #缓冲区代理缓冲用户端请求的最大字节数</span><br><span class="line">        proxy_connect_timeout      300; #nginx跟后端服务器连接超时时间(代理连接超时)</span><br><span class="line">        proxy_send_timeout         300; #后端服务器数据回传时间(代理发送超时)</span><br><span class="line">        proxy_read_timeout         300; #连接成功后，后端服务器响应时间(代理接收超时)</span><br><span class="line">        proxy_buffer_size          4k; #设置代理服务器（nginx）保存用户头信息的缓冲区大小</span><br><span class="line">        proxy_buffers              4 32k; #proxy_buffers缓冲区，网页平均在32k以下的话，这样设置</span><br><span class="line">        proxy_busy_buffers_size    64k; #高负荷下缓冲大小（proxy_buffers*2）</span><br><span class="line">        proxy_temp_file_write_size 64k; #设定缓存文件夹大小，大于这个值，将从upstream服务器传</span><br><span class="line">    &#125;</span><br><span class="line">    #设定查看Nginx状态的地址</span><br><span class="line">    #location /nginxstatus&#123;</span><br><span class="line">    #     stub_status on;</span><br><span class="line">    #     access_log on;</span><br><span class="line">    #     auth_basic &quot;nginxstatus&quot;;</span><br><span class="line">    #     auth_basic_user_file htpasswd;</span><br><span class="line">    #&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="云主机-nginx-tcp-端口转发"><a href="#云主机-nginx-tcp-端口转发" class="headerlink" title="云主机 nginx tcp 端口转发"></a>云主机 nginx tcp 端口转发</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- https://blog.csdn.net/qq_40863328/article/details/92802958</span><br><span class="line">apt install nginx</span><br><span class="line">vi /etc/nginx/nginx.conf</span><br><span class="line">stream &#123;</span><br><span class="line">upstream tcp4444to22 &#123;</span><br><span class="line">            server 172.18.8.211:22;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">            listen 4444;</span><br><span class="line">            proxy_connect_timeout 8s;</span><br><span class="line">            proxy_pass tcp4444to22;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="NGINX-location-在配置中的优先级"><a href="#NGINX-location-在配置中的优先级" class="headerlink" title="NGINX location 在配置中的优先级"></a>NGINX location 在配置中的优先级</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">NGINX location 在配置中的优先级 - 技术颜良 - 博客园 (cnblogs.com)</span><br><span class="line">nginx location配置详细解释 - 星朝 - 博客园 (cnblogs.com)</span><br><span class="line">location表达式类型</span><br><span class="line">~ 表示执行一个正则匹配，区分大小写</span><br><span class="line">~* 表示执行一个正则匹配，不区分大小写</span><br><span class="line">^~ 表示普通字符匹配。使用前缀匹配。如果匹配成功，则不再匹配其他location。</span><br><span class="line">= 进行普通字符精确匹配。也就是完全匹配。</span><br><span class="line">@ &quot;@&quot; 定义一个命名的 location，使用在内部定向时，例如 error_page, try_files</span><br><span class="line">location优先级说明</span><br><span class="line">在nginx的location和配置中location的顺序没有太大关系。正location表达式的类型有关。相同类型的表达式，字符串长的会优先匹配。</span><br><span class="line">以下是按优先级排列说明：</span><br><span class="line">第一优先级：等号类型（=）的优先级最高。一旦匹配成功，则不再查找其他匹配项。</span><br><span class="line">第二优先级：^~类型表达式。一旦匹配成功，则不再查找其他匹配项。</span><br><span class="line">第三优先级：正则表达式类型（~ ~*）的优先级次之。如果有多个location的正则能匹配的话，则使用正则表达式最长的那个。</span><br><span class="line">第四优先级：常规字符串匹配类型。按前缀匹配。</span><br><span class="line">location优先级示例</span><br><span class="line">配置项如下:</span><br><span class="line">location = / &#123;</span><br><span class="line"># 仅仅匹配请求 /</span><br><span class="line">[ configuration A ]</span><br><span class="line">&#125;</span><br><span class="line">location / &#123;</span><br><span class="line"># 匹配所有以 / 开头的请求。但是如果有更长的同类型的表达式，则选择更长的表达式。如果有正则表达式可以匹配，则</span><br><span class="line"># 优先匹配正则表达式。</span><br><span class="line">[ configuration B ]</span><br><span class="line">&#125;</span><br><span class="line">location /documents/ &#123;</span><br><span class="line"># 匹配所有以 /documents/ 开头的请求。但是如果有更长的同类型的表达式，则选择更长的表达式。</span><br><span class="line">#如果有正则表达式可以匹配，则优先匹配正则表达式。</span><br><span class="line">[ configuration C ]</span><br><span class="line">&#125;</span><br><span class="line">location ^~ /images/ &#123;</span><br><span class="line"># 匹配所有以 /images/ 开头的表达式，如果匹配成功，则停止匹配查找。所以，即便有符合的正则表达式location，也</span><br><span class="line"># 不会被使用</span><br><span class="line">[ configuration D ]</span><br><span class="line">&#125;</span><br><span class="line">location ~* \.(gif|jpg|jpeg)$ &#123;</span><br><span class="line"># 匹配所有以 gif jpg jpeg结尾的请求。但是 以 /images/开头的请求，将使用 Configuration D</span><br><span class="line">[ configuration E ]</span><br><span class="line">&#125;</span><br><span class="line">请求匹配示例</span><br><span class="line">/ -&gt; configuration A</span><br><span class="line">/index.html -&gt; configuration B</span><br><span class="line">/documents/document.html -&gt; configuration C</span><br><span class="line">/images/1.gif -&gt; configuration D</span><br><span class="line">/documents/1.jpg -&gt; configuration E</span><br><span class="line">注意，以上的匹配和在配置文件中定义的顺序无关。</span><br><span class="line"></span><br><span class="line"># 来自 &lt;https://www.bo56.com/nginx-location%E5%9C%A8%E9%85%8D%E7%BD%AE%E4%B8%AD%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7/&gt; </span><br></pre></td></tr></table></figure>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/09/01/basetools/Commando-VM/">Commando - VM 安装指南</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/01/basetools/Ubuntu-APT/">Ubuntu APT国内镜像配置指南（20.04 LTS版）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = stellar.config.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.19.0';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.19.0';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+    root : '/',
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"codeblock":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.copycode = Object.assign({"enable":true,"js":"/js/plugins/copycode.js","default_text":"Copy","success_text":"Copied"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
