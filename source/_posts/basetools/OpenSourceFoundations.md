@@ -1,3 +1,15 @@
+---
+date: 2024-01-01
+title: 顶级开源基金会全览 | 从Linux到OpenWeb的开源力量
+authors: [SecAdmin]
+description: >
+  本页面深入介绍了众多顶级开源基金会，涵盖Linux Foundation、Apache Software Foundation、Free Software Foundation等。详细阐述各基金会的使命、特点以及旗下重要开源项目，如Linux操作系统、Apache HTTP Server、GNU Operating System等，展示开源社区的强大力量和创新成果，为读者全面了解开源世界提供丰富且实用的信息。
+categories: 开源技术
+tags:
+  - 开源基金会
+  - 开源项目
+---
+
 # Top Open Source Foundations
 
 ## List of free and open-source software organizations

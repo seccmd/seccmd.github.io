@@ -1,3 +1,15 @@
+---
+date: 2024-01-01
+title: Proxychains安装与代理使用指南
+authors: [SecAdmin]
+description: >
+  本页面专注于Proxychains相关知识，详细介绍了Proxychains的安装步骤，包括打开ssh代理以及使用apt-get命令安装，同时说明了如何配置/etc/proxychains.conf文件以适配代理设置。此外，还深入解析了两种代理方式，涵盖通过设置环境变量实现代理以及利用proxychains4命令实现代理，为用户在网络代理配置方面提供全面且实用的指引。
+categories: 网络工具
+tags:
+  - 网络代理
+  - Proxychains
+---
+
 # Proxychains
 
 ### 安装 proxychains

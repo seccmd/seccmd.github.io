@@ -1,3 +1,16 @@
+---
+date: 2024-01-01
+title: 安全体系全解析
+authors: [SecAdmin]
+description: >
+  本页面全面介绍安全体系相关知识，涵盖攻防对抗、云安全、网络安全、应用安全、数据安全、安全运营及安全合规等多个领域。详细阐述了各类安全工具和技术，如FW、IPS、WAF等网络安全工具，Webscan、DAST、SAST等应用安全工具，以及SCA、IAST、SAST等细分技术。同时，提供了GitHub安全、Fortify、CodeQL等工具的使用指南和相关链接，为用户了解和实践安全技术提供全面且实用的信息。
+categories: 安全体系
+tags:
+  - 网络安全工具
+  - 应用安全测试
+  - 安全细分技术
+---
+
 # Sec System
 
 ## 攻防对抗

@@ -1,3 +1,14 @@
+---
+date: 2023-07-01
+title: HCmd
+authors: [SecAdmin]
+description: >
+  本页面聚焦于多种远HCmd管理方案
+categories: 安全工具
+tags:
+  - 远程控制方案
+---
+
 # HCmd
 
 - Node 程序远程调试

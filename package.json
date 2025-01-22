@@ -24,5 +24,8 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-landscape": "^1.0.0",
     "hexo-theme-stellar": "^1.19.0"
+  },
+  "devDependencies": {
+    "honkit": "^6.0.2"
   }
 }

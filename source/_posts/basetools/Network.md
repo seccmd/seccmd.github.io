@@ -1,3 +1,16 @@
+---
+date: 2024-01-01
+title: 网络配置与调试全攻略 | OpenConnect、Clash及网络工具使用指南
+authors: [SecAdmin]
+description: >
+  本页面专注于网络相关知识，涵盖OpenConnect VPN Server的安装与配置，包括系统网络转发配置、服务端配置和高级路由配置；Clash透明代理技术在本机安装、Tun模式及DNS分流的详细设置，以及DNS精准分流的高级配置；Anyconnect客户端的使用，包括命令行连接与自动登录脚本；网络调试方面，介绍了Network Tools、Tcpdump、Route、Iptables等工具的基础操作与原理，如Iptables透明代理技术和端口复用技术，为用户全面掌握网络配置与调试提供丰富且实用的信息。
+categories: 网络工具
+tags:
+  - VPN配置
+  - 透明代理
+  - 网络调试工具
+---
+
 # Network
 
 ## 参考

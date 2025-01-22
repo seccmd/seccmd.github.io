@@ -1,3 +1,15 @@
+---
+date: 2024-03-01
+title: Docker国内安装全攻略及镜像加速指南
+authors: [SecAdmin]
+description: >
+  本页面聚焦Docker在Windows、Linux等多平台的国内安装解决方案，提供便捷的一键安装命令及备用安装链接，以应对不同网络环境。同时详细介绍Docker镜像加速配置方法，涵盖临时使用与长久有效的配置方式，以及Docker Desktop国内镜像源设置和Docker-CE国内镜像安装步骤，还推荐了Docker学习项目，助力用户高效掌握Docker安装与使用技巧。
+categories: 基础工具
+tags:
+  - Docker安装
+  - 镜像加速
+---
+
 # Docker 国内安装解决方案
 
 - 支持Linux、Win、Mac

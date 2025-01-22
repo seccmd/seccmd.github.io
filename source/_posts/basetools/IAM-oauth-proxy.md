@@ -1,3 +1,14 @@
+---
+date: 2022-11-11
+title: IAM、Oauth proxy、Nginx及Wiki.js等集成部署指南
+authors: [SecAdmin]
+description: >
+  本页面聚焦于身份验证与代理服务的集成部署，详细介绍了访问管理后台IAM的使用，以及在Keycloak中设置OIDC身份验证提供程序的步骤。同时，阐述了oauth proxy的下载与配置，Nginx的服务器配置，以及Wiki.js的安装、SSO登录配置和自签名证书信任问题解决方案。此外，还提供了Chat证书生成的openssl命令，为企业构建安全、高效的身份验证与访问管理体系提供全面且实用的技术指导。
+categories: 基础工具
+tags:
+  - 身份验证
+---
+
 ### IAM
 
 ```

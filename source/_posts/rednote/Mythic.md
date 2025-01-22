@@ -1,3 +1,16 @@
+---
+date: 2024-01-01
+title: Mythic部署全流程
+authors: [SecAdmin]
+description: >
+  本页面详细介绍Mythic的部署过程，包括下载源码、安装Docker和Docker-compose环境，以及使用自动安装部署脚本启动服务，同时指出部署过程中可能遇到的下载速度慢和内存需求大等问题。还介绍了在Mythic中安装Tetanus这一Windows和Linux C2代理的方法，以及Tetanus所支持的http C2配置文件的安装与启动方式，为用户提供全面的Mythic部署及相关工具使用指引。
+categories: 攻防兼备
+tags:
+  - 渗透测试工具
+  - C2框架部署
+  - Mythic
+---
+
 # Mythic 部署
 
 ```

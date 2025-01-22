@@ -1,3 +1,15 @@
+---
+date: 2024-01-01
+title: SSL-TLS证书生成与管理全攻略
+authors: [SecAdmin]
+description: >
+  本页面详细介绍SSL-TLS证书相关知识，涵盖openssl生成自签名根证书、服务器端和客户端证书的具体步骤，Let's Encrypt申请免费SSL证书的流程及证书更新方法，以及SSL自签名证书的创建、安装和Nginx配置教程，为你提供全面的SSL-TLS证书实操指导。
+categories: 基础工具
+tags:
+  - 证书管理
+  - 加密技术
+---
+
 # SSL-TLS-Cert
 
 ### openssl

@@ -1,3 +1,15 @@
+---
+date: 2023-01-01
+title: ulimit配置指南
+authors: [SecAdmin]
+description: >
+  本页面聚焦于ulimit相关知识，介绍了通过`ulimit -a`命令查看系统资源限制的方法。同时，详细阐述了在`/etc/security/limits.conf`文件中进行系统设置的具体内容，包括对核心文件大小、进程数、文件描述符数量、内存锁定、消息队列等资源限制的配置，帮助用户合理调整系统资源，确保系统稳定高效运行，为系统管理与优化提供全面且实用的指引。
+categories: 基础工具
+tags:
+  - ulimit
+  - 系统资源限制
+---
+
 # ulimit
 
   ulimit -a

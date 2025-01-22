@@ -1,3 +1,15 @@
+---
+date: 2024-01-01
+title: sftp、scp、rsync、netcat工具全解析
+authors: [SecAdmin]
+description: >
+  本页面全面解析sftp、scp、rsync、netcat工具，详细阐述它们各自的特点与适用场景。介绍sftp交互式文件管理传输方式，支持SSH协议加密；scp可快速传输文件或目录，多数系统已内置；rsync用于文件同步与备份，支持增量拷贝；netcat功能完善但默认传输不加密。同时提供sftp、scp工具传输文件的具体使用示例，为用户在不同场景下选择和使用这些工具提供全面且实用的指导。
+categories: 基础工具
+tags:
+  - 文件传输工具
+  - 数据备份工具
+---
+
 # sftp、scp、rsync、netcat工具特点及使用场景说明
 - https://help.aliyun.com/zh/ecs/user-guide/use-sftp-to-upload-files-to-a-linux-instance
 

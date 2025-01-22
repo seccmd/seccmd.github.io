@@ -1,3 +1,15 @@
+---
+date: 2024-01-01
+title: SSH全攻略：安装、配置、代理
+authors: [SecAdmin]
+description: >
+  本页面全方位介绍SSH相关知识，涵盖Win系统安装ssh服务的步骤，autossh的使用方法，SSH命令三种代理功能（-L/-R/-D）的详细解析与命令示例，SSH客户端参数说明，配置ssh免密登录、远程端口转发（内网穿透）的操作流程，以及使用systemctl实现断线重连和开机自动运行、心跳检测的配置方法，还有autossh模式、supervisor模式和OpenWRT配置ssh的内容，同时包含SSH配置中限制用户和IP登录的方法。
+categories: 基础工具
+tags:
+  - 远程连接
+  - 服务器管理
+---
+
 # SSH
 
 ### Win 安装 ssh 服务

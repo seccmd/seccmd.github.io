@@ -1,3 +1,16 @@
+---
+date: 2024-01-01
+title: 远程管理软件大盘点：ToDesk到1Remote全解析
+authors: [SecAdmin]
+description: >
+  本页面精心收集整理了各类好用的远程管理软件，涵盖ToDesk、向日葵、TeamViewer、AnyDesk等常见商用软件，以及Apache Guacamole、Quasar、RustDesk等开源项目，还特别介绍了现代化的个人远程会话管理员和启动器1Remote，它支持多种远程协议，为用户提供便捷的远程管理体验。通过对这些工具的介绍，帮助用户全面了解并选择适合自己的远程管理软件。
+categories: 网络工具
+tags:
+  - 远程管理工具
+  - 开源软件
+  - 远程控制
+---
+
 # RemoteDesk
 
 收集整理各种好用的远程管理软件

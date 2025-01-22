@@ -1,3 +1,14 @@
+---
+date: 2024-01-01
+title: Splunk下载指南
+authors: [SecAdmin]
+description: >
+  本页面提供Splunk的下载方法，给出Windows系统下使用wget下载Splunk 9.3.1版本安装包的具体命令。同时明确后续学习方向，包括借助Sysmon、AutoRuns等工具与Splunk结合进行威胁检测，学习接入AD日志、Linux日志等更多种类日志，以及深入学习转发组件相关知识，助力用户全面掌握Splunk应用及日志管理。
+categories: 基础工具
+tags:
+  - 日志管理
+---
+
 ## Splunk
 
 Splunk Download

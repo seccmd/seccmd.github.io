@@ -1,4 +1,16 @@
-# Atlassian-Confluence
+---
+date: 2024-01-01
+title: Atlassian-Confluence与JIRA安装配置全攻略
+authors: [SecAdmin]
+description: >
+  本页面详细介绍Atlassian-Confluence与JIRA在Ubuntu 20.04系统上的安装、配置过程，包括Java、PSQL的安装，数据库的创建与权限设置，Confluence和JIRA的安装步骤及版本选择。同时提供破解补丁使用方法、激活码生成方式，以及confluence+nginx配置https的具体步骤，助力高效搭建相关服务环境。
+categories: 基础工具
+tags:
+  - Atlassian-Confluence
+  - JIRA
+---
+
+# Atlassian-Confluence与JIRA安装配置全攻略
 
 ```
 系统: Ubuntu 20.04
