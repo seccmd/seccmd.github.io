@@ -1,6 +1,6 @@
 ---
-title: 工具箱🔥
-shortTitle: 工具箱🔥
+title: 工具箱
+shortTitle: 工具箱
 category:
   - 工具箱
 tag:

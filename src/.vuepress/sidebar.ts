@@ -3,11 +3,6 @@ import { sidebar } from "vuepress-theme-hope";
 export default sidebar({
   "/": [
     "",
-    {
-      text: "",
-      prefix: "basetools/",
-      children: "structure",
-    },
   ],
   "/test": [
     "",
@@ -33,10 +28,18 @@ export default sidebar({
   ],
   "/sec/": [
     {
-      text: "明剑博客",
+      text: "明剑安全",
       icon: "shield",
       link: "/sec/",
       children: "structure",
     },
-  ]
+  ],
+  "/tld/": [
+    {
+      text: "明剑知识库",
+      icon: "book",
+      link: "/tld/",
+      children: "structure",
+    },
+  ],
 });

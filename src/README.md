@@ -3,10 +3,13 @@ home: true
 icon: home
 title: 主页
 heroImage: /assets/image/index.png
-heroText: 明剑安全
-tagline: 专注实战安全防御体系
+heroText: 明剑实验室
+tagline: 十年一剑，专注一心，耐心坚持长期正确事。<br />慢稳急躁，张弛有度，忍住不做短期错误事。
 actions:
-  - text: 明剑博客→
+  - text: 明剑知识库→
+    link: tld/
+    type: primary
+  - text: 明剑安全→
     link: sec/
     type: primary
   - text: ATT&CK 中文版
