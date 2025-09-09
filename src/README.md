@@ -2,7 +2,7 @@
 home: true
 icon: home
 title: 主页
-heroImage: ./index.png
+heroImage: /assets/image/index.png
 heroText: 明剑安全
 tagline: 专注实战安全防御体系
 actions:
