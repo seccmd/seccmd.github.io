@@ -78,7 +78,7 @@ tags:
 
 ## Winscan.bat
 
-```
+```Batch
 @echo off
 color 0f
 ::call:colorys调用底部:colorys
