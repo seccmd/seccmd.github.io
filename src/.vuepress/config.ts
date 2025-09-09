@@ -11,6 +11,6 @@ export default defineUserConfig({
 
   theme,
 
-  // 和 PWA 一起启用
-  // shouldPrefetch: false,
+  // 和 PWA 一起启用 - 重复缓存: Prefetch 和 PWA 都在做类似的事情——在后台下载并缓存资源。如果你同时启用它们，可能会导致资源被重复下载两次，浪费用户的网络流量和带宽。
+  shouldPrefetch: false,
 });
