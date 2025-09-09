@@ -1,23 +1,2 @@
-# seccmd.github.io
-SecCMD Blog
-
-### blog 操作 
-
-```
-# 安装 hexo & 依赖
-npm install -g hexo-cli
-npm install --force
-
-cd seccmd.github.io
-
-# 本地运行：
-hexo s
-
-# 编辑内容：增删改查
-
-# 提交代码仓库：
-git add --all && git commit -m test && git push
-
-# 发布博客到gh-pages: 
-hexo clean && hexo g && hexo d
-```
+# pydeep
+这是一份通俗易懂、风趣幽默的Python学习指南，内容涵盖Python基础、Python并发编程、Python企业级开发、Python面试等核心知识点。
