@@ -1,4 +1,6 @@
-# GOST Clash Tunnel Deploy
+# GOST
+
+GOST Clash Tunnel Deploy
 
 ## 一键部署脚本
 

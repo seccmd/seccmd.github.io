@@ -1,6 +1,6 @@
-# 基于Netbird开源平台独立部署
+# Netbird
 
-
+基于Netbird开源平台独立部署
 
 [资讯：全球CFO遭钓鱼攻击，黑客利用合法工具NetBird实施精准打击](https://www.wolai.com/hNNZXsKCFfjdiHCaXK8jDd)
 

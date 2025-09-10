@@ -1,4 +1,6 @@
-# Headscale 是一款开源自托管的 Tailscale
+# Headscale
+
+Headscale 是一款开源自托管的 Tailscale
 
 ## 一、网络主流工具选型对比
 

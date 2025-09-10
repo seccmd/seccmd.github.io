@@ -1,6 +1,4 @@
-[TOC]
-
-# TODO
+# Kerberos
 
 Todo
 - 部署测试krb应用- ad linux
