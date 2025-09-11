@@ -84,6 +84,46 @@ https://github.com/gledos/ggame/blob/master/mkdocs.yml
 https://segmentfault.com/a/1190000018592279
 ```
 
+
+### MkDocs 配置谷歌统计和谷歌广告
+
+配置 Google Analytics
+
+在配置文件 mkdocs.yml 中启用，并配置自己的 Google 代码。
+
+```
+extra:
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+```
+
+查看自己的代码：
+
+```
+打开：https://analytics.google.com/
+
+需要点击十次才找到我的 Google 代码，“人性化设计”！！！
+
+【首页】 -> 左下角【管理】 -> 【数据收集与修改】 -> 【数据流】 -> 点选自己的【网站】 -> 【配置代码设置】-> 【数据流】 -> 标签【管理】-> 【添加此 Google 代码】  ->  【手动添加】
+```
+
+配置 Google AdSense
+
+打开谷歌广告网站：https://www.google.com/adsense/
+
+点选【广告】-> 点击【获取代码】-> 完成
+
+
+使用 extra_javascript 配置
+
+可以在 mkdocs.yml 文件中使用 extra_javascript 配置来引入 Google AdSense 脚本。
+
+```
+extra_javascript:
+  - https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxx
+```
+
 ## 方案四、Docusaurus 系统
 
 Docusaurus 官网帮助文档： [开始上手](https://docusaurus.io/zh-CN/)

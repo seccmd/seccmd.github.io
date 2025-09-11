@@ -31,6 +31,9 @@ apt update && apt install -y curl wget proxychains
 nano /etc/proxychains.conf
 socks5 192.168.1.100 1080 
 
+# 另外修改 DNS （可选）
+proxy_dns 8.8.8.8
+
 # 测试代理是否生效​​：
 proxychains curl -I http://www.google.com
 
@@ -51,7 +54,6 @@ git config --global https.proxy "http://192.168.1.100:8080"
 
 git config --global --unset http.proxy
 git config --global --unset https.proxy
-
 ```
 
 ### Docker 代理设置
@@ -75,11 +77,18 @@ sudo nano /etc/docker/daemon.json
 
 ## SOCKS5 服务端
 
+### 方案零、SSH socks5代理服务
+
+```bash
+ssh -D 1080 root@abc.com
+curl --socks5 127.0.0.1:1080 cip.cc
+```
+
 ### 方案一、 Microsocks
 
 <https://github.com/rofl0r/microsocks>
 
-```text
+```bash
 microsocks -1 -q -i listenip -p port -u user -P passw -b bindaddr -w wl
 ```
 
