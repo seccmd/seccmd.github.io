@@ -6,8 +6,14 @@ description: >
   搭建自己个人博客，尝试多个博客系统，我想在博客中表达的内容类型比较多，总是不能完全满足需求，最后选择这个组合Hexo-Stellar是我最喜欢的，基本不用修改太多配置，阅读使用注意力很集中。安装过程记录一下，便于快速部署。
 categories: 程序编程
 tags:
-  - Mkdocs
-  - Program
+  - Docusaurus
+  - GitBook
+  - MkDocs
+  - Docsify
+  - Vuepress
+  - Hego
+  - Hexo
+  - Wordpress
 ---
 
 # 寻找适合自己的博客笔记系统
@@ -21,12 +27,82 @@ tags:
 * GitBook
 * MkDocs
 * Docsify
-* vuepress
+* Vuepress
 * Hego
 * Hexo
 * Wordpress
 
-## Hexo 系统
+## 方案一、Docsify 系统
+
+> 一个神奇的文档网站生成器。
+- [https://docsify.js.org/#/zh-cn/](https://docsify.js.org/#/zh-cn/)
+
+## 方案二、HonKit 搭建文档中心指南
+
+- https://github.com/honkit/honkit
+- https://honkit.netlify.app
+
+```bash
+Install with NPM
+$ npm install honkit --save-dev
+
+Create a book
+$ npx honkit init
+
+Preview and serve your book using:
+$ npx honkit serve
+
+Or build the static website using:
+$ npx honkit build
+```
+
+
+
+## 方案三、MkDocs 系统
+
+Material for MkDocs 官网帮助文档：[快速上手](https://squidfunk.github.io/mkdocs-material/getting-started/)
+
+### MkDocs 基础操作
+
+```bash
+$ pip install mkdocs-material
+
+$ mkdocs new [dir-name] - Create a new project.
+$ mkdocs serve - Start the live-reloading docs server.
+$ mkdocs build - Build the documentation site.
+$ mkdocs -h - Print help message and exit.
+```
+
+### Mkdocs 配置
+
+```python
+# Mkdocs Blog 插件 https://liang2kl.github.io/mkdocs-blogging-plugin/
+$ pip install mkdocs-blogging-plugin
+
+# 配置参考
+https://github.com/gledos/ggame/blob/master/mkdocs.yml
+https://segmentfault.com/a/1190000018592279
+```
+
+## 方案四、Docusaurus 系统
+
+Docusaurus 官网帮助文档： [开始上手](https://docusaurus.io/zh-CN/)
+
+### Docusaurus 安装
+```bash
+$ npx create-docusaurus@latest my-website classic
+$ cd my-website 
+$ npx docusaurus start
+```
+
+### Docusaurus 运行
+```bash
+npm run build
+npm run serve
+npm run serve -- --build --port 3001 --host 0.0.0.0
+```
+
+## 方案五、Hexo 系统
 
 Hexo 官网帮助文档：[快速上手](https://hexo.io/zh-cn/docs/)
 
@@ -45,6 +121,15 @@ $ hexo init <folder>
 $ cd <folder>
 $ npm install
 $ hexo s
+```
+
+### 快速开始
+
+``` bash
+$ hexo new "My New Post"   ### Create a new post
+$ hexo server   ### Run server
+$ hexo generate   ### Generate static files
+$ hexo deploy    ### Deploy to remote sites
 ```
 
 ### Hexo 安装插件
@@ -76,62 +161,4 @@ npm i hexo-deployer-git
 
 # 此插件可以将博客部署到 git 仓库中
 hexo clean && hexo g && hexo d
-```
-
-## MkDocs 系统
-
-Material for MkDocs 官网帮助文档：[快速上手](https://squidfunk.github.io/mkdocs-material/getting-started/)
-
-### MkDocs 基础操作
-
-```bash
-$ pip install mkdocs-material
-
-$ mkdocs new [dir-name] - Create a new project.
-$ mkdocs serve - Start the live-reloading docs server.
-$ mkdocs build - Build the documentation site.
-$ mkdocs -h - Print help message and exit.
-```
-
-### Mkdocs 配置
-
-```python
-# Mkdocs Blog 插件 https://liang2kl.github.io/mkdocs-blogging-plugin/
-$ pip install mkdocs-blogging-plugin
-
-# 配置参考
-https://github.com/gledos/ggame/blob/master/mkdocs.yml
-https://segmentfault.com/a/1190000018592279
-```
-
-## Docusaurus 系统
-
-Docusaurus 官网帮助文档： [开始上手](https://docusaurus.io/zh-CN/)
-
-### Docusaurus 安装
-```bash
-$ npx create-docusaurus@latest my-website classic
-$ cd my-website 
-$ npx docusaurus start
-```
-
-### Docusaurus 运行
-```bash
-npm run build
-npm run serve
-npm run serve -- --build --port 3001 --host 0.0.0.0
-```
-
-## Linux 安装 NodeJS 脚本
-
-```bash
-$ wget https://nodejs.org/dist/v16.15.0/node-v16.15.0-linux-x64.tar.xz
-$ tar -xJvf node-v16.15.0-linux-x64.tar.xz -C /usr/local/lib/nodejs 
-$ vi ~/.profile 
-  export PATH=//usr/local/lib/nodejs/node-v16.15.0-linux-x64/bin:$PATH
-
-$ source ~/.profile
-$ node -v 
-$ npm version 
-$ npx -v
 ```
