@@ -13,7 +13,7 @@ tags:
 https://github.com/fatedier/frp
 
 ## Frp config demo
-```
+```bash
 # frp server dashborad
 http://x.com:58080/static/#/
 
@@ -38,7 +38,6 @@ LimitNOFILE=1048576
 [Install]
 WantedBy=multi-user.target
 ```
-
 
 ## Frp docker
 
@@ -78,3 +77,38 @@ services:
 - Seattle 西雅图
 - Silicon Valley 硅谷
 - Los Angeles 洛杉矶
+
+
+## Frp 设置开机启动
+
+```bash
+# 创建服务文件
+sudo vi /etc/systemd/system/frpc.service
+
+# 填入如下信息，ExecStart请自行替换
+[Unit]
+Description=Frp Client
+After=network.target
+Wants=network.target
+[Service]
+User=frp
+Group=frp
+Restart=on-failure
+RestartSec=5
+ExecStart=/home/frp/frps/frps -c /home/frp/frps/frps.ini
+[Install]
+WantedBy=multi-user.target
+
+#刷新服务列表：
+systemctl daemon-reload
+#设置开机自启
+systemctl enable frpc
+#关闭开机自启
+systemctl disable frpc
+#启动服务
+systemctl start frpc
+#停止服务
+systemctl stop frpc
+#服务状态
+systemctl status frpc
+```
