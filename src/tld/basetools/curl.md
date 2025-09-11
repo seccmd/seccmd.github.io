@@ -19,3 +19,17 @@ curl --max-time 10 -s -w "\nHTTP_CODE: %{http_code}" ${url} 2>&1
 
 for i in {1..200}; do curl -sILk -w "%{http_code}\n" -o /dev/null http://test.com/ ;done
 ```
+
+
+## 参考bash脚本
+
+```bash
+# 循环读取urls.txt中的每一行（每个URL）
+while read url; do
+    # 执行curl请求，并将结果（包括标准输出和标准错误输出）保存到变量中
+    # url=${url}/druid/index.html
+    echo $url
+    result=$(curl --max-time 10 -s -w "\nHTTP_CODE: %{http_code}" ${url} 2>&1)
+    echo "$result ----> $url" >> $result_file
+done < urls.txt
+```

@@ -42,4 +42,11 @@ export default sidebar({
       children: "structure",
     },
   ],
+  "/note/": [
+    {
+      text: "我的笔记本",
+      icon: "book",
+      children: "structure",
+    },
+  ],
 });
