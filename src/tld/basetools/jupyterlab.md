@@ -106,7 +106,7 @@ sudo journalctl -xfu Jupyter
 
 状态输出示例：
 
-```generic
+```
 ● Jupyter.service - Jupyter
      Loaded: loaded (/etc/systemd/system/Jupyter.service; enabled; vendor preset: enabled)
      Active: active (running) since Fri 2021-06-11 03:44:28 CEST; 4s ago

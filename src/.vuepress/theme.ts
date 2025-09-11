@@ -13,7 +13,7 @@ export default hopeTheme({
 
   logo: "/assets/image/index.png",
 
-  repo: "seccmd/seccmd",
+  repo: "seccmd/seccmd.github.io",
 
   docsDir: "src",
 

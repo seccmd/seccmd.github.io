@@ -266,7 +266,7 @@ npm run dev
 
 编辑 `src/App.jsx`：
 
-```react
+```
 function App() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -341,7 +341,7 @@ export default App;
 ```
 - **React**：  
 
-```React
+```
 function Counter() {
   const [count, setCount] = useState(0);
   return <button onClick={() => setCount(count + 1)}>{count}</button>;

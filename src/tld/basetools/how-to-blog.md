@@ -109,14 +109,14 @@ https://segmentfault.com/a/1190000018592279
 Docusaurus 官网帮助文档： [开始上手](https://docusaurus.io/zh-CN/)
 
 ### Docusaurus 安装
-```nodejs
+```bash
 $ npx create-docusaurus@latest my-website classic
 $ cd my-website 
 $ npx docusaurus start
 ```
 
 ### Docusaurus 运行
-```nodejs
+```bash
 npm run build
 npm run serve
 npm run serve -- --build --port 3001 --host 0.0.0.0
