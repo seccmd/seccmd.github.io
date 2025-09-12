@@ -50,9 +50,9 @@ Hyper-V（Gen2）、Parallels、VirtualBox和 VMware。
 到期日期：2024 年 10 月 23 日
 ```
 
-# Hyper-V
+## Hyper-V
 
-## 使用文档
+使用文档
 
 - https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/quick-start/enable-hyper-v
 
@@ -60,19 +60,18 @@ Hyper-V（Gen2）、Parallels、VirtualBox和 VMware。
 
 > DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
 
-## 关键问题：hyper-v 虚机中 开启 cpu 虚拟化功能 (开启后，才能正常使用wsl-2 docker等)
+关键问题：hyper-v 虚机中 开启 cpu 虚拟化功能 (开启后，才能正常使用wsl-2 docker等)
 
 - https://medium.com/@kenslearningcurve/running-docker-in-hyper-v-433476043ec4
 
 > Set-VMProcessor -VMName Windows10 -ExposeVirtualizationExtensions $true
 
-# netsh
 
-## cmd / powershell 配置代理
+## Netsh 网络代理 
 
 ```
 ## 设置代理
-netsh winhttp set proxy 127.0.0.1：7890
+netsh winhttp set proxy 127.0.0.1:7890
 
 ## 查看代理
 netsh winhttp show proxy
@@ -81,7 +80,7 @@ netsh winhttp show proxy
 netsh winhttp reset proxy
 ```
 
-# Microsoft Build of OpenJDK
+## Microsoft Build of OpenJDK
 
 - 专门给 Windows Java 开发者提供的便捷资源。（也包含其他语言：C++ C# 等等）
 - https://learn.microsoft.com/en-us/java/openjdk/
@@ -89,7 +88,7 @@ netsh winhttp reset proxy
 - JavaAPI 文档，还有一些好的学习资料等待挖掘
 - https://learn.microsoft.com/en-us/java/api/
 
-## Download the Microsoft Build of OpenJDK (支持各种主流操作系统，直接下载编译好的java安装包)
+*Download the Microsoft Build of OpenJDK 支持各种主流操作系统，直接下载编译好的java安装包*
 
 - https://learn.microsoft.com/en-us/java/openjdk/download
 
@@ -108,35 +107,23 @@ netsh winhttp reset proxy
 - apt (Debian)
 - yum (CentOS)
 
-```
 
-## Install the Microsoft Build of OpenJDK
+### Install the Microsoft Build of OpenJDK
 
-```
 # Install on Windows via MSI
 # msiexec /i <package>.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR="c:\Program Files\Microsoft\" /quiet
 # This example silently installs the Microsoft Build of OpenJDK, updates the PATH, associates .jar files with Java applications, and defines JAVA_HOME.
 
 msiexec /i https://aka.ms/download-jdk/microsoft-jdk-21.0.4-windows-x64.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR="c:\Program Files\Microsoft\" /quiet
 
-```
-
-
-## Install on Windows with the Windows Package Manager (winget)
-
-
-```
+### Install on Windows with the Windows Package Manager (winget)
 winget search Microsoft.OpenJDK
 winget install Microsoft.OpenJDK.21
-```
 
-## Install on macOS
+### Install on macOS
+brew install --cask microsoft-openjdk
 
-- brew install --cask microsoft-openjdk
-
-## Install on Ubuntu
-
-```
+### Install on Ubuntu
 # Valid values are only '18.04', '20.04', and '22.04'
 # For other versions of Ubuntu, please use the tar.gz package
 ubuntu_release=`lsb_release -rs`
@@ -146,34 +133,30 @@ sudo dpkg -i packages-microsoft-prod.deb
 sudo apt-get install apt-transport-https
 sudo apt-get update
 sudo apt-get install msopenjdk-21
-```
 
-## Install on CentOS 7 (RPM)
-
-```
+### Install on CentOS 7 (RPM)
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 sudo yum install msopenjdk-21
 ```
 
-# Windows Sandbox
+
+## Windows Sandbox
 
 - 测试不安全软件的神器，自动擦除痕迹
 
 - As you may already know, Windows Sandbox an isolated, temporary desktop environment where you can run untrusted software without the fear of lasting impact to your PC. In addition to the GUI method of enabling the feature, I would like to share two extra methods, PowerShell and DISM.
 
-## To Enable Windows 10 Sandbox with PowerShell
+To Enable Windows 10 Sandbox with PowerShell
 
 > Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
-
 > Disable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -Online
 
-## Enable Windows 10 Sandbox with DISM
+Enable Windows 10 Sandbox with DISM
 
 > dism.exe /online /Enable-Feature /FeatureName:"Containers-DisposableClientVM" -All
-
 > dism.exe /online /Disable-Feature /FeatureName:"Containers-DisposableClientVM"
 
-# Windows Terminal
+## Windows Terminal
 
 - https://learn.microsoft.com/zh-cn/windows/terminal/install
 
@@ -185,13 +168,13 @@ $ winget install Microsoft.WindowsTerminal
 - https://github.com/microsoft/terminal/releases
 ```
 
-# Windows 程序包管理器
+## Windows 程序包管理器
 
 - https://learn.microsoft.com/zh-cn/windows/package-manager/
 
 - https://github.com/microsoft/winget-cli/
 
-## 安装 WinGet
+### 安装 WinGet
 
 ```
 $progressPreference = 'silentlyContinue'
@@ -207,13 +190,13 @@ Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 - 常用工具
 > winget install Microsoft.WindowsTerminal Microsoft.PowerToys Microsoft.VisualStudioCode
 
-# WSL - Windows Subsystem for Linux
+## WSL - Windows Subsystem for Linux
 
 - https://learn.microsoft.com/en-us/windows/wsl/install
 - https://learn.microsoft.com/en-us/windows/wsl/install-on-server
 - https://learn.microsoft.com/en-us/windows/wsl/install-manual
 
-## 安装 WSL 命令
+### 安装 WSL 命令
 
 ```
 # 现在，可以使用单个命令安装运行 WSL 所需的一切内容。 
@@ -228,20 +211,20 @@ wsl --install
 
 ```
 
-## 升级 WSL 2 版本
+### 升级 WSL 2 版本
 
 *** 必须升级，不升级很难用 ***
 > dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
 > wsl --update
 
-## 安装 WSL 发行版
+### 安装 WSL 发行版
 
 - 在 Windows 应用商店搜索 ubuntu 
 - wsl --install -d ubuntu-22.04  # 无法访问github下载镜像
 
 
-## WSL 命令
+### WSL 命令
 
 ```
 # 查看安装的版本
@@ -254,32 +237,7 @@ wsl -u root -d ubuntu-20.04 -e ls
 
 ```
 
-## apt 换源
-
-```
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
-
-sudo bash -c "cat > /etc/apt/sources.list" << EOF
-# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
-
-# 预发布软件源，不建议启用
-# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
-EOF
-
-sudo apt-get update
-```
-
-
-## 问题
+### 问题
 
 ```
 我在 hyper-v 虚拟机中安装 wsl ，只能安装 wsl v1，无法运行 wsl v2, 所以只能在 wsl v1 安装和运行。
@@ -296,8 +254,7 @@ I switched to version 1, installed Ubuntu, then switched to Version 2 and it wor
 ```
 
 
-
-## wsl --help
+### wsl --help
 
 ```
 版权所有 (c) Microsoft Corporation。保留所有权利。
@@ -476,7 +433,7 @@ I switched to version 1, installed Ubuntu, then switched to Version 2 and it wor
 ```
 
 
-## WSL 配置，启用 Systemd
+### WSL 配置，启用 Systemd
 
 ```
 # To enable, start your Ubuntu (or other Systemd) distribution under WSL.
@@ -493,7 +450,7 @@ wsl --shutdown
 sudo systemctl status
 ```
 
-## WSL2 中 Systemd 处于降级状态的原因分析及解决方案
+### WSL2 中 Systemd 处于降级状态的原因分析及解决方案
 
 - https://hydrotho.github.io/Analysis-Of-The-Causes-And-Solutions-Of-Systemd-In-Degraded-State-In-WSL2/
 
@@ -549,7 +506,7 @@ slmgr /xpr ::查看过期时间 激活日算起半年
 slmgr.vbs -dlv ::命令可以看到激活后的使用期限为180天
 ```
 
-## Windows各版本的产品密钥
+### Windows各版本的产品密钥
 
 - Win10企业版: NPPR9-FWDCX-D2C8J-H872K-2YT43
 - Win10专业版: W269N-WFGWX-YVC9B-4J6C9-T83GX
@@ -557,7 +514,7 @@ slmgr.vbs -dlv ::命令可以看到激活后的使用期限为180天
 - Windows Server 2019 Standard: N69G4-B89J2-4G8F4-WWYCC-J464C
 - Windows Server 2019 Essential: WVDHN-86M7X-466 P 6-VHXV7-YY726
 
-## KMS服务器
+### KMS服务器
 
 需要ping测试是否有效
 
@@ -575,7 +532,7 @@ www.zgbs.cc
 cy2617.jios.org
 ```
 
-## Windows Server 2022 KMS激活序列号
+### Windows Server 2022 KMS激活序列号
 
 - https://www.orcy.net.cn/1882.html
 
@@ -600,7 +557,7 @@ WX4NM-KYWYW-QJJR4-XV3QB-6VM33 - Datacenter 数据中心版（非图形界面和�
 ```
 
 
-## WindowsServer评估版转为正式版并激活
+### WindowsServer评估版转为正式版并激活
 
 一般从官网下载的Windows Server版本都是评估试用版本。这时候想转为正式版本，就需要使用转换激活代码。请参照不同的版本使用不同的代码。注意：以下代码请以管理员身份运行。
 
@@ -650,7 +607,7 @@ slmgr /ipk WMDGN-G9PQG-XVVXX-R3X43-63DFG
 slmgr /ato
 ```
 
-## Windows Server 2022 系统评估版转为正式版方法
+### Windows Server 2022 系统评估版转为正式版方法
 
 - https://gclz.cn/post/737/
 
@@ -684,7 +641,7 @@ C:\Users\Administrator>DISM /online /Set-Edition:ServerDatacenter /ProductKey:WX
 
 ```
 
-## WindowsServer 2019 Active
+### WindowsServer 2019 Active
 
 ```
 ## 方式1、

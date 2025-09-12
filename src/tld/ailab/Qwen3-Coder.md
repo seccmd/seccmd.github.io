@@ -1,4 +1,4 @@
-# Qwen3-Coder开源：面向世界的智能编程引擎
+# Qwen3-Coder
 
 > **作者：阿里云**
 [**查看原文**](https://mp.weixin.qq.com/s?__biz=MzA4NjI4MzM4MQ%3D%3D&mid=2660253383&idx=1&sn=1e6554ca14538133e2c462a9c538b0d0)

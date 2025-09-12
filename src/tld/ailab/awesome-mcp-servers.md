@@ -1,4 +1,4 @@
-# MCP资源，awesome！
+# MCP资源，awesome
 > **作者：开源君 开源先锋** [**查看原文**](https://mp.weixin.qq.com/s?__biz=MzkwNzU4NTMyMA%3D%3D\&mid=2247494560\&idx=1\&sn=0e1cb7c495d5e4b38a75cf904c400f8f)
 
 

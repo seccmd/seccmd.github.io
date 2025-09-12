@@ -1,4 +1,26 @@
-# Tools
+# 命令工具小技巧
+
+## curl命令
+
+```
+curl --compressed https://www.example.com/large-data
+--compressed：请求服务器发送压缩过的响应，并在接收到数据后自动解压缩。
+
+curl --max-time 10 -s -w "\nHTTP_CODE: %{http_code}" ${url} 2>&1
+
+for i in {1..200}; do curl -sILk -w "%{http_code}\n" -o /dev/null http://test.com/ ;done
+```
+
+```bash
+# 循环读取urls.txt中的每一行（每个URL）
+while read url; do
+    # 执行curl请求，并将结果（包括标准输出和标准错误输出）保存到变量中
+    # url=${url}/druid/index.html
+    echo $url
+    result=$(curl --max-time 10 -s -w "\nHTTP_CODE: %{http_code}" ${url} 2>&1)
+    echo "$result ----> $url" >> $result_file
+done < urls.txt
+```
 
 ## pastebin 工具，私有化部署，自带阅后即
 

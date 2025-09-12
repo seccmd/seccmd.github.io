@@ -1,6 +1,5 @@
 ---
-date: 2024-03-02
-title: FireWall配置全解：UFW、云主机NAT及Linux策略路由
+title: FireWall
 author: [SecCMD]
 description: >
   本页面聚焦防火墙相关配置技巧，涵盖UFW安装与配置，包括默认访问规则、服务规则设置、启用与状态查看等，同时深入探讨云主机的SNAT和DNAT配置，详细介绍命令使用及规则查看方法，还提供Linux策略路由的相关知识链接，助力用户全面掌握网络安全防护中的防火墙配置要点，保障网络环境安全稳定。
@@ -9,7 +8,7 @@ tags:
   - UFW配置
 ---
 
-# FireWall配置全解：UFW、云主机NAT及Linux策略路由
+## FireWall配置全解：UFW、云主机NAT及Linux策略路由
 
 ### ufw 
 ```

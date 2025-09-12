@@ -1,4 +1,4 @@
-# Nginx Proxy Manager​​ 管理面
+# NginxProxyManager​​
 
 ### **图形化管理面板推荐**
 
