@@ -62,6 +62,12 @@ Examples:
   * docker run -it -e SPLUNK_START_ARGS=--accept-license -e SPLUNK_INDEXER_URL=idx1,idx2 -e SPLUNK_SEARCH_HEAD_URL=sh1,sh2 -e SPLUNK_ROLE=splunk_search_head --hostname sh1 --network splunknet --network-alias sh1 -e SPLUNK_PASSWORD=helloworld -e SPLUNK_LICENSE_URI=http://example.com/splunk.lic splunk/splunk start
 ```
 
+### Windows Splunk Download
+
+```bash
+wget -O splunk-9.3.1-0b8d769cb912-x64-release.msi "https://download.splunk.com/products/splunk/releases/9.3.1/windows/splunk-9.3.1-0b8d769cb912-x64-release.msi"
+```
+
 ### 客户端调研专项 todo
 
 <https://download.splunk.com/products/universalforwarder/releases/8.2.5/windows/splunkforwarder-8.2.5-77015bc7a462-x64-release.msi>
