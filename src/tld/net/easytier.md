@@ -7,13 +7,13 @@
 ```bash
 # linux easytier download
 # InstDir: /opt/EasyTier/easytier-linux-x86_64
-curl -sfL http://seccmd.net/tld/script/install-easytier.sh | sh -
+curl -sfL http://seccmd.net/script/install-easytier.sh | sh -
 
 # linux service easytier
 # Conf: /etc/systemd/system/easytier.service
 export SERVICE_NAME=easytier
 export SERVICE_EXEC="/opt/EasyTier/easytier-linux-x86_64/easytier-core -d -p udp://IP:11010 --network-name my-network --network-secret my-secret"
-curl -sfL http://seccmd.net/tld/script/linux-service-install.sh | sh -
+curl -sfL http://seccmd.net/script/linux-service-install.sh | sh -
 ```
 
 ## Windows 客户端 一键自动部署
@@ -51,7 +51,7 @@ windows:
 https://ghfast.top/https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-gui_2.4.2_x64-setup.exe
 
 linux:
-https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip
+https://ghfast.top/https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip
 
 mips:
 https://ghfast.top/https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-mipsel-v2.4.2.zip

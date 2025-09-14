@@ -2,8 +2,8 @@
 # Simple EasyTier installer script
 
 # Variables
-ZIP_URL="https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip"
-# https://ghfast.top/https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip
+# ZIP_URL="https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip"
+ZIP_URL="https://ghfast.top/https://github.com/EasyTier/EasyTier/releases/download/v2.4.2/easytier-linux-x86_64-v2.4.2.zip"
 TMP_ZIP="/tmp/easytier.zip"
 INSTALL_DIR="/opt/EasyTier"
 
