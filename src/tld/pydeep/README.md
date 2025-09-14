@@ -6,4 +6,12 @@ title: PyDeep
 
 - https://liaoxuefeng.com/books/
 
+## FastAPI
+
+- https://github.com/mjhea0/awesome-fastapi
+
+## SQLModel
+
+- https://sqlmodel.tiangolo.com/
+
 <Catalog />
