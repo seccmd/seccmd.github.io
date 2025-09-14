@@ -1,4 +1,4 @@
-# 3. 初始化脚本 One-Stop
+# 3.初始化脚本 One-Stop
 
 ## One - [install0.sh](http://install0.sh)
 

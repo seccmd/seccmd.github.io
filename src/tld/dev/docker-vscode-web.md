@@ -1,4 +1,4 @@
-# Docker 安装 VS Code Web 版
+# VS Code Web
 
 以下是使用 Docker 安装 VS Code Web 版（code-server）的详细步骤，综合了多个最佳实践方案：
 
