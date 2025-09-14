@@ -1,6 +1,6 @@
-# 0 Click 初始化环境 One-Stop
+# 3. 初始化脚本 One-Stop
 
-### One - [install0.sh](http://install0.sh)
+## One - [install0.sh](http://install0.sh)
 
 ```Bash
 curl -LsSf https:/www.seccmd.net/tld/script/install0.sh | bash -s -- all
@@ -18,6 +18,4 @@ init_all() {
 
 journalctl -u jupyter
 ```
-
-
 
