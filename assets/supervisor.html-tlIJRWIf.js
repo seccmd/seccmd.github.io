@@ -1,0 +1,17 @@
+import{_ as t}from"./plugin-vue_export-helper-DlAUqK2U.js";import{c as r,f as o,o as s}from"./app-CgieOM5d.js";const a={};function p(n,e){return s(),r("div",null,[...e[0]||(e[0]=[o(`<h1 id="supervisor" tabindex="-1"><a class="header-anchor" href="#supervisor"><span>Supervisor</span></a></h1><h3 id="安装" tabindex="-1"><a class="header-anchor" href="#安装"><span>安装</span></a></h3><pre><code>apt-get install supervisor
+systemctl status supervisord
+</code></pre><h3 id="配置文件" tabindex="-1"><a class="header-anchor" href="#配置文件"><span>配置文件</span></a></h3><pre><code>/etc/supervisor/supervisord.conf
+/etc/supervisor/conf.d
+</code></pre><h3 id="supervisorctl-常用命令" tabindex="-1"><a class="header-anchor" href="#supervisorctl-常用命令"><span>supervisorctl 常用命令</span></a></h3><pre><code>supervisorctl start/stop/restart program_name
+supervisorctl reload/upload
+supervisorctl stop all	停止全部进程
+</code></pre><h3 id="创建一个hwapp-conf进程配置文件" tabindex="-1"><a class="header-anchor" href="#创建一个hwapp-conf进程配置文件"><span>创建一个hwapp.conf进程配置文件：</span></a></h3><pre><code>[program:hwapp]
+directory=/root/wwwroot/hwapp/publish
+command=dotnet hwapp.dll
+autostart=true
+autorestart=true
+startretries=10
+redirect_stderr=true
+stdout_logfile=/root/wwwroot/hwapp/hwapp.log
+environment=ASPNETCORE_ENVIRONMENT=&quot;Development&quot;
+</code></pre>`,9)])])}const d=t(a,[["render",p]]),m=JSON.parse('{"path":"/tld/prod/supervisor.html","title":"Supervisor服务管理","lang":"zh-CN","frontmatter":{"date":"2024-01-01T00:00:00.000Z","title":"Supervisor服务管理","author":["SecCMD"],"description":"本页面聚焦于Supervisor相关知识，涵盖Supervisor的安装方法，以及如何通过`systemctl status supervisord`命令查看其状态。详细介绍了配置文件所在位置，以及`supervisorctl`常用命令的使用，包括启动、停止、重启进程，重新加载配置以及停止全部进程等操作。同时通过创建`hwapp.conf`进程配置文件的实例，展示了如何对特定程序进行自动化管理，为系统进程管理提供全面且实用的指引。\\n","categories":"基础工具","tags":["Supervisor"],"head":[["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"Supervisor服务管理\\",\\"image\\":[\\"\\"],\\"datePublished\\":\\"2024-01-01T00:00:00.000Z\\",\\"dateModified\\":\\"2025-09-12T17:24:12.000Z\\",\\"author\\":[{\\"@type\\":\\"Person\\",\\"name\\":\\"SecCMD\\"}]}"],["meta",{"property":"og:url","content":"https://www.seccmd.net/tld/prod/supervisor.html"}],["meta",{"property":"og:site_name","content":"明剑实验室"}],["meta",{"property":"og:title","content":"Supervisor服务管理"}],["meta",{"property":"og:description","content":"本页面聚焦于Supervisor相关知识，涵盖Supervisor的安装方法，以及如何通过`systemctl status supervisord`命令查看其状态。详细介绍了配置文件所在位置，以及`supervisorctl`常用命令的使用，包括启动、停止、重启进程，重新加载配置以及停止全部进程等操作。同时通过创建`hwapp.conf`进程配置文件的实例，展示了如何对特定程序进行自动化管理，为系统进程管理提供全面且实用的指引。\\n"}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:updated_time","content":"2025-09-12T17:24:12.000Z"}],["meta",{"property":"article:author","content":"SecCMD"}],["meta",{"property":"article:tag","content":"Supervisor"}],["meta",{"property":"article:published_time","content":"2024-01-01T00:00:00.000Z"}],["meta",{"property":"article:modified_time","content":"2025-09-12T17:24:12.000Z"}]]},"git":{"createdTime":1737552083000,"updatedTime":1757697852000,"contributors":[{"name":"seccmd","username":"seccmd","email":"79789833+seccmd@users.noreply.github.com","commits":2,"url":"https://github.com/seccmd"},{"name":"fireadm","username":"fireadm","email":"iwanwu@hotmail.com","commits":4,"url":"https://github.com/fireadm"}]},"readingTime":{"minutes":0.74,"words":221},"filePathRelative":"tld/prod/supervisor.md"}');export{d as comp,m as data};
