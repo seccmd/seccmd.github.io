@@ -119,6 +119,20 @@ deactivate
 这样，当您运行 python 时，它就不会尝试从安装了软件包的虚拟环境中运行它。
 
 
+## 设置 Python venv 的下载源
+
+```bash
+cat > .venv/pip.conf << EOF
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+EOF
+```
+
+## 查看当前的 pip 配置
+```bash
+pip config list
+```
+
 ## 参考链接
 
 - https://sqlmodel.tiangolo.com/virtual-environments
