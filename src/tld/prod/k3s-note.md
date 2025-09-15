@@ -35,6 +35,21 @@ curl -sfL https://rancher-mirror.rancher.cn/k3s/k3s-install.sh | INSTALL_K3S_MIR
 备注：
 每台主机必须具有唯一的主机名。如果你的计算机没有唯一的主机名，请传递 K3S_NODE_NAME 环境变量，并为每个节点提供一个有效且唯一的主机名。
 
+
+## 卸载 K3S Server 主节点
+
+```bash
+## 在 K3s Server 节点, 执行:
+/usr/local/bin/k3s-uninstall.sh
+```
+
+## 卸载 K3S Agent 节点
+
+```bash
+## 在 K3s Agent 节点, 执行:
+/usr/local/bin/k3s-agent-uninstall.sh
+```
+
 ## 参考资料
 
 - https://docs.k3s.io/zh/quick-start
