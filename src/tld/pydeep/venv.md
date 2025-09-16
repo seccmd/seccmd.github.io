@@ -133,6 +133,44 @@ EOF
 pip config list
 ```
 
+## python-dotenv
+
+python-dotenv 是一个 Python 库，用于从 .env 文件中加载环境变量。
+
+
+创建 .env 配置文件
+
+```ini
+ACCESS_KEY_ID=aaa
+ACCESS_KEY_SECRET=bbb
+ENDPOINT=xxx
+REGION_ID=yyy
+```
+
+读取配置文件
+
+```python
+from dotenv import load_dotenv
+load_dotenv()  # Load environment variables from .env
+
+print(os.environ.get("ACCESS_KEY_ID"))
+print(os.environ.get("ACCESS_KEY_SECRET"))
+print(os.environ.get("ENDPOINT"))
+print(os.environ.get("REGION_ID"))
+```
+
+## requirement.txt
+
+创建 requirement.txt 文件
+
+```bash
+# 创建 requirements.txt 文件
+pip freeze > requirements.txt
+
+# 安装 requirement.txt 文件
+pip install -r requirements.txt
+```
+
 ## 参考链接
 
 - https://sqlmodel.tiangolo.com/virtual-environments
