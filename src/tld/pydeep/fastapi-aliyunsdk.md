@@ -120,6 +120,9 @@ pip install alibabacloud_swas_open20200601==4.0.0
 
 ## 参考
 
+轻量应用服务器SDK 快速入门
+- https://next.api.aliyun.com/api-tools/sdk/SWAS-OPEN
+
 查询轻量服务器所有可用地域列表
 - https://next.api.aliyun.com/api/SWAS-OPEN/2020-06-01/ListRegions?tab=DOC&lang=PYTHON
 
