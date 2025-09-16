@@ -1,6 +1,21 @@
 # SSH in One
 
 
+## 配置ssh免密登录
+
+输入密码之后即完成免密登录配置，之后再执行ssh命令连接到服务器就不用再输入密码了。
+
+```bash
+# Linux 配置
+$ ssh-keygen
+$ ssh-copy-id 用户名@服务器IP
+
+# Windows Powershell 配置
+type ~\.ssh\id_rsa.pub | ssh USER@SERVER_IP "cat >> ~/.ssh/authorized_keys"
+```
+
+
+
 ## 启用/关闭 Windows SSH 服务器
 
 启用/关闭 Windows SSH 服务器、强制密钥认证并限制登录账号的 PowerShell 脚本，已集成安全配置：
@@ -200,13 +215,6 @@ local_user
 * -o KexAlgorithms=+ssh-rsa 是SSH的选项，用于指定密钥交换算法（Key Exchange Algorithms）。+ssh-rsa 表示仅使用RSA算法。
 * -i wang.pem
 
-## 配置ssh免密登录
-
-```
-# 输入密码之后即完成免密登录配置，之后再执行ssh命令连接到服务器就不用再输入密码了。
-$ ssh-keygen
-$ ssh-copy-id 用户名@服务器IP
-```
 
 ## 远程端口转发 (内网穿透)配置
 
