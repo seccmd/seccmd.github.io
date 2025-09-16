@@ -23,7 +23,7 @@ wsl --install
 wsl --set-default-version 2
 ```
 
-## Linux发行版安装指定的Linux发行版
+## 安装指定的Linux发行版
 
 ```
 wsl --install -d Ubuntu-22.04
@@ -43,7 +43,7 @@ Direct3D 版本： 1.611.1-81528511
 DXCore 版本： 10.0.26091.1-240325-1447.ge-release
 ```
 
-## 查看已安装的虚拟机
+## 查看已安装的Linux发行版
 
 ```
 wsl -l -v
@@ -54,7 +54,7 @@ wsl -l -v
   Ubuntu          Stopped         1
 ```
 
-## 注销删除已安装的虚拟机 (wsl版本和虚拟机版本必须匹配)
+## 注销删除已安装的Linux发行版 (wsl版本和虚拟机版本必须匹配)
 
 ```
 wsl --unregister Ubuntu
@@ -64,14 +64,14 @@ wsl --unregister Ubuntu
 操作成功完成。
 ```
 
-## 停止已经安装的分发版
+## 停止已经安装的Linux发行版
 
 ```
 ## 如果目标分发版（如 Ubuntu-24.04）正在运行，需要先停止它
 wsl --terminate Ubuntu-24.04
 ```
 
-## 设置默认分发版
+## 设置默认Linux发行版
 
 ```
 ## 如果希望将 Ubuntu-24.04 设置为默认分发版，可以运行
@@ -104,7 +104,7 @@ SUSE-Linux-Enterprise-15-SP6    SUSE Linux Enterprise 15 SP6
 openSUSE-Tumbleweed             openSUSE Tumbleweed
 ```
 
-## 按照操作案例 Docker in Ubuntu-24.04
+## 操作案例 Docker in Ubuntu-24.04
 
 - https://devpod.sh/docs/tutorials/docker-provider-via-wsl
 
