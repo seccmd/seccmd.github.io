@@ -2,6 +2,13 @@
 
 记得以管理员权限，打开 Powershell 进行操作。
 
+## 启用Windows虚拟化功能​（确认CPU已经开启虚拟化支持）
+
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
 ## ​​安装 WSL​​（如果尚未安装）：
 
 ```
@@ -16,11 +23,10 @@ wsl --install
 wsl --set-default-version 2
 ```
 
-## 启用Windows虚拟化功能​（确认CPU已经开启虚拟化支持）
+## Linux发行版安装指定的Linux发行版
 
 ```
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+wsl --install -d Ubuntu-22.04
 ```
 
 ## 查看当前 wsl 版本
@@ -58,6 +64,23 @@ wsl --unregister Ubuntu
 操作成功完成。
 ```
 
+## 停止已经安装的分发版
+
+```
+## 如果目标分发版（如 Ubuntu-24.04）正在运行，需要先停止它
+wsl --terminate Ubuntu-24.04
+```
+
+## 设置默认分发版
+
+```
+## 如果希望将 Ubuntu-24.04 设置为默认分发版，可以运行
+wsl --set-default Ubuntu-24.04
+
+## 将分发版版本设置为 WSL 2（如需要）：
+wsl --set-version Ubuntu-24.04 2
+```
+
 ## 列出可用的Linux发行版
 ```
 wsl.exe --list --online
@@ -81,12 +104,9 @@ SUSE-Linux-Enterprise-15-SP6    SUSE Linux Enterprise 15 SP6
 openSUSE-Tumbleweed             openSUSE Tumbleweed
 ```
 
-## Linux发行版安装指定的Linux发行版
+## 按照操作案例 Docker in Ubuntu-24.04
 
-```
-wsl --install -d Ubuntu-22.04
-```
-
+- https://devpod.sh/docs/tutorials/docker-provider-via-wsl
 
 ## 其他问题
 
