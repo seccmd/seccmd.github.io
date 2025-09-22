@@ -1,4 +1,6 @@
-# One-API
+# LLM Gateway
+
+## One-API
 
 Cambridge: <https://dictionary.cambridge.org/dictionary/english/repository>
 
@@ -18,5 +20,19 @@ docker run --name one-api -d --restart always -p 3000:3000 -e SQL_DSN="root:1234
 
 [http://47.76.253.98:3000/](http://47.76.253.98:3000/user/edit)
 
-root/Test@两万七
+root/Test@27
+
+## any-llm：又一个统一模型服务接口的Python代理库
+
+由 Mozilla AI 开发的开源项目 - any-llm，它专门解决多 LLM 提供商接口统一的问题，让你可以用一个简单的接口调用不同的大语言模型。
+
+github地址：https://github.com/mozilla-ai/any-llm
+
+**核心优势：**
+
+- **统一接口**：只需要改变一个字符串参数就能切换不同的模型提供商
+- **官方 SDK 支持**：尽可能使用官方 SDK，确保兼容性和稳定性
+- **开发友好**：完整的类型提示和清晰的错误信息
+- **无需代理**：直接与 LLM 提供商通信，无需额外的网关服务
+- **框架无关**：可以在任何 Python 项目中使用
 

@@ -1,4 +1,4 @@
-# sequentialthinking 工具使用教程
+# SequentialThinking
 
 [GitHub - hailanlan0577/sequential-thinking-tutorial: 关于sequentialthinking工具的中文教程和提示词指南](https://github.com/hailanlan0577/sequential-thinking-tutorial)
 

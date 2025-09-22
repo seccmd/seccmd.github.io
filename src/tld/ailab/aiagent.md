@@ -1,4 +1,27 @@
-# Agent Zero 框架简介
+# AI Agent
+
+## agno
+
+[https://github.com/agno-agi/agno](https://github.com/agno-agi/agno)
+
+前端:https://agno-agent-ui.vercel.app/
+
+
+## Auto-GPT
+
+[https://agpt.co/](https://agpt.co/)
+
+[https://docs.agpt.co/](https://docs.agpt.co/)
+
+### Auto-GPT：一个自主的 GPT-4 实验
+
+[https://github.com/RiseInRose/AutoGPT-ZH](https://github.com/RiseInRose/AutoGPT-ZH)
+
+## OpenManus
+
+- https://github.com/mannaandpoem/OpenManus
+
+## Agent Zero 框架简介
 
 [如何用 Agent Zero 打造更聪明的个人 AI Agent](https://mp.weixin.qq.com/s/j-IwBw9sgH82tu0Aj7AFMg)
 
