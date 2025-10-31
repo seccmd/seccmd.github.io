@@ -146,5 +146,12 @@ caddy reverse-proxy --from :2016 --to cip.cc:80 --change-host-header
 # https
 caddy file-server --domain test.us.seccmd.net
 caddy reverse-proxy --from test.us.seccmd.net --to cip.cc:80 --change-host-header
+
+# cat Caddyfile
+test.us.seccmd.net {
+  reverse_proxy https://github.com:443 {
+    header_up Host github.com
+  }
+}
 ```
 
