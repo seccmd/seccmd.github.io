@@ -141,6 +141,10 @@ JSON配置
 代理到指定域名，并修改host请求头为指定域名
 
 ```bash
+# http
 caddy reverse-proxy --from :2016 --to cip.cc:80 --change-host-header
+# https
+caddy file-server --domain test.us.seccmd.net
+caddy reverse-proxy --from test.us.seccmd.net --to cip.cc:80 --change-host-header
 ```
 
