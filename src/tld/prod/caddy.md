@@ -87,6 +87,54 @@ Caddyfile - caddy run
 reverse_proxy 127.0.0.1:9000
 ```
 
+## HTTPS快速入门
+
+Caddyfile - caddy run
+
+```
+example.com
+respond "Hello, privacy!"
+```
+
+file-server命令
+
+```bash
+caddy file-server --domain example.com
+```
+
+reverse-proxy命令
+
+```bash
+caddy reverse-proxy --from example.com --to localhost:9000
+```
+
+JSON配置
+
+```json
+{
+	"apps": {
+		"http": {
+			"servers": {
+				"hello": {
+					"listen": [":443"],
+					"routes": [
+						{
+							"match": [{
+								"host": ["example.com"]
+							}],
+							"handle": [{
+								"handler": "static_response",
+								"body": "Hello, privacy!"
+							}]
+						}
+					]
+				}
+			}
+		}
+	}
+}
+```
+
 
 ## 实验室
 
