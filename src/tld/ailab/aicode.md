@@ -195,3 +195,14 @@ export ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic
 > claude
 ```
 
+## claude-code-templates
+
+Claude Code Templates ：提供 Anthropic Claude Code 的预配置模板，帮助开发者快速构建 AI 辅助开发环境，包括 Agents、Commands、Settings、Hooks、MCPs 和 Templates 等组件，旨在提升工作流效率。
+
+```
+npx claude-code-templates@latest --analytics
+```
+
+这只是其中一个模板，我们来看看所有。
+
+来到：[https://www.aitmpl.com/](https://www.aitmpl.com/)
